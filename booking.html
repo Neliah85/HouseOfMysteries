@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foglalás - Szabadulószoba</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="menu">
+                <li><a href="index.html">Főoldal</a></li>
+                <li><a href="tracks.html">Pályák és foglalás</a></li>
+                <li><a href="prices.html">Árak</a></li>
+                <li><a href="reviews.html">Vélemények</a></li>
+                <li><a href="faq.html">Gyik</a></li>
+                <li><a href="contact.html">Kapcsolat</a></li>
+                <li><a href="gallery.html">Galéria</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="booking-section">
+            <h1>Foglalás</h1>
+            <form id="booking-form" method="POST" action="/php/booking_calendar.php">
+                <label for="track">Válassz egy pályát:</label>
+                <select id="track" name="track" required>
+                    <option value="">Válassz egy pályát</option>
+                    <option value="palya1">Menekülés az iskolából</option>
+                    <option value="palya2">A pedellus bosszúja</option>
+                    <option value="palya3">A tanári titkai</option>
+                    <option value="palya4">A takarítónő visszanéz</option>
+                    <option value="palya5">Szabadulás Kódja</option>
+                    <option value="palya6">Időcsapda</option>
+                    <option value="palya7">KódX Szoba</option>
+                    <option value="palya8">Kalandok Kamrája</option>
+                    <option value="palya9">Titkok Labirintusa</option>
+                </select>
+                <button type="submit">Foglalás megkezdése</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Szabadulószoba. Minden jog fenntartva.</p>
+    </footer>
+</body>
+</html>
