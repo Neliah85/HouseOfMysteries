@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galéria - Rejtélyek Háza</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="menu">
+                <li><a href="index.html">Főoldal</a></li>
+                <li><a href="tracks.html">Pályák és foglalás</a></li>
+                <li><a href="prices.html">Árak</a></li>
+                <li><a href="reviews.html">Vélemények</a></li>
+                <li><a href="faq.html">Gyik</a></li>
+                <li><a href="contact.html">Kapcsolat</a></li>
+                <li><a href="gallery.html">Galéria</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h1>Galéria</h1>
+            <p>Fedezd fel a Rejtélyek Házának belső és külső világát! Tölts fel saját képeket is, hogy megoszd a pillanatokat!</p>
+            
+            <!-- Fotófeltöltő űrlap -->
+            <form action="upload.php" method="post" enctype="multipart/form-data">
+                <label for="fileToUpload">Válaszd ki a feltölteni kívánt képet:</label>
+                <input type="file" name="fileToUpload" id="fileToUpload">
+                <input type="submit" value="Feltöltés" name="submit">
+            </form>
+
+            <!-- Fotógaléria -->
+            <div class="gallery">
+                <figure>
+                    <img src="photos/outside1.jpg" alt="Külső kép 1">
+                    <figcaption>Külső kép 1</figcaption>
+                </figure>
+                <figure>
+                    <img src="photos/outside2.jpg" alt="Külső kép 2">
+                    <figcaption>Külső kép 2</figcaption>
+                </figure>
+                <figure>
+                    <img src="photos/inside1.jpg" alt="Belső kép 1">
+                    <figcaption>Belső kép 1</figcaption>
+                </figure>
+                <figure>
+                    <img src="photos/inside2.jpg" alt="Belső kép 2">
+                    <figcaption>Belső kép 2</figcaption>
+                </figure>
+                <!-- További képek hozzáadhatók ide -->
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Rejtélyek Háza. Minden jog fenntartva.</p>
+    </footer>
+</body>
+</html>
