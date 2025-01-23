@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kapcsolat - Rejtélyek Háza</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="menu">
+                <li><a href="index.html">Főoldal</a></li>
+                <li><a href="tracks.html">Pályák és foglalás</a></li>
+                <li><a href="prices.html">Árak</a></li>
+                <li><a href="reviews.html">Vélemények</a></li>
+                <li><a href="faq.html">Gyik</a></li>
+                <li><a href="contact.html">Kapcsolat</a></li>
+                <li><a href="gallery.html">Galéria</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="contact-info">
+            <h1>Kapcsolat</h1>
+            <p><strong>Cégnév:</strong> BKÁJZSMT Kft.</p>
+            <p><strong>Cím:</strong> Miskolc, Palóczy László utca 3, 3525</p>
+            <p><strong>Telefonszám:</strong><a href="tel:+36123456789"></a>+36 12 345 6789</p>
+            <p><strong>Email:</strong><a href="mailto:info@szabaduloszoba.hu">info@szabaduloszoba.hu</p></a>
+            <p><strong>Google Maps:</strong> <a href="https://www.google.com/maps/place/Miskolci+SZC+Kand%C3%B3+K%C3%A1lm%C3%A1n+Informatikai+Technikum/@48.1011823,20.7801176,14z/data=!4m6!3m5!1s0x47409fe48c01588b:0xdc6303e601794631!8m2!3d48.1054339!4d20.7799792!16s%2Fg%2F11bx896m_f?entry=ttu" target="_blank">Tekintse meg térképen</a></p>
+        </section>
+
+        <section class="contact-form">
+            <h2>Írj nekünk!</h2>
+            <form action="send_contact_form.php" method="POST">
+                <label for="name">Név:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="phone">Telefonszám:</label>
+                <input type="tel" id="phone" name="phone" required>
+
+                <label for="message">Üzenet:</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+
+                <label for="consent">
+                    <input type="checkbox" id="consent" name="consent" required><a href="datamanagement.html" target="_blank">Elfogadom az adatkezelési feltételeket</a>
+                </label>
+
+                <button type="submit">Elküld</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Rejtélyek Háza. Minden jog fenntartva.</p>
+    </footer>
+</body>
+</html>
