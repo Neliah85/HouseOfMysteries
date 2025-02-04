@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Feb 01. 15:33
+-- Létrehozás ideje: 2025. Feb 04. 14:07
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.2.12
 
@@ -61,11 +61,11 @@ CREATE TABLE `csapatok` (
 
 CREATE TABLE `szoba1` (
   `Foglalt_ip` datetime NOT NULL,
-  `AdminID` char(36) NOT NULL,
-  `CsapatID` char(36) NOT NULL,
+  `AdminID` char(36) DEFAULT NULL,
+  `CsapatID` char(36) DEFAULT NULL,
   `Zar` timestamp NULL DEFAULT NULL,
   `Nyit` timestamp NULL DEFAULT NULL,
-  `Komment` char(100) NOT NULL
+  `Komment` char(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -76,12 +76,54 @@ CREATE TABLE `szoba1` (
 
 CREATE TABLE `szoba2` (
   `Foglalt_ip` datetime NOT NULL,
-  `AdminID` char(36) NOT NULL,
-  `CsapatID` char(36) NOT NULL,
+  `AdminID` char(36) DEFAULT NULL,
+  `CsapatID` char(36) DEFAULT NULL,
   `Zar` timestamp NULL DEFAULT NULL,
   `Nyit` timestamp NULL DEFAULT NULL,
-  `Komment` char(100) NOT NULL
+  `Komment` char(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- A nézet helyettes szerkezete `versenyeredmenyek_szoba1`
+-- (Lásd alább az aktuális nézetet)
+--
+CREATE TABLE `versenyeredmenyek_szoba1` (
+`csapat_nev` char(60)
+,`kijutasi_ido` time
+,`helyezes` bigint(21)
+);
+
+-- --------------------------------------------------------
+
+--
+-- A nézet helyettes szerkezete `versenyeredmenyek_szoba2`
+-- (Lásd alább az aktuális nézetet)
+--
+CREATE TABLE `versenyeredmenyek_szoba2` (
+`csapat_nev` char(60)
+,`kijutasi_ido` time
+,`helyezes` bigint(21)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Nézet szerkezete `versenyeredmenyek_szoba1`
+--
+DROP TABLE IF EXISTS `versenyeredmenyek_szoba1`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `versenyeredmenyek_szoba1`  AS SELECT `csapatok`.`Nev` AS `csapat_nev`, timediff(`szoba1`.`Zar`,`szoba1`.`Nyit`) AS `kijutasi_ido`, rank() over ( order by timediff(`szoba1`.`Zar`,`szoba1`.`Nyit`)) AS `helyezes` FROM (`szoba1` join `csapatok` on(`szoba1`.`CsapatID` = `csapatok`.`CsapatID`)) WHERE `szoba1`.`Zar` is not null AND `szoba1`.`Nyit` is not null ;
+
+-- --------------------------------------------------------
+
+--
+-- Nézet szerkezete `versenyeredmenyek_szoba2`
+--
+DROP TABLE IF EXISTS `versenyeredmenyek_szoba2`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `versenyeredmenyek_szoba2`  AS SELECT `csapatok`.`Nev` AS `csapat_nev`, timediff(`szoba2`.`Zar`,`szoba2`.`Nyit`) AS `kijutasi_ido`, rank() over ( order by timediff(`szoba2`.`Zar`,`szoba2`.`Nyit`)) AS `helyezes` FROM (`szoba2` join `csapatok` on(`szoba2`.`CsapatID` = `csapatok`.`CsapatID`)) WHERE `szoba2`.`Zar` is not null AND `szoba2`.`Nyit` is not null ;
 
 --
 -- Indexek a kiírt táblákhoz
