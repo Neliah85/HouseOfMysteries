@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- GÈp: 127.0.0.1
--- LÈtrehoz·s ideje: 2025. Feb 04. 14:07
--- Kiszolg·lÛ verziÛja: 10.4.32-MariaDB
--- PHP verziÛ: 8.2.12
+-- G√©p: 127.0.0.1
+-- L√©trehoz√°s ideje: 2025. Feb 26. 10:03
+-- Kiszolg√°l√≥ verzi√≥ja: 10.4.32-MariaDB
+-- PHP verzi√≥: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,29 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Adatb·zis: `rejtelyekhaza`
+-- Adatb√°zis: `rejtelyekhaza`
 --
-CREATE DATABASE IF NOT EXISTS `rejtelyekhaza` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `rejtelyekhaza`;
 
 -- --------------------------------------------------------
 
 --
--- T·bla szerkezet ehhez a t·bl·hoz `admin`
---
-
-CREATE TABLE `admin` (
-  `AdminID` char(36) NOT NULL,
-  `Nev` char(60) DEFAULT NULL,
-  `Szint` int(1) DEFAULT NULL,
-  `SALT` varchar(64) NOT NULL,
-  `HASH` varchar(64) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- T·bla szerkezet ehhez a t·bl·hoz `csapatok`
+-- T√°bla szerkezet ehhez a t√°bl√°hoz `csapatok`
 --
 
 CREATE TABLE `csapatok` (
@@ -53,125 +37,26 @@ CREATE TABLE `csapatok` (
   `HASH` varchar(64) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
 --
--- T·bla szerkezet ehhez a t·bl·hoz `szoba1`
+-- A t√°bla adatainak ki√≠rat√°sa `csapatok`
 --
 
-CREATE TABLE `szoba1` (
-  `Foglalt_ip` datetime NOT NULL,
-  `AdminID` char(36) DEFAULT NULL,
-  `CsapatID` char(36) DEFAULT NULL,
-  `Zar` timestamp NULL DEFAULT NULL,
-  `Nyit` timestamp NULL DEFAULT NULL,
-  `Komment` char(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
+INSERT INTO `csapatok` (`CsapatID`, `Nev`, `CsKapitany`, `email`, `telefonszam`, `SALT`, `HASH`) VALUES
+('567890ab-cdef-1234-5678-9abcdef01234', 'Harcosok', 'Szab√≥ D√°niel', 'daniel.szabo@example.com', 2147483647, 'teamsalt5', 'teamhash5'),
+('c1d2e3f4-5678-90ab-cdef-123456789abc', 'Gy≈ëztesek', 'Kiss Gerg≈ë', 'gergo.kiss@example.com', 214748364, 'teamsalt1', 'teamhash1'),
+('d2e3f456-7890-abcd-ef12-3456789abcde', 'Vill√°mok', 'Horv√°th R√©ka', 'reka.horvath@example.com', 123456778, 'teamsalt2', 'teamhash2'),
+('e3f45678-90ab-cdef-1234-56789abcdef0', 'Tigrisek', 'Balogh √Åd√°m', 'adam.balogh@example.com', 7483647, 'teamsalt3', 'teamhash3'),
+('f4567890-abcd-ef12-3456-789abcdef012', 'M√°gusok', 'Kov√°cs Eszter', 'eszter.kovacs@example.com', 214748647, 'teamsalt4', 'teamhash4');
 
 --
--- T·bla szerkezet ehhez a t·bl·hoz `szoba2`
---
-
-CREATE TABLE `szoba2` (
-  `Foglalt_ip` datetime NOT NULL,
-  `AdminID` char(36) DEFAULT NULL,
-  `CsapatID` char(36) DEFAULT NULL,
-  `Zar` timestamp NULL DEFAULT NULL,
-  `Nyit` timestamp NULL DEFAULT NULL,
-  `Komment` char(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- A nÈzet helyettes szerkezete `versenyeredmenyek_szoba1`
--- (L·sd al·bb az aktu·lis nÈzetet)
---
-CREATE TABLE `versenyeredmenyek_szoba1` (
-`csapat_nev` char(60)
-,`kijutasi_ido` time
-,`helyezes` bigint(21)
-);
-
--- --------------------------------------------------------
-
---
--- A nÈzet helyettes szerkezete `versenyeredmenyek_szoba2`
--- (L·sd al·bb az aktu·lis nÈzetet)
---
-CREATE TABLE `versenyeredmenyek_szoba2` (
-`csapat_nev` char(60)
-,`kijutasi_ido` time
-,`helyezes` bigint(21)
-);
-
--- --------------------------------------------------------
-
---
--- NÈzet szerkezete `versenyeredmenyek_szoba1`
---
-DROP TABLE IF EXISTS `versenyeredmenyek_szoba1`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `versenyeredmenyek_szoba1`  AS SELECT `csapatok`.`Nev` AS `csapat_nev`, timediff(`szoba1`.`Zar`,`szoba1`.`Nyit`) AS `kijutasi_ido`, rank() over ( order by timediff(`szoba1`.`Zar`,`szoba1`.`Nyit`)) AS `helyezes` FROM (`szoba1` join `csapatok` on(`szoba1`.`CsapatID` = `csapatok`.`CsapatID`)) WHERE `szoba1`.`Zar` is not null AND `szoba1`.`Nyit` is not null ;
-
--- --------------------------------------------------------
-
---
--- NÈzet szerkezete `versenyeredmenyek_szoba2`
---
-DROP TABLE IF EXISTS `versenyeredmenyek_szoba2`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `versenyeredmenyek_szoba2`  AS SELECT `csapatok`.`Nev` AS `csapat_nev`, timediff(`szoba2`.`Zar`,`szoba2`.`Nyit`) AS `kijutasi_ido`, rank() over ( order by timediff(`szoba2`.`Zar`,`szoba2`.`Nyit`)) AS `helyezes` FROM (`szoba2` join `csapatok` on(`szoba2`.`CsapatID` = `csapatok`.`CsapatID`)) WHERE `szoba2`.`Zar` is not null AND `szoba2`.`Nyit` is not null ;
-
---
--- Indexek a kiÌrt t·bl·khoz
+-- Indexek a ki√≠rt t√°bl√°khoz
 --
 
 --
--- A t·bla indexei `admin`
---
-ALTER TABLE `admin`
-  ADD PRIMARY KEY (`AdminID`);
-
---
--- A t·bla indexei `csapatok`
+-- A t√°bla indexei `csapatok`
 --
 ALTER TABLE `csapatok`
   ADD PRIMARY KEY (`CsapatID`);
-
---
--- A t·bla indexei `szoba1`
---
-ALTER TABLE `szoba1`
-  ADD KEY `AdminID` (`AdminID`),
-  ADD KEY `CsapatID` (`CsapatID`);
-
---
--- A t·bla indexei `szoba2`
---
-ALTER TABLE `szoba2`
-  ADD KEY `AdminID` (`AdminID`,`CsapatID`),
-  ADD KEY `CsapatID` (`CsapatID`);
-
---
--- MegkˆtÈsek a kiÌrt t·bl·khoz
---
-
---
--- MegkˆtÈsek a t·bl·hoz `szoba1`
---
-ALTER TABLE `szoba1`
-  ADD CONSTRAINT `szoba1_ibfk_1` FOREIGN KEY (`CsapatID`) REFERENCES `csapatok` (`CsapatID`),
-  ADD CONSTRAINT `szoba1_ibfk_2` FOREIGN KEY (`AdminID`) REFERENCES `admin` (`AdminID`);
-
---
--- MegkˆtÈsek a t·bl·hoz `szoba2`
---
-ALTER TABLE `szoba2`
-  ADD CONSTRAINT `szoba2_ibfk_1` FOREIGN KEY (`CsapatID`) REFERENCES `csapatok` (`CsapatID`),
-  ADD CONSTRAINT `szoba2_ibfk_2` FOREIGN KEY (`AdminID`) REFERENCES `admin` (`AdminID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
