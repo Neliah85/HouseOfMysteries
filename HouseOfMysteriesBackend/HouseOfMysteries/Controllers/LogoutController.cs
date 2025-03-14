@@ -6,13 +6,13 @@ namespace HouseOfMysteries.Controllers
     [ApiController]
     public class LogoutController : ControllerBase
     {
-        [HttpPost("{userName}")]
-        public IActionResult Logout(string userName)
+        [HttpPost("{token}")]
+        public IActionResult Logout(string token)
         {
             try
             {
-                Program.loggedInUsers.Logout(userName);
-                return Ok(userName);
+                Program.loggedInUsers.Logout(token);
+                return Ok("Logout succesful!");
             }
             catch (Exception ex)
             {

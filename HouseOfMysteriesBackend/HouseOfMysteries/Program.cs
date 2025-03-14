@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Text;
 using HouseOfMysteries.Classes;
 using System.Security.Cryptography;
+using System.Net.Mail;
 
 namespace HouseOfMysteries
 {
@@ -11,7 +12,7 @@ namespace HouseOfMysteries
     {
         public static int SaltLength = 64;
 
-        public static TokenHolder loggedInUsers = new TokenHolder(false, 1000);
+        public static TokenHolder loggedInUsers = new TokenHolder(Guid.Parse("724bdf82-0e13-4dc4-a596-ee660d0a700a"),false, 1000);
 
         public static string GenerateSalt()
         {
@@ -39,8 +40,21 @@ namespace HouseOfMysteries
             }
         }
 
+        public static async Task SendEmail(string mailAddressTo, string subject, string body)
+        {
+            MailMessage mail = new MailMessage();
+            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
 
+            mail.From = new MailAddress("noreply.rejtelyekhaza@gmail.com");
+            mail.To.Add(mailAddressTo);
+            mail.Subject = subject;
+            mail.Body = body;
 
+            SmtpServer.Port = 587;
+            SmtpServer.Credentials = new System.Net.NetworkCredential("noreply.rejtelyekhaza@gmail.com", "avskcvaempdkwsog");
+            SmtpServer.EnableSsl = true;
+            await SmtpServer.SendMailAsync(mail);
+        }
 
         public static void Main(string[] args)
         {
@@ -57,7 +71,7 @@ namespace HouseOfMysteries
 
             //  var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
-            builder.Services.AddCors(options =>
+            builder.Services.AddCors(options => 
             {
 
                 options.AddPolicy(MyAllowSpecificOrigins,

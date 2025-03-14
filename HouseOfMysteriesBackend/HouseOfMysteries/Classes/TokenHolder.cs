@@ -4,23 +4,51 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
-using Org.BouncyCastle.Asn1.Icao;
 using HouseOfMysteries.DTOs;
 using HouseOfMysteries.Models;
 
 namespace HouseOfMysteries.Classes;
-
-
 public class TokenHolder
 {
+    #region Declarations
     public static List<CustomToken> tokens = new List<CustomToken>();
     public LoggedInUserDTO master = new LoggedInUserDTO();
-        
     public static System.Timers.Timer? aTimer;
-
     public bool AutoDecrease { get; private set; }
     public bool SingleUseToken { get; private set; }
     int interval;
+    #endregion
+    #region Constructors
+    public TokenHolder(bool singleUseToken, int interval)
+    {
+        SingleUseToken = singleUseToken;
+        Interval = interval;
+        master.NickName = "master";
+        master.RoleId = 4;
+        master.RealName = "";
+        master.Email = "";
+        master.Phone = "";
+        tokens.Add(new CustomToken(0, master));
+    }
+    public TokenHolder(Guid masterToken, bool singleUseToken, int interval)
+    {
+        SingleUseToken = singleUseToken;
+        Interval = interval;
+        master.NickName = "master";
+        master.RoleId = 4;
+        master.RealName = "";
+        master.Email = "";
+        master.Phone = "";
+        tokens.Add(new CustomToken(masterToken, 0, master));
+    }
+    #endregion
+    #region Destructor
+    ~TokenHolder()
+    {
+        aTimer?.Close();
+    }
+    #endregion
+    #region handleTimer
     public int Interval
     {
         get { return interval; }
@@ -50,8 +78,9 @@ public class TokenHolder
     {
         DecreaseExpirationTime();
     }
-    
-    public string GetMasterToken() 
+    #endregion
+    #region GetToken
+    public string GetMasterToken()
     {
         return tokens[0].LoggedInUser.Token;
     }
@@ -70,13 +99,13 @@ public class TokenHolder
         {
             return tokens[index].LoggedInUser.Token.ToString();
         }
-        else 
+        else
         {
             return "";
         }
     }
-
-
+    #endregion
+    #region handleExpirationTime
     public void DecreaseExpirationTime()
     {
         if (tokens.Count > 0)
@@ -94,7 +123,8 @@ public class TokenHolder
             }
         }
     }
-
+    #endregion
+    #region GenerateToken
     public LoggedInUserDTO GenerateToken(int expirationTime, User loggedInUser)
     {
         LoggedInUserDTO newLoggedInUser = new LoggedInUserDTO();
@@ -108,35 +138,10 @@ public class TokenHolder
         newLoggedInUser.Role = loggedInUser.Role;
         newLoggedInUser.Team = loggedInUser.Team;
         tokens.Add(new CustomToken(expirationTime, newLoggedInUser));
-        return newLoggedInUser;   
+        return newLoggedInUser;
     }
-
-    public TokenHolder(bool singleUseToken, int interval)
-    {
-        SingleUseToken = singleUseToken;
-        Interval = interval;        
-        //master. = Guid.NewGuid().ToString();
-        master.NickName = "master";
-        master.RoleId = 4;
-        master.RealName = "";
-        master.Email = "";
-        master.Phone = "";
-        tokens.Add(new CustomToken(0,master));
-    }
-
-    public TokenHolder(Guid masterToken, bool singleUseToken, int interval)
-    {
-        SingleUseToken = singleUseToken;
-        Interval = interval;
-        //master.Id = Guid.NewGuid().ToString();
-        master.NickName = "master";
-        master.RoleId = 4;
-        master.RealName = "";
-        master.Email = "";
-        master.Phone = "";
-        tokens.Add(new CustomToken(masterToken,0,master));        
-    }
-
+    #endregion
+    #region TokenValidity
     public CustomToken CheckTokenValidity(string token)
     {
         int index = -1;
@@ -150,21 +155,22 @@ public class TokenHolder
         if (index != -1)
         {
             tokens[index].ResetRemainingTime();
-            if (SingleUseToken == true && index!=0) { tokens[index].LoggedInUser.Token = Guid.NewGuid().ToString(); }
+            if (SingleUseToken == true && index != 0) { tokens[index].LoggedInUser.Token = Guid.NewGuid().ToString(); }
             return tokens[index];
         }
         else
         {
-            return new CustomToken(new Guid(),-1,new LoggedInUserDTO());
+            return new CustomToken(new Guid(), -1, new LoggedInUserDTO());
         }
     }
-
-    public void Logout(string userName) 
+    #endregion
+    #region Logout
+    public void Logout(string token)
     {
         int index = -1;
         for (int i = 0; i < tokens.Count; i++)
         {
-            if (tokens[i].LoggedInUser.NickName.ToString() == userName)
+            if (tokens[i].LoggedInUser.Token.ToString() == token)
             {
                 index = i; break;
             }
@@ -174,10 +180,5 @@ public class TokenHolder
             tokens.RemoveAt(index);
         }
     }
-
-    ~TokenHolder()
-    {
-        aTimer?.Close();
-    }
-
+    #endregion
 }

@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HouseOfMysteries.DTOs;
-using HouseOfMysteries.Models;
+﻿using HouseOfMysteries.DTOs;
 
 namespace HouseOfMysteries.Classes;
-
 public class CustomToken
 {
+    #region Declarations
     public LoggedInUserDTO LoggedInUser {get; set; }
         
     int expirationTime;
@@ -19,8 +13,8 @@ public class CustomToken
         set { expirationTime = value; }
     }
     public int RemainingTime {  get; private set; }
-
-
+    #endregion
+    #region methods
     public void ResetRemainingTime() 
     { 
         RemainingTime = ExpirationTime;            
@@ -33,7 +27,8 @@ public class CustomToken
             RemainingTime--;
         }
     }
-             
+    #endregion
+    #region Construktors             
     public CustomToken(int expirationTime,LoggedInUserDTO loggedInUser) {
         LoggedInUser = loggedInUser;
         LoggedInUser.Token = Guid.NewGuid().ToString();
@@ -50,8 +45,8 @@ public class CustomToken
         RemainingTime = expirationTime;
         LoggedInUser = loggedInUser;
     }
-
+    #endregion
+    #region overrides
     public override string ToString() { return $"{LoggedInUser}"; }
-
-
+    #endregion
 }

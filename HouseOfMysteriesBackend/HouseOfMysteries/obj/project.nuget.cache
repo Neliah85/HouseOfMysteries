@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "wEpVcsRKiedFrIugwBTOCgdzu0RNhUDlprBsqknLCQn5BTU9yJtFUVnda2F4tdj8GwV2mlCdI4K8/Mk/Kk2diA==",
+  "dgSpecHash": "ECtWj/lb5dw=",
   "success": true,
-  "projectFilePath": "C:\\Users\\mesza\\source\\repos\\HouseOfMysteries\\HouseOfMysteries\\HouseOfMysteries.csproj",
+  "projectFilePath": "D:\\SULI\\Projektmunka\\Projekt_Rejtelyek_haza\\HouseOfMysteriesBackend\\HouseOfMysteries\\HouseOfMysteries.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mesza\\.nuget\\packages\\bouncycastle.cryptography\\2.3.1\\bouncycastle.cryptography.2.3.1.nupkg.sha512",
     "C:\\Users\\mesza\\.nuget\\packages\\google.protobuf\\3.26.1\\google.protobuf.3.26.1.nupkg.sha512",
