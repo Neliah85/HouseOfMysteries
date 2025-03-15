@@ -2,7 +2,7 @@
   {
     "ContainingType": "HouseOfMysteries.Controllers.BookingController",
     "Method": "Post",
-    "RelativePath": "Booking/token,bookingTime,roomId,teamId,comment",
+    "RelativePath": "Booking/{token}",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -10,7 +10,7 @@
       {
         "Name": "token",
         "Type": "System.String",
-        "IsRequired": false
+        "IsRequired": true
       },
       {
         "Name": "bookingDate",
@@ -30,6 +30,110 @@
       {
         "Name": "comment",
         "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HouseOfMysteries.Controllers.BookingController",
+    "Method": "Get",
+    "RelativePath": "Booking/{token}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "token",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "day",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "roomId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HouseOfMysteries.Controllers.BookingController",
+    "Method": "Delete",
+    "RelativePath": "Booking/{token}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "token",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "bookingId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HouseOfMysteries.Controllers.BookingController",
+    "Method": "ClearBooking",
+    "RelativePath": "Booking/ClearBooking/{token}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "token",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "bookingDate",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "roomId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HouseOfMysteries.Controllers.BookingController",
+    "Method": "SaveResult",
+    "RelativePath": "Booking/SaveResult/{token}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "token",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "bookingDate",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "roomId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "result",
+        "Type": "System.TimeSpan",
         "IsRequired": false
       }
     ],
@@ -122,6 +226,22 @@
   },
   {
     "ContainingType": "HouseOfMysteries.Controllers.UsersController",
+    "Method": "Get",
+    "RelativePath": "Users/{token}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "token",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HouseOfMysteries.Controllers.UsersController",
     "Method": "Post",
     "RelativePath": "Users/{token}",
     "HttpMethod": "POST",
@@ -143,24 +263,8 @@
   },
   {
     "ContainingType": "HouseOfMysteries.Controllers.UsersController",
-    "Method": "Get",
-    "RelativePath": "Users/token",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "token",
-        "Type": "System.String",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "HouseOfMysteries.Controllers.UsersController",
     "Method": "GetUserName",
-    "RelativePath": "Users/token,userName",
+    "RelativePath": "Users/{token},{userName}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -168,12 +272,12 @@
       {
         "Name": "token",
         "Type": "System.String",
-        "IsRequired": false
+        "IsRequired": true
       },
       {
         "Name": "userName",
         "Type": "System.String",
-        "IsRequired": false
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []

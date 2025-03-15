@@ -1,11 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using HouseOfMysteries.Models;
-using HouseOfMysteries.Controllers;
-using HouseOfMysteries.Classes;
-using HouseOfMysteries.DTOs;
-using Microsoft.EntityFrameworkCore;
-using HouseOfMysteries;
+
 
 namespace HouseOfMysteries.Controllers
 {
@@ -13,7 +9,7 @@ namespace HouseOfMysteries.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        [HttpGet("token")]
+        [HttpGet("{token}")]
         public ActionResult Get(string token)
         {
             if (Program.loggedInUsers.CheckTokenValidity(token).LoggedInUser.RoleId > 2)
@@ -36,16 +32,16 @@ namespace HouseOfMysteries.Controllers
             }
         }
 
-        [HttpGet("token,userName")]
+        [HttpGet("{token},{userName}")]
         public ActionResult GetUserName(string token, string userName)
         {
             if (Program.loggedInUsers.CheckTokenValidity(token).LoggedInUser.RoleId > 2)
             {
-                using (var cx = new HouseofmysteriesContext())
+                using (var context = new HouseofmysteriesContext())
                 {
                     try
                     {
-                        return Ok(cx.Users.FirstOrDefault(f => f.NickName == userName));
+                        return Ok(context.Users.FirstOrDefault(f => f.NickName == userName));
                     }
                     catch (Exception ex)
                     {
