@@ -67,9 +67,7 @@ namespace HouseOfMysteries
                 var ConnectionString = builder.Configuration.GetConnectionString("MySQL");
                 options.UseMySQL(ConnectionString);
             }
-            );//regisztrálom auz osztálytaminek a példányosítása a builder feladata
-
-            //  var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+            );
 
             builder.Services.AddCors(options => 
             {

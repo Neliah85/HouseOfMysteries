@@ -1,0 +1,89 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\SULI\\IKT_PROJEKTMUNKA\\CustomToken\\CustomToken\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{58BE3C60-B91E-4169-9E7A-69C17EBB5A09}|CustomToken\\CustomTokenTest.csproj|d:\\suli\\ikt_projektmunka\\customtoken\\customtoken\\customtoken\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{58BE3C60-B91E-4169-9E7A-69C17EBB5A09}|CustomToken\\CustomTokenTest.csproj|solutionrelative:customtoken\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{58BE3C60-B91E-4169-9E7A-69C17EBB5A09}|CustomToken\\CustomTokenTest.csproj|d:\\suli\\ikt_projektmunka\\customtoken\\customtoken\\customtoken\\customtoken.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{58BE3C60-B91E-4169-9E7A-69C17EBB5A09}|CustomToken\\CustomTokenTest.csproj|solutionrelative:customtoken\\customtoken.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{58BE3C60-B91E-4169-9E7A-69C17EBB5A09}|CustomToken\\CustomTokenTest.csproj|d:\\suli\\ikt_projektmunka\\customtoken\\customtoken\\customtoken\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{58BE3C60-B91E-4169-9E7A-69C17EBB5A09}|CustomToken\\CustomTokenTest.csproj|solutionrelative:customtoken\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{58BE3C60-B91E-4169-9E7A-69C17EBB5A09}|CustomToken\\CustomTokenTest.csproj|d:\\suli\\ikt_projektmunka\\customtoken\\customtoken\\customtoken\\tokenholder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{58BE3C60-B91E-4169-9E7A-69C17EBB5A09}|CustomToken\\CustomTokenTest.csproj|solutionrelative:customtoken\\tokenholder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "D:\\SULI\\IKT_PROJEKTMUNKA\\CustomToken\\CustomToken\\CustomToken\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "CustomToken\\MainWindow.xaml",
+              "ToolTip": "D:\\SULI\\IKT_PROJEKTMUNKA\\CustomToken\\CustomToken\\CustomToken\\MainWindow.xaml",
+              "RelativeToolTip": "CustomToken\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-02-16T12:10:31.317Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "TokenHolder.cs",
+              "DocumentMoniker": "D:\\SULI\\IKT_PROJEKTMUNKA\\CustomToken\\CustomToken\\CustomToken\\TokenHolder.cs",
+              "RelativeDocumentMoniker": "CustomToken\\TokenHolder.cs",
+              "ToolTip": "D:\\SULI\\IKT_PROJEKTMUNKA\\CustomToken\\CustomToken\\CustomToken\\TokenHolder.cs",
+              "RelativeToolTip": "CustomToken\\TokenHolder.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-14T14:20:12.751Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CustomToken.cs",
+              "DocumentMoniker": "D:\\SULI\\IKT_PROJEKTMUNKA\\CustomToken\\CustomToken\\CustomToken\\CustomToken.cs",
+              "RelativeDocumentMoniker": "CustomToken\\CustomToken.cs",
+              "ToolTip": "D:\\SULI\\IKT_PROJEKTMUNKA\\CustomToken\\CustomToken\\CustomToken\\CustomToken.cs",
+              "RelativeToolTip": "CustomToken\\CustomToken.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAkwA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-14T14:04:07.923Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "D:\\SULI\\IKT_PROJEKTMUNKA\\CustomToken\\CustomToken\\CustomToken\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "CustomToken\\MainWindow.xaml.cs",
+              "ToolTip": "D:\\SULI\\IKT_PROJEKTMUNKA\\CustomToken\\CustomToken\\CustomToken\\MainWindow.xaml.cs",
+              "RelativeToolTip": "CustomToken\\MainWindow.xaml.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAArwCcAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-14T13:01:42.345Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
