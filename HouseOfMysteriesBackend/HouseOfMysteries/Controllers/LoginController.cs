@@ -39,6 +39,7 @@ public class LoginController : ControllerBase
             try
             {
                 string Hash = Program.CreateSHA256(loginDTO.TmpHash);
+                Hash = Program.CreateSHA256(Hash);
                 User? loginUser = await context.Users.FirstOrDefaultAsync(f => f.NickName == loginDTO.LoginName && f.Hash == Hash);
                 if (loginUser != null)
                 {
