@@ -34,6 +34,12 @@ namespace ServiceToolWPF
         public MainWindow()
         {
             InitializeComponent();
+            RegNameTextCheck();
+            RegUsernameTextCheck();
+            RegPhoneTextCheck();
+            RegEmailTextCheck();
+            //RegPassword1TextCheck();
+            //RegPassword2TextCheck();
         }
         #endregion
         #region Generate Salt/Hash
@@ -170,9 +176,9 @@ namespace ServiceToolWPF
                         WriteLog("Login failed: " + ex.Message);
                     }
                 }
-                else 
+                else
                 {
-                    WriteLog("Login failed: Incorrect username or password!" );
+                    WriteLog("Login failed: Incorrect username or password!");
                 }
 
                 //if (MainWindow.loggedIn)
@@ -199,7 +205,7 @@ namespace ServiceToolWPF
             {
                 WriteLog("Logout succesful!");
             }
-            else 
+            else
             {
                 WriteLog("Logout failed!");
             }
@@ -261,7 +267,7 @@ namespace ServiceToolWPF
             }
             else
             {
-                txbRegUserName.Background = txbUserNameBackgrnd.Background;
+                txbRegUserName.Background = Brushes.White;
             }
         }
         private void txbRegPassword1_GotFocus(object sender, RoutedEventArgs e)
@@ -282,7 +288,7 @@ namespace ServiceToolWPF
             }
             else
             {
-                txbRegPassword1.Background = txbPasswordBackgrnd.Background;
+                txbRegPassword1.Background = Brushes.White;
             }
         }
         private void txbRegPassword2_GotFocus(object sender, RoutedEventArgs e)
@@ -303,7 +309,7 @@ namespace ServiceToolWPF
             {
                 if (txbRegPassword1.Password == txbRegPassword2.Password)
                 {
-                    txbRegPassword2.Background = txbUserNameBackgrnd.Background;
+                    txbRegPassword2.Background = Brushes.White;
                 }
                 else
                 {
@@ -329,7 +335,7 @@ namespace ServiceToolWPF
             }
             else
             {
-                txbRegName.Background = txbUserNameBackgrnd.Background;
+                txbRegName.Background = Brushes.White;
             }
         }
 
@@ -351,20 +357,20 @@ namespace ServiceToolWPF
             }
             else
             {
-                txbRegEmail.Background = txbUserNameBackgrnd.Background;
+                txbRegEmail.Background = Brushes.White;
             }
         }
         private void txbRegPhone_GotFocus(object sender, RoutedEventArgs e)
         {
-            RegEmailPhoneCheck();
+            RegPhoneTextCheck();
         }
 
         private void txbRegPhone_TextChanged(object sender, TextChangedEventArgs e)
         {
-            RegEmailPhoneCheck();
+            RegPhoneTextCheck();
         }
 
-        private void RegEmailPhoneCheck()
+        private void RegPhoneTextCheck()
         {
             if (txbRegPhone.Text == "")
             {
@@ -372,7 +378,7 @@ namespace ServiceToolWPF
             }
             else
             {
-                txbRegPhone.Background = txbUserNameBackgrnd.Background;
+                txbRegPhone.Background = Brushes.White;
             }
         }
 
@@ -406,6 +412,10 @@ namespace ServiceToolWPF
         {
             Registration();
         }
+        private void btnConfirmRegistration_Click(object sender, RoutedEventArgs e)
+        {
+            ConfirmRegistration();
+        }
         #endregion
         #region Registration
         private void Registration()
@@ -415,15 +425,24 @@ namespace ServiceToolWPF
                 SALT = GenerateSalt();
                 UserDTO user = new UserDTO();
                 user.UserId = 0;
-                user.NickName = txbRegUserName.Text;    
+                user.NickName = txbRegUserName.Text;
                 user.RealName = txbRegName.Text;
-                user.Email = txbRegEmail.Text;  
+                user.Email = txbRegEmail.Text;
                 user.Phone = txbRegPhone.Text;
                 user.RoleId = null;
                 user.TeamId = null;
                 user.Salt = SALT;
                 user.Hash = CreateSHA256(CreateSHA256(txbRegPassword1.Password + SALT));
                 UserService.Post(sharedClient, user);
+                WriteLog(message);
+            }
+        }
+        private void ConfirmRegistration()
+        {            
+            if (txbRegUserName.Text != "" && txbRegEmail.Text != "")
+            {
+                ConfirmRegDTO confirmReg = new ConfirmRegDTO { LoginName = txbRegUserName.Text, Email = txbRegEmail.Text };
+                UserService.Post(sharedClient, confirmReg);
                 WriteLog(message);
             }
         }
