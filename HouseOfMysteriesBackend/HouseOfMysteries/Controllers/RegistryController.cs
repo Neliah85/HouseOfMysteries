@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using HouseOfMysteries.DTOs;
 
 namespace HouseOfMysteries.Controllers
 {
@@ -38,14 +39,15 @@ namespace HouseOfMysteries.Controllers
             }
         }
 
-        [HttpGet]
-        public async Task<IActionResult> EndOfTheRegistry(string userName, string email)
+        
+        [HttpPost("Confirm")]
+        public async Task<IActionResult> EndOfTheRegistry(ConfirmRegDTO confirmReg )
         {
             using (var context = new HouseofmysteriesContext())
             {
                 try
                 {
-                    User user = await context.Users.FirstOrDefaultAsync(f => f.NickName == userName && f.Email == email);
+                    User user = await context.Users.FirstOrDefaultAsync(f => f.NickName == confirmReg.LoginName && f.Email == confirmReg.Email);
                     if (user == null)
                     {
                         return Ok("Failed to verify registration!");

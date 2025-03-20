@@ -5,15 +5,5 @@
         public string LoginName { get; set; } = null!;
 
         public string TmpHash { get; set; } = null!;
-
-
-
-
-
-
-
-
-
-
     }
 }

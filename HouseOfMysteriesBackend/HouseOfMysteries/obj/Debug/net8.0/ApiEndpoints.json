@@ -206,20 +206,15 @@
   {
     "ContainingType": "HouseOfMysteries.Controllers.RegistryController",
     "Method": "EndOfTheRegistry",
-    "RelativePath": "Registry",
-    "HttpMethod": "GET",
+    "RelativePath": "Registry/Confirm",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "userName",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "email",
-        "Type": "System.String",
-        "IsRequired": false
+        "Name": "confirmReg",
+        "Type": "HouseOfMysteries.DTOs.ConfirmRegDTO",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []

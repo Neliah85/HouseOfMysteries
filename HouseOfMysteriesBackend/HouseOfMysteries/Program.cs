@@ -12,7 +12,7 @@ namespace HouseOfMysteries
     {
         public static int SaltLength = 64;
 
-        public static TokenHolder loggedInUsers = new TokenHolder(Guid.Parse("724bdf82-0e13-4dc4-a596-ee660d0a700a"),false, 1000);
+        public static TokenHolder loggedInUsers = new TokenHolder(Guid.Parse("724bdf82-0e13-4dc4-a596-ee660d0a700a"),false, 1000);//Master token
 
         public static string GenerateSalt()
         {
