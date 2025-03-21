@@ -3,10 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using HouseOfMysteries.Models;
 using HouseOfMysteries.DTOs;
-using System.Text.Json;
-
-
-
 
 namespace HouseOfMysteries.Controllers;
 
@@ -58,14 +54,3 @@ public class LoginController : ControllerBase
     }
 
 }
-
-/*
-
-dcedbd2d352d19c6eae0dfb12271b74d985c825b8d774afd2abd0d101b6e57ef
-
-Id:c7a8721e-097d-408c-bbce-cae69b025ca7
-UserName:LakatosI
-Salt:jQGX8grO1yjNqhiZbtROcseiqj1NVZJd2iqlfxPx1GKLJ9H8smnLJ9dloScCK6Zp
-Hash:dcedbd2d352d19c6eae0dfb12271b74d985c825b8d774afd2abd0d101b6e57ef
-Email:lakatosi@gmail.com 
-*/

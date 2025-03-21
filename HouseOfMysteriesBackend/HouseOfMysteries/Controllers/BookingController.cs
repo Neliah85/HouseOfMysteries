@@ -12,19 +12,23 @@ namespace HouseOfMysteries.Controllers
     public class BookingController : ControllerBase
     {
         [HttpPut("ClearBooking/{token}")]
-        public async Task<IActionResult>ClearBooking(string token, DateTime bookingDate, int roomId)
+        public async Task<IActionResult> ClearBooking(string token, DateTime bookingDate, int roomId)
         {
-            if (Program.loggedInUsers.CheckTokenValidity(token).LoggedInUser.RoleId > 1)
+            int? roleId = Program.loggedInUsers.CheckTokenValidity(token).LoggedInUser.RoleId;
+            if (roleId == -1)
+            {
+                return BadRequest("Invalid token!");
+            }
+            else if (roleId > 1)
             {
                 Booking? booking = new Booking();
                 using (var context = new HouseofmysteriesContext())
-                {
                     try
                     {
                         if (context.Bookings.FirstOrDefaultAsync(f => f.BookingDate.Equals(bookingDate) && f.RoomId == roomId && f.IsAvailable == false).Result != null)
                         {
                             booking = context.Bookings.FirstOrDefaultAsync(f => f.BookingDate.Equals(bookingDate) && f.RoomId == roomId && f.IsAvailable == false).Result;
-                            booking.IsAvailable = true;                    
+                            booking.IsAvailable = true;
                             context.Bookings.Update(booking);
                             await context.SaveChangesAsync();
                             return Ok("Clear booking succesful!");
@@ -32,13 +36,12 @@ namespace HouseOfMysteries.Controllers
                         else
                         {
                             return Ok("Booking not found!");
-                        }                        
+                        }
                     }
                     catch (Exception ex)
                     {
                         return BadRequest(ex.Message);
                     }
-                }
             }
             else
             {
@@ -49,7 +52,12 @@ namespace HouseOfMysteries.Controllers
         [HttpPut("SaveResult/{token}")]
         public async Task<IActionResult> SaveResult(string token, DateTime bookingDate, int roomId, TimeSpan result)
         {
-            if (Program.loggedInUsers.CheckTokenValidity(token).LoggedInUser.RoleId > 2)
+            int? roleId = Program.loggedInUsers.CheckTokenValidity(token).LoggedInUser.RoleId;
+            if (roleId == -1)
+            {
+                return BadRequest("Invalid token!");
+            }
+            else if (roleId > 2)
             {
                 Booking? booking = new Booking();
                 using (var context = new HouseofmysteriesContext())
@@ -85,7 +93,12 @@ namespace HouseOfMysteries.Controllers
         [HttpPost("{token}")]
         public async Task<IActionResult> Post(string token, DateTime bookingDate, int roomId, int? teamId, string? comment)
         {
-            if (Program.loggedInUsers.CheckTokenValidity(token).LoggedInUser.RoleId > 1)
+            int? roleId = Program.loggedInUsers.CheckTokenValidity(token).LoggedInUser.RoleId;
+            if (roleId == -1)
+            {
+                return BadRequest("Invalid token!");
+            }
+            else if (roleId > 1)
             {
                 Booking? booking = new Booking();
                 using (var context = new HouseofmysteriesContext())
@@ -134,7 +147,12 @@ namespace HouseOfMysteries.Controllers
 
         public IActionResult Get(string token, DateTime day, int roomId)
         {
-            if (Program.loggedInUsers.CheckTokenValidity(token).LoggedInUser.RoleId > 1)
+            int? roleId = Program.loggedInUsers.CheckTokenValidity(token).LoggedInUser.RoleId;
+            if (roleId == -1)
+            {
+                return BadRequest("Invalid token!");
+            }
+            else if (roleId > 1)
             {
                 string date = DateOnly.FromDateTime(day).ToString("yyyy-MM-dd", CultureInfo.InvariantCulture) + "%";
                 using (var context = new HouseofmysteriesContext())
@@ -160,7 +178,12 @@ namespace HouseOfMysteries.Controllers
 
         public async Task<IActionResult> Delete(string token, int bookingId)
         {
-            if (Program.loggedInUsers.CheckTokenValidity(token).LoggedInUser.RoleId > 3)
+            int? roleId = Program.loggedInUsers.CheckTokenValidity(token).LoggedInUser.RoleId;
+            if (roleId == -1)
+            {
+                return BadRequest("Invalid token!");
+            }
+            else if (roleId > 3)
             {
                 using (var context = new HouseofmysteriesContext())
                 {
@@ -184,3 +207,5 @@ namespace HouseOfMysteries.Controllers
         }
     }
 }
+
+

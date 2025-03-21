@@ -160,7 +160,14 @@ public class TokenHolder
         }
         else
         {
-            return new CustomToken(new Guid(), -1, new LoggedInUserDTO());
+            LoggedInUserDTO invalidUser = new LoggedInUserDTO();
+            invalidUser.Token = new Guid().ToString();
+            invalidUser.RealName = "";
+            invalidUser.NickName = "";
+            invalidUser.Email = "";
+            invalidUser.Phone = "";
+            invalidUser.RoleId = -1;
+            return new CustomToken(new Guid(), -1, invalidUser);
         }
     }
     #endregion

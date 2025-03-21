@@ -12,7 +12,12 @@ namespace HouseOfMysteries.Controllers
         [HttpGet("{token}")]
         public ActionResult Get(string token)
         {
-            if (Program.loggedInUsers.CheckTokenValidity(token).LoggedInUser.RoleId > 2)
+            int? roleId = Program.loggedInUsers.CheckTokenValidity(token).LoggedInUser.RoleId;
+            if (roleId == -1)
+            {
+                return BadRequest("Invalid token!");
+            }
+            else if (roleId > 2)
             {
                 using (var context = new HouseofmysteriesContext())
                 {
@@ -35,7 +40,12 @@ namespace HouseOfMysteries.Controllers
         [HttpGet("{token},{userName}")]
         public ActionResult GetUserName(string token, string userName)
         {
-            if (Program.loggedInUsers.CheckTokenValidity(token).LoggedInUser.RoleId > 2)
+            int? roleId = Program.loggedInUsers.CheckTokenValidity(token).LoggedInUser.RoleId;
+            if (roleId == -1)
+            {
+                return BadRequest("Invalid token!");
+            }
+            else if (roleId > 2)
             {
                 using (var context = new HouseofmysteriesContext())
                 {
@@ -58,7 +68,12 @@ namespace HouseOfMysteries.Controllers
         [HttpPost("{token}")]
         public async Task<IActionResult> Post(string token, User user)
         {
-            if (Program.loggedInUsers.CheckTokenValidity(token).LoggedInUser.RoleId > 3)
+            int? roleId = Program.loggedInUsers.CheckTokenValidity(token).LoggedInUser.RoleId;
+            if (roleId == -1)
+            {
+                return BadRequest("Invalid token!");
+            }
+            else if (roleId > 3)
             {
                 using (var context = new HouseofmysteriesContext())
                 {
@@ -66,7 +81,7 @@ namespace HouseOfMysteries.Controllers
                     {
                         user.UserId = 0;
                         user.TeamId = null;
-                        user.RoleId = null;    
+                        user.RoleId = null;
                         context.Add(user);
                         await context.SaveChangesAsync();
                         return Ok("User added successfully!");
@@ -84,3 +99,17 @@ namespace HouseOfMysteries.Controllers
         }
     }
 }
+
+//int? roleId = Program.loggedInUsers.CheckTokenValidity(token).LoggedInUser.RoleId;
+//if (roleId == -1)
+//{
+//    return BadRequest("Invalid token!");
+//}
+//else if (roleId > 1)
+//{
+
+//}
+//else
+//{
+//    return BadRequest("You do not have permission to perform this operation!");
+//}
