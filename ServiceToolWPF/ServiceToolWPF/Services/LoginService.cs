@@ -12,8 +12,8 @@ namespace ServiceToolWPF.Services
 {
     internal class LoginService
     {
-
-        public static string GetSalt(HttpClient httpClient, string loginName)
+        public static SendLogEvent sendLogEvent = new SendLogEvent();
+        public static string? GetSalt(HttpClient httpClient, string loginName)
         {
             try
             {
@@ -21,10 +21,12 @@ namespace ServiceToolWPF.Services
                 var response = httpClient.PostAsync(uri, null).Result;
                 if (response.IsSuccessStatusCode)
                 {
+                    //sendLogEvent.SendLog(response.Content.ReadAsStringAsync().Result);//SALT
                     return response.Content.ReadAsStringAsync().Result;
                 }
                 else
                 {
+                    sendLogEvent.SendLog("Invalid username! GetSalt failed!");
                     return "Error";
                 }
             }
@@ -32,10 +34,8 @@ namespace ServiceToolWPF.Services
             {
                 return ex.Message;
             }
-        }
-
-        
-        public static string Login(HttpClient httpClient, string loginName, string tmpHash)
+        }  
+        public static string? Login(HttpClient httpClient, string loginName, string tmpHash)
         {
             string url = $"{httpClient.BaseAddress}Login";
             LoginDTO loginUser = new LoginDTO { LoginName = loginName, TmpHash = tmpHash };
@@ -44,19 +44,13 @@ namespace ServiceToolWPF.Services
             var request = new StringContent(json, Encoding.UTF8, "application/json");
 
             HttpResponseMessage? response = httpClient.PostAsync(url, request).Result;
-            if (response.IsSuccessStatusCode)
-            {
-                MainWindow.message ="";
-            }
-            else
-            {                    
-                MainWindow.message = $"Login failed: {response.StatusCode}";
+            if (!response.IsSuccessStatusCode)
+            {      
+                sendLogEvent.SendLog($"Login failed: {response.StatusCode}");
                 MainWindow.loggedInUser = null;
                 MainWindow.loggedIn = false;
             }
             return response.Content.ReadAsStringAsync().Result;
         }       
-
-
     }
 }

@@ -16,24 +16,27 @@ namespace ServiceToolWPF
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-
+    
     public partial class MainWindow : Window
     {
         #region Declarations
         string SALT;
         string HASH;
-        public static string message;
         public static bool loggedIn = false;
+        public static LoggedInUserDTO? loggedInUser;
         public static HttpClient? sharedClient = new()
         {
             BaseAddress = new Uri("http://localhost:5131/"),
-        };
-        public static LoggedInUserDTO? loggedInUser;
+        };        
         #endregion
         #region Constuctor
         public MainWindow()
         {
-            InitializeComponent();
+            InitializeComponent();            
+            UserService.sendLogEvent.LogSent += SendLogEvent_LogSent;
+            LoginService.sendLogEvent.LogSent += SendLogEvent_LogSent;
+            LogoutService.sendLogEvent.LogSent += SendLogEvent_LogSent;
+
             RegNameTextCheck();
             RegUsernameTextCheck();
             RegPhoneTextCheck();
@@ -136,7 +139,7 @@ namespace ServiceToolWPF
         {
             if (txbUserName.Text != "" && txbPassword.Password != "")
             {
-                WriteLog($"Login: {txbUserName.Text}");
+                WriteLog($"[Login: {txbUserName.Text}]");
                 var salt = LoginService.GetSalt(ServiceToolWPF.MainWindow.sharedClient, txbUserName.Text);
                 if (salt != "" && salt != "Error")
                 {
@@ -144,7 +147,7 @@ namespace ServiceToolWPF
                     try
                     {
                         string l = LoginService.Login(ServiceToolWPF.MainWindow.sharedClient, txbUserName.Text, tmpHash);
-                        if (message == "")
+                        if (l != null && l != "Incorrect username or password!")
                         {
                             var options = new JsonSerializerOptions
                             {
@@ -162,13 +165,7 @@ namespace ServiceToolWPF
                                 btnLogin.Content = "Logout";
                                 WriteLog("Login successful!");
                                 WriteLog(l);
-                                token.Text = loggedInUser.Token;
-
                             }
-                        }
-                        else
-                        {
-                            WriteLog($"{message}");
                         }
                     }
                     catch (Exception ex)
@@ -180,35 +177,14 @@ namespace ServiceToolWPF
                 {
                     WriteLog("Login failed: Incorrect username or password!");
                 }
-
-                //if (MainWindow.loggedIn)
-                //{
-                //    txbUserName.Focusable = false;
-                //    txbUserName.Background = Brushes.LightGreen;
-                //    txbPassword.Focusable = false;
-                //    txbPassword.Background = Brushes.LightGreen;
-                //    btnLogin.Content = "Logout";
-                //}
-                //else
-                //{
-                //    WriteLog(errorMessage);
-                //}
-
             }
         }
         #endregion
         #region Logout
         public void UserLogout()
         {
+            WriteLog("[Logout]");
             string response = LogoutService.Logout(ServiceToolWPF.MainWindow.sharedClient, MainWindow.loggedInUser.NickName);
-            if (message == "")
-            {
-                WriteLog("Logout succesful!");
-            }
-            else
-            {
-                WriteLog("Logout failed!");
-            }
             txbUserName.Focusable = true;
             txbUserName.Background = Brushes.White;
             txbPassword.Focusable = true;
@@ -217,6 +193,10 @@ namespace ServiceToolWPF
         }
         #endregion
         #region LogWindow
+        private void SendLogEvent_LogSent(object sender, string e) 
+        {
+            WriteLog(e);
+        }
         public void WriteLog(string line)
         {
             lbxLog.Items.Add($"{DateTime.Now.ToString()}> {line}");
@@ -422,6 +402,7 @@ namespace ServiceToolWPF
         {
             if (txbRegUserName.Text != "" && txbRegPassword1.Password != "" && txbRegPassword1.Password == txbRegPassword2.Password && txbRegName.Text != "" && txbRegEmail.Text != "" && txbRegPhone.Text != "")
             {
+                WriteLog("[Registration]");
                 SALT = GenerateSalt();
                 UserDTO user = new UserDTO();
                 user.UserId = 0;
@@ -433,17 +414,16 @@ namespace ServiceToolWPF
                 user.TeamId = null;
                 user.Salt = SALT;
                 user.Hash = CreateSHA256(CreateSHA256(txbRegPassword1.Password + SALT));
-                UserService.Post(sharedClient, user);
-                WriteLog(message);
+                UserService.Post(sharedClient, user);                
             }
         }
         private void ConfirmRegistration()
         {            
             if (txbRegUserName.Text != "" && txbRegEmail.Text != "")
             {
+                WriteLog("[Confirm registration]");
                 ConfirmRegDTO confirmReg = new ConfirmRegDTO { LoginName = txbRegUserName.Text, Email = txbRegEmail.Text };
-                UserService.Post(sharedClient, confirmReg);
-                WriteLog(message);
+                UserService.Post(sharedClient, confirmReg);      
             }
         }
         #endregion

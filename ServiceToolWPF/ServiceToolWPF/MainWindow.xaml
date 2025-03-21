@@ -49,16 +49,14 @@
                 <Button x:Name="btnClearLog" Content="Clear log" HorizontalAlignment="Center" Margin="0,111,0,0" VerticalAlignment="Bottom" Width="146" Grid.Column="1" Height="20" Click="btnClearLog_Click"/>
 
 
-                <TextBox x:Name="token" HorizontalAlignment="Center" Margin="0,80
-,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="146" Height="18" UseLayoutRounding="False" GotFocus="txbUserName_GotFocus" Foreground="#FF5B5CAB" FontWeight="Bold" Background="{Binding ElementName=txbPassword, Mode=OneWay}" TextChanged="txbUserName_TextChanged" KeyDown="txbUserName_KeyDown" />
 
-
-                
 
             </Grid>
 
         </GroupBox>
-        <GroupBox Header="Log" HorizontalContentAlignment="Stretch" UseLayoutRounding="False" Height="130" Margin="2,0,2,2" VerticalAlignment="Bottom">
+        <GroupBox Header="Log" HorizontalContentAlignment="Stretch" UseLayoutRounding="False" Height="134
+                  
+                  " Margin="2,0,2,2" VerticalAlignment="Bottom">
             <ListBox x:Name="lbxLog" d:ItemsSource="{d:SampleData ItemCount=5}" Background="#FFECF8FB"/>
         </GroupBox>
     </Grid>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ServiceToolWPF.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -10,6 +11,7 @@ namespace ServiceToolWPF.Services
 {
     internal class LogoutService
     {
+        public static SendLogEvent sendLogEvent = new SendLogEvent();
         public static string Logout(HttpClient httpClient, string userName)
         {
             string url = $"{httpClient.BaseAddress}Logout/{userName}";
@@ -20,19 +22,19 @@ namespace ServiceToolWPF.Services
                 var response = httpClient.PostAsync(url, request).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    MainWindow.message = "";
+                    sendLogEvent.SendLog("Logout succesful!");
                     MainWindow.loggedInUser = null;
                     MainWindow.loggedIn = false;
                 }
                 else
                 {
-                    MainWindow.message = $"{response.StatusCode} Logout failed!";
+                    sendLogEvent.SendLog($"Logout failed! {response.StatusCode}");
                 }
                 return response.Content.ReadAsStringAsync().Result;
             }
             catch (Exception ex) 
-            {                 
-                MainWindow.message = $"{ex.Message} Logout failed!";
+            {
+                sendLogEvent.SendLog($"Logout failed! {ex.Message}");
                 return ex.Message;
             }
         }

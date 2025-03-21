@@ -1,20 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Reflection.Metadata;
+﻿using System.Net.Http;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
 using ServiceToolWPF.Classes;
 
 namespace ServiceToolWPF.Services
 {
     class UserService
     {
+        public static SendLogEvent sendLogEvent = new SendLogEvent();
         public static async Task<string> Post(HttpClient httpClient, UserDTO user)
         {
             try
@@ -30,21 +23,21 @@ namespace ServiceToolWPF.Services
                 var content = await response.Content.ReadAsStringAsync();
                 if (response.IsSuccessStatusCode)
                 {
-                    MainWindow.message = content;   
+                    sendLogEvent.SendLog(content);  
                     return content;
                 }
                 else
                 {
-                    MainWindow.message = $"Error: {response.StatusCode} {response.Content.Headers} {content}";
+                    sendLogEvent.SendLog($"Error: {response.StatusCode} {response.Content.Headers} {content}");  
                     return $"Error: {response.StatusCode} {response.Content.Headers} {content}";
                 }
             }
             catch (Exception ex)
             {
+                sendLogEvent.SendLog(ex.Message);
                 return ex.Message;
             }
         }
-
         public static async Task<string> Post(HttpClient httpClient, ConfirmRegDTO confirmReg)
         {
             try
@@ -56,25 +49,20 @@ namespace ServiceToolWPF.Services
                 var content = await response.Content.ReadAsStringAsync();
                 if (response.IsSuccessStatusCode)
                 {
-                    MainWindow.message = content;
+                    sendLogEvent.SendLog(content);
                     return content;
                 }
                 else
                 {
-                    MainWindow.message = $"Error: {response.StatusCode} {response.Content.Headers} {content}";
+                    sendLogEvent.SendLog($"Error: {response.StatusCode} {response.Content.Headers} {content}");
                     return $"Error: {response.StatusCode} {response.Content.Headers} {content}";
                 }
             }
             catch (Exception ex)
             {
-                MainWindow.message = ex.Message;
+                sendLogEvent.SendLog(ex.Message);
                 return ex.Message;
             }
         }
-
-
-
-
-
     }
 }
