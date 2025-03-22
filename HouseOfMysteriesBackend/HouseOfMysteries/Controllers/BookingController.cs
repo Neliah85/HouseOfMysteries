@@ -91,7 +91,7 @@ namespace HouseOfMysteries.Controllers
 
 
         [HttpPost("{token}")]
-        public async Task<IActionResult> Post(string token, DateTime bookingDate, int roomId, int? teamId, string? comment)
+        public async Task<IActionResult> Post(string token, DateTime bookingDate, int roomId, int teamId, string comment)
         {
             int? roleId = Program.loggedInUsers.CheckTokenValidity(token).LoggedInUser.RoleId;
             if (roleId == -1)

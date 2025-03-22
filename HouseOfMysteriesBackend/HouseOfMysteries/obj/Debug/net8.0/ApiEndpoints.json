@@ -24,7 +24,7 @@
       },
       {
         "Name": "teamId",
-        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "System.Int32",
         "IsRequired": false
       },
       {
@@ -220,6 +220,174 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "HouseOfMysteries.Controllers.RolesController",
+    "Method": "Get",
+    "RelativePath": "Roles/{token}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "token",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HouseOfMysteries.Controllers.RolesController",
+    "Method": "Delete",
+    "RelativePath": "Roles/{token}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "token",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HouseOfMysteries.Controllers.RolesController",
+    "Method": "Put",
+    "RelativePath": "Roles/{token},{role}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "token",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "role",
+        "Type": "HouseOfMysteries.Models.Role",
+        "IsRequired": true
+      },
+      {
+        "Name": "role",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HouseOfMysteries.Controllers.RolesController",
+    "Method": "Post",
+    "RelativePath": "Roles/{token},{roleName}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "token",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "roleName",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HouseOfMysteries.Controllers.TeamsController",
+    "Method": "Get",
+    "RelativePath": "Teams/{token}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "token",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HouseOfMysteries.Controllers.TeamsController",
+    "Method": "Delete",
+    "RelativePath": "Teams/{token}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "token",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "teamId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HouseOfMysteries.Controllers.TeamsController",
+    "Method": "Put",
+    "RelativePath": "Teams/{token},{team}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "token",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "team",
+        "Type": "HouseOfMysteries.Models.Team",
+        "IsRequired": true
+      },
+      {
+        "Name": "team",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HouseOfMysteries.Controllers.TeamsController",
+    "Method": "Post",
+    "RelativePath": "Teams/{token},{teamName}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "token",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "teamName",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "HouseOfMysteries.Controllers.UsersController",
     "Method": "Get",
     "RelativePath": "Users/{token}",
@@ -258,8 +426,102 @@
   },
   {
     "ContainingType": "HouseOfMysteries.Controllers.UsersController",
-    "Method": "GetUserName",
-    "RelativePath": "Users/{token},{userName}",
+    "Method": "Put",
+    "RelativePath": "Users/{token},{user}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "token",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "user",
+        "Type": "HouseOfMysteries.Models.User",
+        "IsRequired": true
+      },
+      {
+        "Name": "user",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HouseOfMysteries.Controllers.UsersController",
+    "Method": "Delete",
+    "RelativePath": "Users/{token},{userId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "token",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HouseOfMysteries.Controllers.UsersController",
+    "Method": "AddUserToTeam",
+    "RelativePath": "Users/AddUserToTeam/{token},{userName},teamName",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "token",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "userName",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "teamName",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HouseOfMysteries.Controllers.UsersController",
+    "Method": "DeleteByUserName",
+    "RelativePath": "Users/DeleteByUserName/{token},{userName}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "token",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "userName",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HouseOfMysteries.Controllers.UsersController",
+    "Method": "GetByUserName",
+    "RelativePath": "Users/GetByUserName/{token},{userName}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -271,6 +533,27 @@
       },
       {
         "Name": "userName",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HouseOfMysteries.Controllers.UsersController",
+    "Method": "TeamRegistration",
+    "RelativePath": "Users/TeamRegistration/{token},{teamName}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "token",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "teamName",
         "Type": "System.String",
         "IsRequired": true
       }

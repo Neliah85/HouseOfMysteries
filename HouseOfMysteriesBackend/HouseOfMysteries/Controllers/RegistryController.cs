@@ -47,7 +47,7 @@ namespace HouseOfMysteries.Controllers
             {
                 try
                 {
-                    User user = await context.Users.FirstOrDefaultAsync(f => f.NickName == confirmReg.LoginName && f.Email == confirmReg.Email);
+                    User? user = await context.Users.FirstOrDefaultAsync(f => f.NickName == confirmReg.LoginName && f.Email == confirmReg.Email);
                     if (user == null)
                     {
                         return Ok("Failed to verify registration!");
