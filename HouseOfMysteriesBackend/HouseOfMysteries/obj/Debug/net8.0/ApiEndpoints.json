@@ -1,9 +1,9 @@
 [
   {
     "ContainingType": "HouseOfMysteries.Controllers.BookingController",
-    "Method": "Post",
+    "Method": "Delete",
     "RelativePath": "Booking/{token}",
-    "HttpMethod": "POST",
+    "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -13,23 +13,8 @@
         "IsRequired": true
       },
       {
-        "Name": "bookingDate",
-        "Type": "System.DateTime",
-        "IsRequired": false
-      },
-      {
-        "Name": "roomId",
+        "Name": "bookingId",
         "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "teamId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "comment",
-        "Type": "System.String",
         "IsRequired": false
       }
     ],
@@ -37,8 +22,8 @@
   },
   {
     "ContainingType": "HouseOfMysteries.Controllers.BookingController",
-    "Method": "Get",
-    "RelativePath": "Booking/{token}",
+    "Method": "CheckBooking",
+    "RelativePath": "Booking/CheckBooking{token}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -63,28 +48,7 @@
   },
   {
     "ContainingType": "HouseOfMysteries.Controllers.BookingController",
-    "Method": "Delete",
-    "RelativePath": "Booking/{token}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "token",
-        "Type": "System.String",
-        "IsRequired": true
-      },
-      {
-        "Name": "bookingId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "HouseOfMysteries.Controllers.BookingController",
-    "Method": "ClearBooking",
+    "Method": "Put",
     "RelativePath": "Booking/ClearBooking/{token}",
     "HttpMethod": "PUT",
     "IsController": true,
@@ -96,14 +60,30 @@
         "IsRequired": true
       },
       {
-        "Name": "bookingDate",
-        "Type": "System.DateTime",
-        "IsRequired": false
+        "Name": "clearBooking",
+        "Type": "HouseOfMysteries.DTOs.ClearBookingDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HouseOfMysteries.Controllers.BookingController",
+    "Method": "NewBooking",
+    "RelativePath": "Booking/NewBooking/{token}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "token",
+        "Type": "System.String",
+        "IsRequired": true
       },
       {
-        "Name": "roomId",
-        "Type": "System.Int32",
-        "IsRequired": false
+        "Name": "newBooking",
+        "Type": "HouseOfMysteries.DTOs.BookingDTO",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -122,19 +102,25 @@
         "IsRequired": true
       },
       {
-        "Name": "bookingDate",
-        "Type": "System.DateTime",
-        "IsRequired": false
-      },
+        "Name": "newResult",
+        "Type": "HouseOfMysteries.DTOs.SaveResultDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HouseOfMysteries.Controllers.BookingController",
+    "Method": "TeamCompetition",
+    "RelativePath": "Booking/TeamCompetition/{roomId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
       {
         "Name": "roomId",
         "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "result",
-        "Type": "System.TimeSpan",
-        "IsRequired": false
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -388,6 +374,74 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "HouseOfMysteries.Controllers.TeamsController",
+    "Method": "AcceptInvitation",
+    "RelativePath": "Teams/AcceptInvitation/{userName},{teamName}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userName",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "teamName",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HouseOfMysteries.Controllers.TeamsController",
+    "Method": "AddUserToTeam",
+    "RelativePath": "Teams/AddUserToTeam/{token},{userName},teamName",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "token",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "userName",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "teamName",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HouseOfMysteries.Controllers.TeamsController",
+    "Method": "TeamRegistration",
+    "RelativePath": "Teams/TeamRegistration/{token},{teamName}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "token",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "teamName",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "HouseOfMysteries.Controllers.UsersController",
     "Method": "Get",
     "RelativePath": "Users/{token}",
@@ -473,32 +527,6 @@
   },
   {
     "ContainingType": "HouseOfMysteries.Controllers.UsersController",
-    "Method": "AddUserToTeam",
-    "RelativePath": "Users/AddUserToTeam/{token},{userName},teamName",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "token",
-        "Type": "System.String",
-        "IsRequired": true
-      },
-      {
-        "Name": "userName",
-        "Type": "System.String",
-        "IsRequired": true
-      },
-      {
-        "Name": "teamName",
-        "Type": "System.String",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "HouseOfMysteries.Controllers.UsersController",
     "Method": "DeleteByUserName",
     "RelativePath": "Users/DeleteByUserName/{token},{userName}",
     "HttpMethod": "DELETE",
@@ -533,27 +561,6 @@
       },
       {
         "Name": "userName",
-        "Type": "System.String",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "HouseOfMysteries.Controllers.UsersController",
-    "Method": "TeamRegistration",
-    "RelativePath": "Users/TeamRegistration/{token},{teamName}",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "token",
-        "Type": "System.String",
-        "IsRequired": true
-      },
-      {
-        "Name": "teamName",
         "Type": "System.String",
         "IsRequired": true
       }

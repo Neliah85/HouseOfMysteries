@@ -1,5 +1,4 @@
 ﻿using HouseOfMysteries.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using HouseOfMysteries.DTOs;
@@ -38,7 +37,6 @@ namespace HouseOfMysteries.Controllers
                 }
             }
         }
-
         
         [HttpPost("Confirm")]
         public async Task<IActionResult> EndOfTheRegistry(ConfirmRegDTO confirmReg )
