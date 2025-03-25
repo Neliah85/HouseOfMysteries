@@ -47,8 +47,7 @@ namespace ServiceToolWPF.Services
             if (!response.IsSuccessStatusCode)
             {      
                 sendLogEvent.SendLog($"Login failed: {response.StatusCode}");
-                MainWindow.loggedInUser = null;
-                MainWindow.loggedIn = false;
+                MainWindow.ResetLoggedInUser(); 
             }
             return response.Content.ReadAsStringAsync().Result;
         }       

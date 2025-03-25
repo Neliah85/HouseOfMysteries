@@ -5,7 +5,7 @@ using ServiceToolWPF.Classes;
 
 namespace ServiceToolWPF.Services
 {
-    class UserService
+    public class UserService
     {
         public static SendLogEvent sendLogEvent = new SendLogEvent();
         public static async Task<string> Post(HttpClient httpClient, UserDTO user)
@@ -16,9 +16,9 @@ namespace ServiceToolWPF.Services
                 {
                     PropertyNameCaseInsensitive = true,
                 };
-                string uj = JsonSerializer.Serialize(user, options);
+                string json = JsonSerializer.Serialize(user, options);
                 string url = $"{httpClient.BaseAddress}Registry";
-                var request = new StringContent(uj, Encoding.UTF8, "application/json");
+                var request = new StringContent(json, Encoding.UTF8, "application/json");
                 var response = await httpClient.PostAsync(url, request);
                 var content = await response.Content.ReadAsStringAsync();
                 if (response.IsSuccessStatusCode)

@@ -23,7 +23,7 @@ namespace ServiceToolWPF.Services
                 if (response.IsSuccessStatusCode)
                 {
                     sendLogEvent.SendLog("Logout succesful!");
-                    MainWindow.loggedInUser = null;
+                    MainWindow.loggedInUser.Token=Guid.NewGuid().ToString();
                     MainWindow.loggedIn = false;
                 }
                 else

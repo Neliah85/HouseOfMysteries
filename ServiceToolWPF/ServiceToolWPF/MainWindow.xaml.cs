@@ -1,5 +1,6 @@
 ﻿using ServiceToolWPF.Classes;
 using ServiceToolWPF.Services;
+using ServiceToolWPF.Models;
 using System.Text;
 using System.Text.Json;
 using System.Windows;
@@ -10,6 +11,9 @@ using System.Security.Cryptography;
 using System.Net.Http;
 using Microsoft.Win32;
 using System.IO;
+using System;
+using ServiceToolWPF.DTOs;
+
 
 namespace ServiceToolWPF
 {
@@ -27,7 +31,16 @@ namespace ServiceToolWPF
         public static HttpClient? sharedClient = new()
         {
             BaseAddress = new Uri("http://localhost:5131/"),
-        };        
+        };
+
+        ////Booking
+        //public static List<Booking> bookings = new List<Booking>();
+        //public static string[] bookingTime = new string[7] {"09:00:00","10:30:00","12:00:00","13:30:00","15:00:00","16:30:00","18:00:00" };
+        public static string[] bookingTime = new string[7] { "09:00", "10:30", "12:00", "13:30", "15:00", "16:30", "18:00" };
+        public static string[] rooms = new string[9] { "Menekülés az iskolából", "A pedellus bosszúja", "A tanári titkai", "A tanári titkai", "Szabadulás Kódja", "Szabadulás Kódja", "Szabadulás Kódja", "Kalandok Kamrája", "Titkok Labirintusa" };    
+
+
+
         #endregion
         #region Constuctor
         public MainWindow()
@@ -36,13 +49,27 @@ namespace ServiceToolWPF
             UserService.sendLogEvent.LogSent += SendLogEvent_LogSent;
             LoginService.sendLogEvent.LogSent += SendLogEvent_LogSent;
             LogoutService.sendLogEvent.LogSent += SendLogEvent_LogSent;
+            BookingService.sendLogEvent.LogSent += SendLogEvent_LogSent;        
 
+            ResetLoggedInUser();
+
+            unTextCheck();
+            passTextCheck();
             RegNameTextCheck();
             RegUsernameTextCheck();
             RegPhoneTextCheck();
             RegEmailTextCheck();
             //RegPassword1TextCheck();
             //RegPassword2TextCheck();
+
+
+            //Booking
+            cmbBookingTime.ItemsSource = bookingTime;
+            cmbBookingTime.SelectedIndex = 0;
+            dtpBookingDate.SelectedDate = DateTime.Now;
+            cmbRooms.ItemsSource = rooms;
+            cmbRooms.SelectedIndex = 0;
+            
         }
         #endregion
         #region Generate Salt/Hash
@@ -181,6 +208,20 @@ namespace ServiceToolWPF
         }
         #endregion
         #region Logout
+        public static void ResetLoggedInUser() 
+        { 
+            LoggedInUserDTO user = new LoggedInUserDTO();
+            user.Token=Guid.NewGuid().ToString();
+            user.RoleId = -1;
+            user.Phone = "";
+            user.Email = "";
+            user.UserId = 0;
+            user.RealName = "";
+            user.NickName = "";
+            user.TeamId = 0;
+            loggedInUser = user;
+            loggedIn = false;
+        }
         public void UserLogout()
         {
             WriteLog("[Logout]");
@@ -427,5 +468,83 @@ namespace ServiceToolWPF
             }
         }
         #endregion
+
+        #region Booking
+        //Get all booking
+        private void btnGetAllBooking_Click(object sender, RoutedEventArgs e)
+        {
+            GetAllBooking();
+        }
+        private async void GetAllBooking() 
+        {
+            WriteLog("[Get all booking]");
+            dgrBookingData.ItemsSource = await BookingService.GetAllBooking(sharedClient, loggedInUser.Token);
+        }
+        //CheckBooking
+        private async void btnCheckBooking_Click(object sender, RoutedEventArgs e)
+        {
+            CheckBooking();
+        }
+        private async void CheckBooking()
+        {
+            WriteLog("[Check booking]");
+            dgrBookingData.ItemsSource = await BookingService.CheckBooking(sharedClient, loggedInUser.Token, DateTime.Parse(dtpBookingDate.SelectedDate.Value.ToShortDateString()), cmbRooms.SelectedIndex + 1);
+        }
+        //New booking
+        private async void btnNewBooking_Click(object sender, RoutedEventArgs e)
+        {
+            NewBooking();
+        }
+        private async void NewBooking() 
+        {
+            WriteLog("[New booking]");
+            TimeSpan time = TimeSpan.Parse(bookingTime[cmbBookingTime.SelectedIndex]);
+            BookingDTO newBooking = new BookingDTO();
+            //newBooking.BookingDate = DateTime.Parse(dtpBookingDate.DisplayDate.ToShortDateString() + " " + time.ToString());
+            newBooking.BookingDate = DateTime.Parse(dtpBookingDate.DisplayDate.ToShortDateString() + " " + TimeSpan.Parse(bookingTime[cmbBookingTime.SelectedIndex]).ToString());
+            newBooking.TeamId = null;
+            newBooking.RoomId = cmbRooms.SelectedIndex + 1;
+            newBooking.Comment = "Teszt";
+            await BookingService.NewBooking(sharedClient, loggedInUser.Token, newBooking);
+
+        }
+
+
+
+        private void SetBookingDate() 
+        {
+   
+            
+        }
+
+        private void cmbBookingTime_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SetBookingDate();
+        }
+
+
+        private void dgrBookingData_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int index = dgrBookingData.SelectedIndex;
+            if (index > -1)
+            {
+                Booking row = (Booking)dgrBookingData.Items.GetItemAt(index);
+                dtpBookingDate.DisplayDate = (DateTime)row.BookingDate;
+                cmbRooms.SelectedIndex = row.RoomId.Value - 1;
+                txbReasultTime.Text = row.BookingDate.ToString().Split(".")[3].Trim(' ').Substring(0, 5);
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+        #endregion
+
     }
 }
