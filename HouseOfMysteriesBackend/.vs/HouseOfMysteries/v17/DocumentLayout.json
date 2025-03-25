@@ -3,28 +3,48 @@
   "WorkspaceRootPath": "D:\\SULI\\Projektmunka\\Projekt_Rejtelyek_haza\\HouseOfMysteriesBackend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F2A19814-9D01-43B8-A9C2-B13A603FCF3C}|HouseOfMysteries\\HouseOfMysteries.csproj|d:\\suli\\projektmunka\\projekt_rejtelyek_haza\\houseofmysteriesbackend\\houseofmysteries\\controllers\\bookingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F2A19814-9D01-43B8-A9C2-B13A603FCF3C}|HouseOfMysteries\\HouseOfMysteries.csproj|solutionrelative:houseofmysteries\\controllers\\bookingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F2A19814-9D01-43B8-A9C2-B13A603FCF3C}|HouseOfMysteries\\HouseOfMysteries.csproj|d:\\suli\\projektmunka\\projekt_rejtelyek_haza\\houseofmysteriesbackend\\houseofmysteries\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2A19814-9D01-43B8-A9C2-B13A603FCF3C}|HouseOfMysteries\\HouseOfMysteries.csproj|solutionrelative:houseofmysteries\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F2A19814-9D01-43B8-A9C2-B13A603FCF3C}|HouseOfMysteries\\HouseOfMysteries.csproj|d:\\suli\\projektmunka\\projekt_rejtelyek_haza\\houseofmysteriesbackend\\houseofmysteries\\dtos\\saveresultdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F2A19814-9D01-43B8-A9C2-B13A603FCF3C}|HouseOfMysteries\\HouseOfMysteries.csproj|solutionrelative:houseofmysteries\\dtos\\saveresultdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F2A19814-9D01-43B8-A9C2-B13A603FCF3C}|HouseOfMysteries\\HouseOfMysteries.csproj|d:\\suli\\projektmunka\\projekt_rejtelyek_haza\\houseofmysteriesbackend\\houseofmysteries\\controllers\\bookingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2A19814-9D01-43B8-A9C2-B13A603FCF3C}|HouseOfMysteries\\HouseOfMysteries.csproj|solutionrelative:houseofmysteries\\controllers\\bookingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F2A19814-9D01-43B8-A9C2-B13A603FCF3C}|HouseOfMysteries\\HouseOfMysteries.csproj|d:\\suli\\projektmunka\\projekt_rejtelyek_haza\\houseofmysteriesbackend\\houseofmysteries\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F2A19814-9D01-43B8-A9C2-B13A603FCF3C}|HouseOfMysteries\\HouseOfMysteries.csproj|solutionrelative:houseofmysteries\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F2A19814-9D01-43B8-A9C2-B13A603FCF3C}|HouseOfMysteries\\HouseOfMysteries.csproj|d:\\suli\\projektmunka\\projekt_rejtelyek_haza\\houseofmysteriesbackend\\houseofmysteries\\dtos\\loggedinuserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F2A19814-9D01-43B8-A9C2-B13A603FCF3C}|HouseOfMysteries\\HouseOfMysteries.csproj|solutionrelative:houseofmysteries\\dtos\\loggedinuserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F2A19814-9D01-43B8-A9C2-B13A603FCF3C}|HouseOfMysteries\\HouseOfMysteries.csproj|d:\\suli\\projektmunka\\projekt_rejtelyek_haza\\houseofmysteriesbackend\\houseofmysteries\\models\\booking.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2A19814-9D01-43B8-A9C2-B13A603FCF3C}|HouseOfMysteries\\HouseOfMysteries.csproj|solutionrelative:houseofmysteries\\models\\booking.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F2A19814-9D01-43B8-A9C2-B13A603FCF3C}|HouseOfMysteries\\HouseOfMysteries.csproj|d:\\suli\\projektmunka\\projekt_rejtelyek_haza\\houseofmysteriesbackend\\houseofmysteries\\controllers\\registrycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F2A19814-9D01-43B8-A9C2-B13A603FCF3C}|HouseOfMysteries\\HouseOfMysteries.csproj|solutionrelative:houseofmysteries\\controllers\\registrycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F2A19814-9D01-43B8-A9C2-B13A603FCF3C}|HouseOfMysteries\\HouseOfMysteries.csproj|d:\\suli\\projektmunka\\projekt_rejtelyek_haza\\houseofmysteriesbackend\\houseofmysteries\\dtos\\bookingdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2A19814-9D01-43B8-A9C2-B13A603FCF3C}|HouseOfMysteries\\HouseOfMysteries.csproj|solutionrelative:houseofmysteries\\dtos\\bookingdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A19814-9D01-43B8-A9C2-B13A603FCF3C}|HouseOfMysteries\\HouseOfMysteries.csproj|d:\\suli\\projektmunka\\projekt_rejtelyek_haza\\houseofmysteriesbackend\\houseofmysteries\\dtos\\clearbookingdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2A19814-9D01-43B8-A9C2-B13A603FCF3C}|HouseOfMysteries\\HouseOfMysteries.csproj|solutionrelative:houseofmysteries\\dtos\\clearbookingdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A19814-9D01-43B8-A9C2-B13A603FCF3C}|HouseOfMysteries\\HouseOfMysteries.csproj|d:\\suli\\projektmunka\\projekt_rejtelyek_haza\\houseofmysteriesbackend\\houseofmysteries\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2A19814-9D01-43B8-A9C2-B13A603FCF3C}|HouseOfMysteries\\HouseOfMysteries.csproj|solutionrelative:houseofmysteries\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F2A19814-9D01-43B8-A9C2-B13A603FCF3C}|HouseOfMysteries\\HouseOfMysteries.csproj|d:\\suli\\projektmunka\\projekt_rejtelyek_haza\\houseofmysteriesbackend\\houseofmysteries\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{F2A19814-9D01-43B8-A9C2-B13A603FCF3C}|HouseOfMysteries\\HouseOfMysteries.csproj|solutionrelative:houseofmysteries\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A19814-9D01-43B8-A9C2-B13A603FCF3C}|HouseOfMysteries\\HouseOfMysteries.csproj|d:\\suli\\projektmunka\\projekt_rejtelyek_haza\\houseofmysteriesbackend\\houseofmysteries\\dtos\\loggedinuserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2A19814-9D01-43B8-A9C2-B13A603FCF3C}|HouseOfMysteries\\HouseOfMysteries.csproj|solutionrelative:houseofmysteries\\dtos\\loggedinuserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A19814-9D01-43B8-A9C2-B13A603FCF3C}|HouseOfMysteries\\HouseOfMysteries.csproj|d:\\suli\\projektmunka\\projekt_rejtelyek_haza\\houseofmysteriesbackend\\houseofmysteries\\dtos\\saveresultdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2A19814-9D01-43B8-A9C2-B13A603FCF3C}|HouseOfMysteries\\HouseOfMysteries.csproj|solutionrelative:houseofmysteries\\dtos\\saveresultdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F2A19814-9D01-43B8-A9C2-B13A603FCF3C}|HouseOfMysteries\\HouseOfMysteries.csproj|d:\\suli\\projektmunka\\projekt_rejtelyek_haza\\houseofmysteriesbackend\\houseofmysteries\\controllers\\registrycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F2A19814-9D01-43B8-A9C2-B13A603FCF3C}|HouseOfMysteries\\HouseOfMysteries.csproj|solutionrelative:houseofmysteries\\controllers\\registrycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F2A19814-9D01-43B8-A9C2-B13A603FCF3C}|HouseOfMysteries\\HouseOfMysteries.csproj|d:\\suli\\projektmunka\\projekt_rejtelyek_haza\\houseofmysteriesbackend\\houseofmysteries\\classes\\tokenholder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -50,7 +70,69 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 6,
+              "Title": "User.cs",
+              "DocumentMoniker": "D:\\SULI\\Projektmunka\\Projekt_Rejtelyek_haza\\HouseOfMysteriesBackend\\HouseOfMysteries\\Models\\User.cs",
+              "RelativeDocumentMoniker": "HouseOfMysteries\\Models\\User.cs",
+              "ToolTip": "D:\\SULI\\Projektmunka\\Projekt_Rejtelyek_haza\\HouseOfMysteriesBackend\\HouseOfMysteries\\Models\\User.cs",
+              "RelativeToolTip": "HouseOfMysteries\\Models\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-24T18:45:20.055Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UsersController.cs",
+              "DocumentMoniker": "D:\\SULI\\Projektmunka\\Projekt_Rejtelyek_haza\\HouseOfMysteriesBackend\\HouseOfMysteries\\Controllers\\UsersController.cs",
+              "RelativeDocumentMoniker": "HouseOfMysteries\\Controllers\\UsersController.cs",
+              "ToolTip": "D:\\SULI\\Projektmunka\\Projekt_Rejtelyek_haza\\HouseOfMysteriesBackend\\HouseOfMysteries\\Controllers\\UsersController.cs",
+              "RelativeToolTip": "HouseOfMysteries\\Controllers\\UsersController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAMEAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-23T18:47:36.183Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Booking.cs",
+              "DocumentMoniker": "D:\\SULI\\Projektmunka\\Projekt_Rejtelyek_haza\\HouseOfMysteriesBackend\\HouseOfMysteries\\Models\\Booking.cs",
+              "RelativeDocumentMoniker": "HouseOfMysteries\\Models\\Booking.cs",
+              "ToolTip": "D:\\SULI\\Projektmunka\\Projekt_Rejtelyek_haza\\HouseOfMysteriesBackend\\HouseOfMysteries\\Models\\Booking.cs",
+              "RelativeToolTip": "HouseOfMysteries\\Models\\Booking.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-23T15:21:51.301Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "BookingDTO.cs",
+              "DocumentMoniker": "D:\\SULI\\Projektmunka\\Projekt_Rejtelyek_haza\\HouseOfMysteriesBackend\\HouseOfMysteries\\DTOs\\BookingDTO.cs",
+              "RelativeDocumentMoniker": "HouseOfMysteries\\DTOs\\BookingDTO.cs",
+              "ToolTip": "D:\\SULI\\Projektmunka\\Projekt_Rejtelyek_haza\\HouseOfMysteriesBackend\\HouseOfMysteries\\DTOs\\BookingDTO.cs",
+              "RelativeToolTip": "HouseOfMysteries\\DTOs\\BookingDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-23T14:00:37.91Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ClearBookingDTO.cs",
+              "DocumentMoniker": "D:\\SULI\\Projektmunka\\Projekt_Rejtelyek_haza\\HouseOfMysteriesBackend\\HouseOfMysteries\\DTOs\\ClearBookingDTO.cs",
+              "RelativeDocumentMoniker": "HouseOfMysteries\\DTOs\\ClearBookingDTO.cs",
+              "ToolTip": "D:\\SULI\\Projektmunka\\Projekt_Rejtelyek_haza\\HouseOfMysteriesBackend\\HouseOfMysteries\\DTOs\\ClearBookingDTO.cs",
+              "RelativeToolTip": "HouseOfMysteries\\DTOs\\ClearBookingDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-23T13:53:03.252Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "SaveResultDTO.cs",
               "DocumentMoniker": "D:\\SULI\\Projektmunka\\Projekt_Rejtelyek_haza\\HouseOfMysteriesBackend\\HouseOfMysteries\\DTOs\\SaveResultDTO.cs",
               "RelativeDocumentMoniker": "HouseOfMysteries\\DTOs\\SaveResultDTO.cs",
@@ -58,18 +140,17 @@
               "RelativeToolTip": "HouseOfMysteries\\DTOs\\SaveResultDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-23T10:29:58.68Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-23T10:29:58.68Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "BookingController.cs",
               "DocumentMoniker": "D:\\SULI\\Projektmunka\\Projekt_Rejtelyek_haza\\HouseOfMysteriesBackend\\HouseOfMysteries\\Controllers\\BookingController.cs",
               "RelativeDocumentMoniker": "HouseOfMysteries\\Controllers\\BookingController.cs",
               "ToolTip": "D:\\SULI\\Projektmunka\\Projekt_Rejtelyek_haza\\HouseOfMysteriesBackend\\HouseOfMysteries\\Controllers\\BookingController.cs",
               "RelativeToolTip": "HouseOfMysteries\\Controllers\\BookingController.cs",
-              "ViewState": "AgIAACsAAAAAAAAAAAAQwBEAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAACIAAAAAAAAAAAAQwDoAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-14T21:43:35.829Z",
               "EditorCaption": ""
@@ -82,14 +163,14 @@
               "RelativeDocumentMoniker": "HouseOfMysteries\\Program.cs",
               "ToolTip": "D:\\SULI\\Projektmunka\\Projekt_Rejtelyek_haza\\HouseOfMysteriesBackend\\HouseOfMysteries\\Program.cs",
               "RelativeToolTip": "HouseOfMysteries\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAAArAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwBUAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-11T09:19:54.289Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 10,
               "Title": "RegistryController.cs",
               "DocumentMoniker": "D:\\SULI\\Projektmunka\\Projekt_Rejtelyek_haza\\HouseOfMysteriesBackend\\HouseOfMysteries\\Controllers\\RegistryController.cs",
               "RelativeDocumentMoniker": "HouseOfMysteries\\Controllers\\RegistryController.cs",
@@ -101,7 +182,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "appsettings.json",
               "DocumentMoniker": "D:\\SULI\\Projektmunka\\Projekt_Rejtelyek_haza\\HouseOfMysteriesBackend\\HouseOfMysteries\\appsettings.json",
               "RelativeDocumentMoniker": "HouseOfMysteries\\appsettings.json",
@@ -113,7 +194,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 8,
               "Title": "LoggedInUserDTO.cs",
               "DocumentMoniker": "D:\\SULI\\Projektmunka\\Projekt_Rejtelyek_haza\\HouseOfMysteriesBackend\\HouseOfMysteries\\DTOs\\LoggedInUserDTO.cs",
               "RelativeDocumentMoniker": "HouseOfMysteries\\DTOs\\LoggedInUserDTO.cs",
@@ -125,7 +206,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 11,
               "Title": "TokenHolder.cs",
               "DocumentMoniker": "D:\\SULI\\Projektmunka\\Projekt_Rejtelyek_haza\\HouseOfMysteriesBackend\\HouseOfMysteries\\Classes\\TokenHolder.cs",
               "RelativeDocumentMoniker": "HouseOfMysteries\\Classes\\TokenHolder.cs",
@@ -137,7 +218,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 12,
               "Title": "CustomToken.cs",
               "DocumentMoniker": "D:\\SULI\\Projektmunka\\Projekt_Rejtelyek_haza\\HouseOfMysteriesBackend\\HouseOfMysteries\\Classes\\CustomToken.cs",
               "RelativeDocumentMoniker": "HouseOfMysteries\\Classes\\CustomToken.cs",

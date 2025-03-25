@@ -2,6 +2,8 @@
 using HouseOfMysteries.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Mysqlx.Crud;
+using MySqlX.XDevAPI.Common;
 using System.Globalization;
 
 namespace HouseOfMysteries.Controllers
@@ -39,8 +41,33 @@ namespace HouseOfMysteries.Controllers
             }
         }
 
-
-
+        [HttpGet("GetAllBooking{token}")]
+        public IActionResult GetAllBooking(string token)
+        {
+            int? roleId = Program.loggedInUsers.CheckTokenValidity(token).LoggedInUser.RoleId;
+            if (roleId == -1)
+            {
+                return BadRequest("Invalid token!");
+            }
+            else if (roleId > 3)
+            {
+                using (var context = new HouseofmysteriesContext())
+                {
+                    try
+                    {
+                        return Ok(context.Bookings.ToList());
+                    }
+                    catch (Exception ex)
+                    {
+                        return BadRequest(ex.Message);
+                    }
+                }
+            }
+            else
+            {
+                return BadRequest("You do not have permission to perform this operation!");
+            }
+        }
 
         [HttpPut("ClearBooking/{token}")]
         public async Task<IActionResult> Put(string token, ClearBookingDTO clearBooking)
@@ -206,23 +233,18 @@ namespace HouseOfMysteries.Controllers
             }
         }
 
-
-
         [HttpGet("TeamCompetition/{roomId}")]
-        public async Task<ActionResult> TeamCompetition(int roomId)
+        public async Task<ActionResult> TeamCompetition(int roomId, int limit)
         {
             using (var context = new HouseofmysteriesContext())
             {
                 try
                 {
-                    //return Ok(context.Bookings.FromSql($"SELECT teams.teamName AS Csapat neve, MIN(booking.result) AS Legjobb idő FROM booking JOIN  rooms ON booking.roomId = rooms.roomId JOI  teams ON booking.teamId = teams.teamId WHERE booking.result IS NOT NULL --Csak a befejezett játékokat veszem figyelembe GROUP BY rooms.roomId, teams.teamId ORDER BY rooms.roomName, MIN(booking.result);").ToList());
-                    
-                    return Ok(context.Bookings.FromSql($"SELECT r.roomName, t.teamName, b.result FROM booking b JOIN rooms r ON b.roomId = r.roomId JOIN teams t ON  b.teamId = t.teamId WHERE b.roomId = 1 ORDER BY b.result ASC;").ToList());
-
-
-
-
-                    //return Ok(context.Bookings.FromSql($"SELECT ranked.roomId, t.teamName, ranked.result FROM (SELECT booking.roomId,booking.teamId,booking.result,RANK() OVER (PARTITION BY booking.roomId ORDER BY booking.result ASC) AS ranking FROM booking WHERE booking.result IS NOT NULL) AS ranked JOIN teams t ON ranked.teamId = t.teamId WHERE ranked.ranking <= 3 ORDER BY ranked.roomId, ranked.result;").ToList());
+                    if (limit ==0 || limit ==null) 
+                    {
+                        limit = 1;
+                    }
+                    return Ok(context.Bookings.FromSql($"SELECT * FROM `booking` WHERE(result IS NOT null)AND(roomId = {roomId})AND(teamId IS NOT null) ORDER by result LIMIT {limit}").ToList());
                 }
                 catch (Exception ex)
                 {
@@ -230,7 +252,6 @@ namespace HouseOfMysteries.Controllers
                 }
             }
         }
-
 
 
 

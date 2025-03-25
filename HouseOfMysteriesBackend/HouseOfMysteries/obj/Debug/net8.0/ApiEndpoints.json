@@ -69,6 +69,22 @@
   },
   {
     "ContainingType": "HouseOfMysteries.Controllers.BookingController",
+    "Method": "GetAllBooking",
+    "RelativePath": "Booking/GetAllBooking{token}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "token",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HouseOfMysteries.Controllers.BookingController",
     "Method": "NewBooking",
     "RelativePath": "Booking/NewBooking/{token}",
     "HttpMethod": "POST",
@@ -121,6 +137,11 @@
         "Name": "roomId",
         "Type": "System.Int32",
         "IsRequired": true
+      },
+      {
+        "Name": "limit",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

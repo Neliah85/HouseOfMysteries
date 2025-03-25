@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\SULI\\IKT_PROJEKTMUNKA\\CustomToken\\CustomToken\\CustomToken\\CustomTokenTest.csproj": {}
+    "D:\\SULI\\Projektmunka\\Projekt_Rejtelyek_haza\\CustomToken\\CustomToken\\CustomTokenTest.csproj": {}
   },
   "projects": {
-    "D:\\SULI\\IKT_PROJEKTMUNKA\\CustomToken\\CustomToken\\CustomToken\\CustomTokenTest.csproj": {
+    "D:\\SULI\\Projektmunka\\Projekt_Rejtelyek_haza\\CustomToken\\CustomToken\\CustomTokenTest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\SULI\\IKT_PROJEKTMUNKA\\CustomToken\\CustomToken\\CustomToken\\CustomTokenTest.csproj",
+        "projectUniqueName": "D:\\SULI\\Projektmunka\\Projekt_Rejtelyek_haza\\CustomToken\\CustomToken\\CustomTokenTest.csproj",
         "projectName": "CustomTokenTest",
-        "projectPath": "D:\\SULI\\IKT_PROJEKTMUNKA\\CustomToken\\CustomToken\\CustomToken\\CustomTokenTest.csproj",
+        "projectPath": "D:\\SULI\\Projektmunka\\Projekt_Rejtelyek_haza\\CustomToken\\CustomToken\\CustomTokenTest.csproj",
         "packagesPath": "C:\\Users\\mesza\\.nuget\\packages\\",
-        "outputPath": "D:\\SULI\\IKT_PROJEKTMUNKA\\CustomToken\\CustomToken\\CustomToken\\obj\\",
+        "outputPath": "D:\\SULI\\Projektmunka\\Projekt_Rejtelyek_haza\\CustomToken\\CustomToken\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
