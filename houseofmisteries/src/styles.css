@@ -1,0 +1,1490 @@
+/* Alapvető stílusok */
+body {
+   
+    background-size: cover;
+    background-position: center;  
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #585555;
+    padding-top: 100px;
+       
+}
+
+h5{
+    text-align: center;
+    margin-top: 20px;
+    color: red;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+h4{
+    text-align: center;
+    margin-top: 20px;
+    color: #920505;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+main {
+    padding-top: 100px; /* A fejléc alá tolja az egész tartalmat */
+}
+
+/* Fejléc és menü */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 98%;
+    background-color: #181515;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Az elemeket balra rendezi */
+    width: 100%;        
+}
+
+
+.logo {
+    height: 60px;
+    width: auto;
+    cursor: pointer;
+    margin-left: 0; 
+    padding-left: 20px;
+}
+
+
+/* Menü lista */
+.menu {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+}
+
+.menu li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 13px; /* Kisebb betűméret */
+    transition: color 0.3s;
+}
+
+.menu li a:hover {
+    color: #CF5443;
+}
+
+.login-button, .register-button {
+    color: white;
+    padding: 4px 10px; /* Kisebb gombméret */
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 11px; /* Még kisebb betűméret */
+    transition: background 0.3s;
+    display: flex;        
+    margin-left: 0%;
+    white-space: nowrap; /* Megakadályozza a több sorba törést */
+    
+}
+
+.login-button:hover, .register-button:hover {
+    background-color: #A83D30;
+}
+
+/* Kijelentkezés gomb */
+.logout-button {
+    background-color: #CF5443;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    border: none;
+    transition: background 0.3s;
+    margin-left: 10px;
+}
+
+.logout-button:hover {
+    background-color: #A83D30;
+}
+
+/* Üdvözlő szöveg a bejelentkezett felhasználónak */
+.welcome-text {
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+
+/* Bejelentkezés és Regisztráció oldalak */
+.auth-container {
+    text-align: center;
+    padding: 50px 20px;
+    max-width: 400px;
+    margin: 100px auto;
+    background: #222;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Formázás a beviteli mezőkhöz */
+.auth-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Középre igazítja a mezőket */
+    gap: 15px;
+    width: 100%;
+}
+
+/* Label stílus */
+.auth-container label {
+    font-weight: bold;
+    color: white;
+    text-align: left;
+    width: 100%;
+}
+
+/* Beviteli mezők */
+.auth-container input {
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+    width: 90%;
+    text-align: left;
+}
+
+/* Kisebb gombméret és középre igazítás */
+.auth-container button {
+    background-color: #CF5443;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    border: none;
+    transition: background 0.3s;
+    width: 50%;
+}
+
+.auth-container button:hover {
+    background-color: #A83D30;
+}
+
+.profile-container {
+    text-align: center;
+    padding: 50px 20px;
+    max-width: 400px;
+    margin: 100px auto;
+    background: #222;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Formázás a beviteli mezőkhöz */
+.profile-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Középre igazítja a mezőket */
+    gap: 15px;
+    width: 100%;
+}
+
+/* Label stílus */
+.profile-container label {
+    font-weight: bold;
+    color: white;
+    text-align: left;
+    width: 100%;
+}
+
+/* Beviteli mezők */
+.profile-container input {
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+    width: 90%;
+    text-align: left;
+}
+
+/* Kisebb gombméret és középre igazítás */
+.profile-container button {
+    background-color: #CF5443;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    border: none;
+    transition: background 0.3s;
+    width: 50%;
+}
+
+.profile-container button:hover {
+    background-color: #A83D30;
+}
+
+/* Hibajelzés */
+.error {
+    color: red;
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+/* Felugró üzenet */
+.popup {
+    background: #444;
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 20px auto;
+    width: 50%;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Jelszó mező és ikon elrendezése */
+.password-wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+/* Jelszó mező */
+.password-wrapper input {
+    flex: 300%;  /* Kitölti a rendelkezésre álló helyet */
+    padding-right: 40px; /* Kicsit beljebb hozzuk a szöveget, hogy ne érjen a gombhoz */
+    margin-left: 12px; /* A kívánt távolság pixelben */
+}
+
+/* Szem ikon teljesen kívül, jobb oldalon */
+.toggle-password {
+    background: none !important;
+    border: none !important;
+    padding: 5px 10px; /* Kicsit beljebb igazítjuk */
+    width: auto;
+    height: auto;
+    cursor: pointer;
+    font-size: 14px; 
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px; /* Térköz a beviteli mező és az ikon között */
+}
+
+/* Gombok hover és kattintási animációja */
+.menu-button:hover {
+    background-color: #A83D30;
+    border: 2px solid #FFFCFC;
+    transform: scale(1.05);
+}
+
+/* Gombok aktív állapotban (kattintáskor) */
+.menu-button:active {
+    background-color: #8F3226;
+    transform: scale(0.95);
+}
+
+.menu-button {
+    display: inline-block;
+    background-color: #CF5443;
+    color: #FFFCFC;
+    text-decoration: none;
+    font-family: "Roboto Mono", sans-serif;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 5px 20px;
+    border-radius: 15px;
+    transition: background 0.3s, transform 0.2s;
+    border: 2px solid transparent;
+}
+
+/* Slideshow */
+.slideshow {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    height: 350px; /* Rögzített magasság */
+    margin: 20px auto;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Slideshow képek */
+.slide-image {
+    width: 100%;
+    height: 100%; /* Kitölti a teljes slideshow dobozt */
+    object-fit: cover; /* Arányos méretezés, hogy a képek ne torzuljanak */
+    display: block;
+    border-radius: 10px;
+}
+
+/* Szöveg a kép alatt */
+.slide-text {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 20px 15px;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    max-width: 90%;
+}
+
+
+/* Főoldali cím */
+h1 {
+    text-align: center;
+    margin-top: 60px;
+    color: #ff0000;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+h2{
+    text-align: center;
+    margin-top: 30;
+    color: #f7d765;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+h3{
+    text-align: center;
+    margin-top: 20px;
+    color: #ff0000;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+p{
+    text-align: center;
+    margin-left: 30px;
+    margin-right: 30px;
+    color: #d4a756;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    
+}
+
+/* Apróbetűs szöveg */
+.small-text {
+    font-size: 8px;
+    color: #fe0000;
+    text-align: center;
+    margin-top: 5px;
+}
+
+
+/* Pályák táblázata a főoldalon */
+.tracks-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 900px;
+    margin: 50px auto;
+}
+
+.tracks-grid img {
+    width: 320;
+    height: 200;    
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.tracks-grid img:hover {
+    transform: scale(1.05);
+}
+.tracks-grid figcaption {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffffff;   
+    background-color: rgba(0, 0, 0, 0.5); /* Átlátszó háttér */
+    padding: 5px;
+    border-radius: 5px;
+}
+
+
+figure {
+    margin: 0;
+    text-align: center; /* Középre igazítja a feliratot */
+}
+
+/* Rólunk oldal stílus */
+.about-container {
+    text-align: center;
+    padding: 50px 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    color: #FFFCFC;
+}
+
+.placeholder-text {
+    font-size: 18px;
+    color: #888;
+    font-style: italic;
+}
+
+/* Kapcsolat oldal stílusai */
+.contact-info, .contact-form {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #575656;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact-info p, .contact-form h2 {
+    margin-bottom: 20px;
+}
+
+.contact-form label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.contact-form input, .contact-form textarea {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 20px;
+    border: 1px solid #686666;
+    border-radius: 4px;
+}
+
+.contact-form button {
+    background-color: #333;
+    color: #858585;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.contact-form button:hover {
+    background-color: #f4f2f2;
+}
+
+.contact-form input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+/* Lábléc */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 2px 0;
+    
+    width: 100%;
+    bottom: 0;
+}
+
+/* Foglalási oldal stílusa */
+.booking-section {
+    text-align: center;
+    padding: 50px 20px;
+    max-width: 400px;
+    margin: 100px auto;
+    background: #222;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Formázás a beviteli mezőkhöz */
+.booking-section form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+}
+
+/* Label stílus */
+.booking-section label {
+    font-weight: bold;
+    color: white;
+    text-align: left;
+    width: 100%;
+}
+
+/* Beviteli mezők */
+.booking-section input,
+.booking-section select {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+    width: 90%;
+    text-align: left;
+}
+
+/* Kisebb gombméret és középre igazítás */
+.booking-section button {
+    background-color: #CF5443;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    border: none;
+    transition: background 0.3s;
+    width: 50%;
+}
+
+.booking-section button:hover {
+    background-color: #A83D30;
+}
+
+/* Regisztrációs gomb */
+.booking-register-button {
+    background-color: #666;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 13px;
+    text-decoration: none;
+    border: none;
+    transition: background 0.3s;
+    width: 50%;
+    margin-top: 50%;
+     
+  
+}
+
+.tracks-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    max-width: 800px;
+    margin: 50px auto;
+}
+
+.track-item {
+    background: #333;
+    color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.track-item img {
+    border-radius: 10px;
+    transition: transform 0.3s;
+}
+
+.track-item img:hover {
+    transform: scale(1.05);
+}
+
+.track-item h2 {
+    margin: 10px 0;
+}
+
+.track-item p {
+    font-size: 16px;
+    color: #ccc;
+}
+
+.button {
+    display: inline-block;
+    background-color: #f84444;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+.button:hover {
+    background-color: #d12c2c;
+}
+
+
+/*datamanagement formázás */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #666464;
+}
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+header {
+    background: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+p {
+    margin: 0 0 10px;
+}
+.contact-info {
+    margin: 0 auto;
+    text-align: center;
+}
+.contact-info p {
+    margin: 5px 0;
+    
+}
+/* Gomb stílus */
+.button {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #929292; /* Gomb háttérszín (kék) */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px; /* Lekerekített sarkok */
+    text-align: center;
+    text-decoration: none; /* Link aláhúzás eltávolítása */
+    transition: background-color 0.3s, transform 0.2s; /* Animációk */
+   
+}
+.container {
+    display: flex;
+    justify-content: center; /* vízszintes középre igazítás */
+    align-items: center; /* függőleges középre igazítás */
+    height: 10vh; /* teljes képernyőn középre igazítás */
+}
+
+.button:hover {
+    background-color: #0056b3; /* Sötétebb kék szín, amikor az egér a gomb fölött van */
+    transform: scale(1.05); /* Kisebb nagyítás, amikor az egér a gomb fölött van */
+}
+
+.button:active {
+    background-color: #003d80; /* Még sötétebb kék, amikor rákattintanak */
+}
+/* Galéria oldal stílus */
+.gallery-container {
+    text-align: center;
+    padding: 50px 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    color: #FFFCFC;
+}
+
+/* Kép feltöltő gomb */
+.upload-button {
+    display: inline-block;
+    background-color: #CF5443;
+    color: white;
+    padding: 10px 15px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.upload-button:hover {
+    background-color: #A83D30;
+}
+
+/* Elrejtjük az alapértelmezett file inputot */
+.upload-button input {
+    display: none;
+}
+
+/* Galéria képek rácsos elrendezésben */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+/* Egyes képek */
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+}
+
+.gallery-item img:hover {
+    transform: scale(1.05);
+}
+
+.preview-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.preview-image {
+    max-width: 300px;
+    max-height: 300px;
+    margin-bottom: 10px;
+}
+
+/* Árak oldal stílus */
+.prices-container {
+    text-align: center;
+    padding: 50px 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    color: #FFFCFC;
+}
+
+/* Táblázat stílus */
+.prices-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.prices-table th, .prices-table td {
+    border: 2px solid #CF5443;
+    padding: 10px;
+    font-size: 18px;
+}
+
+.prices-table th {
+    background-color: #181515;
+    color: #FFFCFC;
+}
+
+.prices-table tbody tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.prices-table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+.table-responsive {
+    overflow-x: auto;
+}
+
+
+/* Egyedi ajánlat szöveg */
+.group-pricing {
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+.group-pricing a {
+    color: #CF5443;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.group-pricing a:hover {
+    text-decoration: underline;
+}
+
+/* Vélemények oldal stílus */
+.reviews-container {
+    text-align: center;
+    padding: 50px 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    color: #FFFCFC;
+}
+
+/* Vélemények lista */
+.reviews-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Egyedi vélemény elem */
+.review-item {
+    background: #333;
+    color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: 2px solid #CF5443;
+}
+
+/* Csillagok stílusa */
+.stars {
+    font-size: 20px;
+    color: #FFD700; /* Arany csillagok */
+}
+
+/* Vélemény szöveg */
+.review-text {
+    font-size: 16px;
+    color: #ccc;
+    font-style: italic;
+}
+
+/* Kijutási információ */
+.escaped {
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+/* Vélemények oldal stílus */
+.reviews-container {
+    text-align: center;
+    padding: 50px 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    color: #FFFCFC;
+}
+
+/* Vélemények lista */
+.reviews-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Egyedi vélemény elem */
+.review-item {
+    background: #333;
+    color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: 2px solid #CF5443;
+}
+
+/* Csillagok stílusa */
+.stars {
+    font-size: 20px;
+    color: #FFD700; /* Arany csillagok */
+}
+
+/* Vélemény szöveg */
+.review-text {
+    font-size: 16px;
+    color: #ccc;
+    font-style: italic;
+}
+
+/* Kijutási információ */
+.escaped {
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+/* Vélemény beküldő űrlap */
+.review-form {
+    background: #222;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+.review-form input, .review-form textarea, .review-form select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+}
+
+.review-form textarea {
+    height: 80px;
+}
+
+.review-form button {
+    background-color: #CF5443;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    border: none;
+    transition: background 0.3s;
+}
+
+.review-form button:hover {
+    background-color: #A83D30;
+}
+
+.track-name {
+    font-size: 16px;
+    font-weight: bold;
+    color: #f7d765;
+    margin-bottom: 5px;
+}
+
+
+/* Rádiógombok */
+.radio-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 10px 0;
+}
+
+.radio-buttons label {
+    cursor: pointer;
+}
+
+/* GYIK oldal stílus */
+.faq-container {
+    text-align: center;
+    padding: 50px 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    color: #FFFCFC;
+}
+
+/* GYIK lista */
+.faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+/* Egyes kérdés-válasz blokk */
+.faq-item {
+    background: #333;
+    color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: 2px solid #CF5443;
+}
+
+/* Kérdés beküldő űrlap */
+.faq-form {
+    background: #222;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+.faq-form textarea {
+    width: 100%;
+    padding: 10px;
+    height: 80px;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+}
+
+.faq-form button {
+    background-color: #CF5443;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    border: none;
+    transition: background 0.3s;
+}
+
+.faq-form button:hover {
+    background-color: #A83D30;
+}
+
+/* Felugró üzenet */
+.popup {
+    background: #444;
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 20px auto;
+    width: 50%;
+    font-size: 16px;
+    font-weight: bold;
+}
+/* Kapcsolat oldal */
+.contact-container {
+    text-align: center;
+    padding: 50px 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    color: #FFFCFC;
+}
+
+/* Kapcsolati információk elkülönítése */
+.contact-info {
+    background: #5f5f5f;
+    padding: 0px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Űrlap stílus */
+.contact-form {
+    background: #5f5f5f;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    max-width: 600px;
+    margin: 0 auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.contact-form label {
+    display: block;
+    font-weight: bold;
+    text-align: left;
+    margin: 10px 0 5px;
+}
+
+.contact-form input, .contact-form textarea {
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+    background: #ffffff;
+    color: #000000;
+}
+
+.contact-form textarea {
+    height: 80px;
+}
+
+.contact-form button {
+    background-color: #CF5443;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    border: none;
+    transition: background 0.3s;
+}
+
+.contact-form button:hover {
+    background-color: #A83D30;
+}
+
+/* Hibajelzés */
+.error {
+    color: red;
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+/* Felugró üzenet */
+.popup {
+    background: #444;
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 20px auto;
+    width: 50%;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+}
+/* Bejelentkezés és Regisztráció oldalak */
+.auth-container {
+    text-align: center;
+    padding: 50px 20px;
+    max-width: 400px;
+    margin: 100px auto;
+    background: #222;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Formázás a beviteli mezőkhöz */
+.auth-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Középre igazítja a mezőket */
+    gap: 15px;
+    width: 100%;
+}
+
+/* Label stílus */
+.auth-container label {
+    font-weight: bold;
+    color: white;
+    text-align: left;
+    width: 100%;
+}
+
+/* Beviteli mezők */
+.auth-container input {
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+    width: 90%; /* Kicsit kisebb legyen, hogy ne érjen a széléhez */
+    text-align: left;
+}
+
+/* Kisebb gombméret és középre igazítás */
+.auth-container button {
+    background-color: #CF5443;
+    color: white;
+    padding: 8px 15px; /* Kisebb gombméret */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px; /* Kisebb betűméret */
+    border: none;
+    transition: background 0.3s;
+    width: 50%; /* Gomb szélességének csökkentése */
+}
+
+.auth-container button:hover {
+    background-color: #A83D30;
+}
+
+/* Szobák oldalainak stílusa */
+.track-container {
+    text-align: center;
+    padding: 50px 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    color: white;
+}
+
+/* Szobák (pályák) címének eltolása a fejléc alá */
+.track-container h2 {
+    margin-top: 100px; /* Eltolja a címet a fejléc alól */
+}
+
+/* Szoba képek */
+.track-image {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 20px 0;
+}
+
+/* Foglalás gomb */
+.button {
+    display: inline-block;
+    background-color: #f84444;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+.button:hover {
+    background-color: #d12c2c;
+}
+/* ---- Admin konténer ---- */
+.admin-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+/* ---- Admin rács elrendezése ---- */
+.admin-grid {
+    display: grid;
+    gap: 30px;
+    margin: 20px auto;
+    max-width: 500px;
+    justify-content: center;
+}
+
+/* ---- Admin szekciók (dobozok) ---- */
+.admin-section {
+    background: #333;
+    padding: 25px;
+    border-radius: 10px;
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ---- Beviteli mezők és legördülő menük ---- */
+.admin-section label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+    color: #f7d765;
+}
+
+.admin-section select,
+.admin-section input[type="text"],
+.admin-section input[type="email"],
+.admin-section input[type="tel"],
+.admin-section input[type="date"] {
+    width: 80%;
+    padding: 10px;
+    border: 2px solid #f7d765;
+    border-radius: 5px;
+    background: #222;
+    color: white;
+    font-size: 16px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* ---- Gombok ---- */
+.admin-section button {
+    background-color: #CF5443;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    border: none;
+    transition: background 0.3s;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.admin-section button:hover {
+    background-color: #A83D30;
+}
+
+/* ---- Felhasználói táblázat ---- */
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.user-table th, .user-table td {
+    border: 2px solid #f7d765;
+    padding: 10px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.user-table th {
+    background-color: #181515;
+    color: #FFFCFC;
+}
+
+/* ---- Foglalási mezők formázása ---- */
+.admin-section input[type="checkbox"] {
+    transform: scale(1.2);
+    margin-left: 10px;
+}
+
+/* ---- Távolság a mezők között ---- */
+.admin-section select,
+.admin-section input {
+    margin-bottom: 10px;
+}
+
+/* ---- Versenytábla beállítása ---- */
+.admin-section .competition {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+
+
+/* Pályák listája */
+.track-item {
+    background: #333;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.track-item button {
+    background-color: #CF5443;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.track-item button:hover {
+    background-color: #A83D30;
+}
+
+/* Foglalások listája */
+.booking-management ul {
+    list-style: none;
+    padding: 0;
+}
+
+.booking-management li {
+    background: #444;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.time-slots {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.time-slot {
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: background 0.3s;
+    text-align: center;
+    min-width: 200px; /* Egyforma méret */
+    margin-left: 100px;
+}
+
+
+/* Szabad időpont */
+.time-slot.available {
+    background-color: #4CAF50; /* Zöld */
+    color: white;
+}
+
+/* Foglalt időpont */
+.time-slot.booked {
+    background-color: #d9534f; /* Piros */
+    color: white;
+    cursor: not-allowed;
+}
+
+/* Kiválasztott időpont (kék) */
+.time-slot.selected {
+    background-color: #007BFF; /* Kék */
+    color: white;
+}
+
+/* Hover effekt csak a szabad időpontokra */
+.time-slot.available:hover {
+    background-color: #45a049;
+}
+
+.challenge-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    
+}
+
+.challenge-table th, .user-table td {
+    border: 2px solid #f7d765;
+    padding: 10px;
+    text-align: center;
+    
+}
+
+.challenge-table th {
+    background-color: #181515;
+    color: #FFFCFC;
+    }
+
+    .privacy-policy-container {
+        text-align: left;
+        padding: 50px 20px;
+        max-width: 800px;
+        margin: 0 auto;
+        color: #FFFCFC;
+    }
+    
+    .privacy-policy-container h1 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    
+    .privacy-policy-container p {
+        margin-bottom: 20px;
+        line-height: 1.6;
+    }
+    
+    .privacy-policy-container ul {
+        margin-left: 30px;
+        margin-bottom: 20px;
+    }
+    
+    .privacy-policy-container li {
+        margin-bottom: 10px;
+    }
+
+    .icon-button {
+        font-size: 1em;
+        cursor: pointer;
+      }
+      
+      .icon-button.edit {
+        color: blue;
+      }
+      
+      .icon-button.delete {
+        color: red;
+      }
+      .bookings-table {
+        width: 80%; /* A táblázat szélessége, állítsd be igény szerint */
+        margin: 20px auto; /* Középre igazítás vízszintesen */
+        border-collapse: collapse; /* Szimpla vonalak az cellák körül */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Szép árnyék a táblázat körül */
+      }
+      
+      .bookings-table th, .bookings-table td {
+        border: 1px solid #ddd; /* Vékony szürke vonalak a cellák körül */
+        padding: 8px;
+        text-align: left; /* Szöveg igazítása balra az oszlopokban */
+      }
+      
+      .bookings-table th {
+        background-color: #2b2a2a; /* Világos szürke háttér a fejléchez */
+        font-weight: bold; /* Félkövér betűk a fejléchez */
+        text-align: center; /* Fejléc szöveg középre */
+      }
+      
+      .bookings-table tbody tr:nth-child(even) {
+        background-color: #4d4c4c; /* Második sorok világosabb háttérrel a jobb olvashatóságért */
+      }
+      
+      .bookings-table button {
+        padding: 6px 10px;
+        border: none;
+        background-color: #dc3545; /* Piros háttér a törlés gombhoz */
+        color: white;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: background-color 0.3s ease;
+      }
+      
+      .bookings-table button:hover {
+        background-color: #c82333; /* Sötétebb piros háttér hover-re */
+      }
+      
+      .bookings-table td:last-child {
+        text-align: center; /* A törlés gomb középre igazítása */
+      }
