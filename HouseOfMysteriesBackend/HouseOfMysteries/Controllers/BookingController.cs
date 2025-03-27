@@ -91,7 +91,7 @@ namespace HouseOfMysteries.Controllers
                             await context.SaveChangesAsync();
                             return Ok("Clear booking succesful!");
                         }
-                        else 
+                        else
                         {
                             return Ok("Booking not found!");
                         }
@@ -149,7 +149,7 @@ namespace HouseOfMysteries.Controllers
 
 
         [HttpPost("NewBooking/{token}")]
-        public async Task<IActionResult> NewBooking(string token,BookingDTO newBooking)
+        public async Task<IActionResult> NewBooking(string token, BookingDTO newBooking)
         {
             int? roleId = Program.loggedInUsers.CheckTokenValidity(token).LoggedInUser.RoleId;
             if (roleId == -1)
@@ -158,28 +158,30 @@ namespace HouseOfMysteries.Controllers
             }
             else if (roleId > 1)
             {
-                Booking? booking = new Booking();
                 using (var context = new HouseofmysteriesContext())
                 {
                     try
                     {
-                        booking = context.Bookings.FirstOrDefaultAsync(f => f.BookingDate.Equals(newBooking.BookingDate) && f.RoomId == newBooking.RoomId && f.IsAvailable == false).Result;
+                        Booking? booking = new Booking();
+                        booking = context.Bookings.FirstOrDefaultAsync(f => f.BookingDate.Equals(newBooking.BookingDate) && f.RoomId == newBooking.RoomId).Result;
                         if (booking != null)
                         {
-                            return Ok("The room cannot be booked for this time!");
-                        }
-
-                        if (context.Bookings.FirstOrDefaultAsync(f => f.BookingDate.Equals(newBooking.BookingDate) && f.RoomId == newBooking.RoomId && f.IsAvailable == true).Result != null)
-                        {
-                            booking = context.Bookings.FirstOrDefaultAsync(f => f.BookingDate.Equals(newBooking.BookingDate) && f.RoomId == newBooking.RoomId && f.IsAvailable == true).Result;
-                            booking.TeamId = newBooking.TeamId;
-                            booking.Comment = newBooking.Comment;
-                            booking.IsAvailable = false;
-                            context.Bookings.Update(booking);
-                            await context.SaveChangesAsync();
+                            if (booking.IsAvailable == false)
+                            {
+                                return Ok("The room cannot be booked for this time!");
+                            }
+                            else
+                            {
+                                booking.TeamId = newBooking.TeamId;
+                                booking.Comment = newBooking.Comment;
+                                booking.IsAvailable = false;
+                                context.Bookings.Update(booking);
+                                await context.SaveChangesAsync();
+                            }
                         }
                         else
                         {
+                            booking = new Booking();
                             booking.BookingDate = newBooking.BookingDate;
                             booking.RoomId = newBooking.RoomId;
                             booking.TeamId = newBooking.TeamId;
@@ -201,7 +203,7 @@ namespace HouseOfMysteries.Controllers
                 return BadRequest("You do not have permission to perform this operation!");
             }
         }
-        
+
         [HttpDelete("{token}")]
 
         public async Task<IActionResult> Delete(string token, int bookingId)
@@ -241,7 +243,7 @@ namespace HouseOfMysteries.Controllers
             {
                 try
                 {
-                    if (limit ==0 || limit ==null) 
+                    if (limit == 0 || limit == null)
                     {
                         limit = 1;
                     }
