@@ -83,15 +83,15 @@ namespace HouseOfMysteries.Controllers
                 using (var context = new HouseofmysteriesContext())
                     try
                     {
-                        if (context.Bookings.FirstOrDefaultAsync(f => f.BookingDate.Equals(clearBooking.BookingDate) && f.RoomId == clearBooking.RoomId && f.IsAvailable == false).Result != null)
+                        booking = context.Bookings.FirstOrDefaultAsync(f => f.BookingDate.Equals(clearBooking.BookingDate) && f.RoomId == clearBooking.RoomId && f.IsAvailable == false).Result;
+                        if (booking != null)
                         {
-                            booking = context.Bookings.FirstOrDefaultAsync(f => f.BookingDate.Equals(clearBooking.BookingDate) && f.RoomId == clearBooking.RoomId && f.IsAvailable == false).Result;
                             booking.IsAvailable = true;
                             context.Bookings.Update(booking);
                             await context.SaveChangesAsync();
                             return Ok("Clear booking succesful!");
                         }
-                        else
+                        else 
                         {
                             return Ok("Booking not found!");
                         }
@@ -163,7 +163,8 @@ namespace HouseOfMysteries.Controllers
                 {
                     try
                     {
-                        if (context.Bookings.FirstOrDefaultAsync(f => f.BookingDate.Equals(newBooking.BookingDate) && f.RoomId == newBooking.RoomId && f.IsAvailable == false).Result != null)
+                        booking = context.Bookings.FirstOrDefaultAsync(f => f.BookingDate.Equals(newBooking.BookingDate) && f.RoomId == newBooking.RoomId && f.IsAvailable == false).Result;
+                        if (booking != null)
                         {
                             return Ok("The room cannot be booked for this time!");
                         }

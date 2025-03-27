@@ -54,7 +54,7 @@ namespace ServiceToolWPF.Services
                 }
                 else
                 {
-                    sendLogEvent.SendLog($"Error: {response.StatusCode} {response.Content.Headers} {content}");
+                    sendLogEvent.SendLog(response.Content.ReadAsStringAsync().Result);
                     return $"Error: {response.StatusCode} {response.Content.Headers} {content}";
                 }
             }

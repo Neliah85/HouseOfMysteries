@@ -46,7 +46,7 @@ namespace ServiceToolWPF.Services
             HttpResponseMessage? response = httpClient.PostAsync(url, request).Result;
             if (!response.IsSuccessStatusCode)
             {      
-                sendLogEvent.SendLog($"Login failed: {response.StatusCode}");
+                sendLogEvent.SendLog(response.Content.ReadAsStringAsync().Result);
                 MainWindow.ResetLoggedInUser(); 
             }
             return response.Content.ReadAsStringAsync().Result;

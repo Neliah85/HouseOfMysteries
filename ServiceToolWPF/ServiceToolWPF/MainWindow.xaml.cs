@@ -20,7 +20,7 @@ namespace ServiceToolWPF
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    
+
     public partial class MainWindow : Window
     {
         #region Declarations
@@ -35,9 +35,9 @@ namespace ServiceToolWPF
 
         ////Booking
         //public static List<Booking> bookings = new List<Booking>();
-        //public static string[] bookingTime = new string[7] {"09:00:00","10:30:00","12:00:00","13:30:00","15:00:00","16:30:00","18:00:00" };
-        public static string[] bookingTime = new string[7] { "09:00", "10:30", "12:00", "13:30", "15:00", "16:30", "18:00" };
-        public static string[] rooms = new string[9] { "Menekülés az iskolából", "A pedellus bosszúja", "A tanári titkai", "A tanári titkai", "Szabadulás Kódja", "Szabadulás Kódja", "Szabadulás Kódja", "Kalandok Kamrája", "Titkok Labirintusa" };    
+        public static string[] bookingTime = new string[7] {"09:00:00","10:30:00","12:00:00","13:30:00","15:00:00","16:30:00","18:00:00" };
+        //public static string[] bookingTime = new string[7] { "09:00", "10:30", "12:00", "13:30", "15:00", "16:30", "18:00" };
+        public static string[] rooms = new string[9] { "Menekülés az iskolából", "A pedellus bosszúja", "A tanári titkai", "A takarítónő visszanéz", "Szabadulás Kódja", "Időcsapda", "KódX Szoba", "Kalandok Kamrája", "Titkok Labirintusa" };
 
 
 
@@ -45,11 +45,11 @@ namespace ServiceToolWPF
         #region Constuctor
         public MainWindow()
         {
-            InitializeComponent();            
+            InitializeComponent();
             UserService.sendLogEvent.LogSent += SendLogEvent_LogSent;
             LoginService.sendLogEvent.LogSent += SendLogEvent_LogSent;
             LogoutService.sendLogEvent.LogSent += SendLogEvent_LogSent;
-            BookingService.sendLogEvent.LogSent += SendLogEvent_LogSent;        
+            BookingService.sendLogEvent.LogSent += SendLogEvent_LogSent;
 
             ResetLoggedInUser();
 
@@ -69,7 +69,7 @@ namespace ServiceToolWPF
             dtpBookingDate.SelectedDate = DateTime.Now;
             cmbRooms.ItemsSource = rooms;
             cmbRooms.SelectedIndex = 0;
-            
+
         }
         #endregion
         #region Generate Salt/Hash
@@ -208,10 +208,10 @@ namespace ServiceToolWPF
         }
         #endregion
         #region Logout
-        public static void ResetLoggedInUser() 
-        { 
+        public static void ResetLoggedInUser()
+        {
             LoggedInUserDTO user = new LoggedInUserDTO();
-            user.Token=Guid.NewGuid().ToString();
+            user.Token = Guid.NewGuid().ToString();
             user.RoleId = -1;
             user.Phone = "";
             user.Email = "";
@@ -234,7 +234,7 @@ namespace ServiceToolWPF
         }
         #endregion
         #region LogWindow
-        private void SendLogEvent_LogSent(object sender, string e) 
+        private void SendLogEvent_LogSent(object sender, string e)
         {
             WriteLog(e);
         }
@@ -455,31 +455,20 @@ namespace ServiceToolWPF
                 user.TeamId = null;
                 user.Salt = SALT;
                 user.Hash = CreateSHA256(CreateSHA256(txbRegPassword1.Password + SALT));
-                UserService.Post(sharedClient, user);                
+                UserService.Post(sharedClient, user);
             }
         }
         private void ConfirmRegistration()
-        {            
+        {
             if (txbRegUserName.Text != "" && txbRegEmail.Text != "")
             {
                 WriteLog("[Confirm registration]");
                 ConfirmRegDTO confirmReg = new ConfirmRegDTO { LoginName = txbRegUserName.Text, Email = txbRegEmail.Text };
-                UserService.Post(sharedClient, confirmReg);      
+                UserService.Post(sharedClient, confirmReg);
             }
         }
         #endregion
-
         #region Booking
-        //Get all booking
-        private void btnGetAllBooking_Click(object sender, RoutedEventArgs e)
-        {
-            GetAllBooking();
-        }
-        private async void GetAllBooking() 
-        {
-            WriteLog("[Get all booking]");
-            dgrBookingData.ItemsSource = await BookingService.GetAllBooking(sharedClient, loggedInUser.Token);
-        }
         //CheckBooking
         private async void btnCheckBooking_Click(object sender, RoutedEventArgs e)
         {
@@ -487,7 +476,7 @@ namespace ServiceToolWPF
         }
         private async void CheckBooking()
         {
-            WriteLog("[Check booking]");
+            WriteLog($"[Check booking >> Date: {dtpBookingDate.DisplayDate.ToShortDateString()}]");
             dgrBookingData.ItemsSource = await BookingService.CheckBooking(sharedClient, loggedInUser.Token, DateTime.Parse(dtpBookingDate.SelectedDate.Value.ToShortDateString()), cmbRooms.SelectedIndex + 1);
         }
         //New booking
@@ -495,9 +484,9 @@ namespace ServiceToolWPF
         {
             NewBooking();
         }
-        private async void NewBooking() 
+        private async void NewBooking()
         {
-            WriteLog("[New booking]");
+            WriteLog($"[New booking >> Room: {cmbRooms.SelectedItem.ToString()} Date: {GetBookingDateTime()}]");
             TimeSpan time = TimeSpan.Parse(bookingTime[cmbBookingTime.SelectedIndex]);
             BookingDTO newBooking = new BookingDTO();
             //newBooking.BookingDate = DateTime.Parse(dtpBookingDate.DisplayDate.ToShortDateString() + " " + time.ToString());
@@ -508,13 +497,63 @@ namespace ServiceToolWPF
             await BookingService.NewBooking(sharedClient, loggedInUser.Token, newBooking);
 
         }
-
-
-
-        private void SetBookingDate() 
+        //Clear booking
+        private void btnClearBooking_Click(object sender, RoutedEventArgs e)
         {
-   
-            
+            ClearBooking();
+        }
+        private async void ClearBooking() 
+        {
+            WriteLog("Clear booking");
+            ClearBookingDTO clearBooking = new ClearBookingDTO();
+            clearBooking.BookingDate = GetBookingDateTime();
+            clearBooking.RoomId = cmbRooms.SelectedIndex + 1;
+            await BookingService.ClearBooking(sharedClient,loggedInUser.Token,clearBooking);
+        }
+        //Get all booking
+        private void btnGetAllBooking_Click(object sender, RoutedEventArgs e)
+        {
+            GetAllBooking();
+        }
+        private async void GetAllBooking()
+        {
+            WriteLog("[Get all booking]");
+            dgrBookingData.ItemsSource = await BookingService.GetAllBooking(sharedClient, loggedInUser.Token);
+        }
+
+        //Delete booking
+        private async void btnDeleteBooking_Click(object sender, RoutedEventArgs e)
+        {
+            if (txbBookingId.Text != "") 
+            {
+                int id = int.Parse(txbBookingId.Text);
+                WriteLog("[Delete booking]");
+                await BookingService.DeleteBooking(sharedClient, loggedInUser.Token, id);
+            }   
+        }
+
+
+        public DateTime GetBookingDateTime() 
+        { 
+            return DateTime.Parse($"{dtpBookingDate.DisplayDate.ToShortDateString()} "+ bookingTime[cmbBookingTime.SelectedIndex]);
+        }
+
+        public int GetIndexOfBookingTime(TimeSpan bookingTime) 
+        {
+            //int index = 0;
+            int index = cmbBookingTime.Items.IndexOf(bookingTime.ToString());
+            return index;
+        }
+
+
+
+
+
+
+        private void SetBookingDate()
+        {
+
+
         }
 
         private void cmbBookingTime_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -531,7 +570,10 @@ namespace ServiceToolWPF
                 Booking row = (Booking)dgrBookingData.Items.GetItemAt(index);
                 dtpBookingDate.DisplayDate = (DateTime)row.BookingDate;
                 cmbRooms.SelectedIndex = row.RoomId.Value - 1;
-                txbReasultTime.Text = row.BookingDate.ToString().Split(".")[3].Trim(' ').Substring(0, 5);
+                cmbBookingTime.SelectedIndex = GetIndexOfBookingTime(row.BookingDate.Value.TimeOfDay);
+                //txbReasultTime.Text = row.BookingDate.ToString().Split(".")[3].Trim(' ').Substring(0, 5);
+                txbBookingId.Text = row.BookingId.ToString();
+
             }
         }
 
@@ -544,7 +586,9 @@ namespace ServiceToolWPF
 
 
 
+
         #endregion
+
 
     }
 }

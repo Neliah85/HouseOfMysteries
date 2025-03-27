@@ -14,6 +14,8 @@ using System.Globalization;
 using ServiceToolWPF.DTOs;
 using System.DirectoryServices.ActiveDirectory;
 using System.Text.Json.Nodes;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+
 
 
 namespace ServiceToolWPF.Services
@@ -82,7 +84,7 @@ namespace ServiceToolWPF.Services
                 string url = $"{httpClient.BaseAddress}Booking/NewBooking/{token}?";
                 string json = JsonSerializer.Serialize(newBooking);
                 var request = new StringContent(json, Encoding.UTF8, "application/json");
-                sendLogEvent.SendLog(url);
+                //sendLogEvent.SendLog(url);
                 HttpResponseMessage? response = await httpClient.PostAsync(url, request);
                 if (response.IsSuccessStatusCode)
                 {
@@ -101,7 +103,46 @@ namespace ServiceToolWPF.Services
             }
         }
 
+        public static async Task<string> DeleteBooking(HttpClient httpClient,string token, int bookingId)
+        {
+            try
+            {
+                Booking booking = new Booking();
+                booking.BookingId = bookingId;  
+                string url = $"{httpClient.BaseAddress}Booking/";
+                string p = $"{token}?bookingId={bookingId}";
+                var response = await httpClient.DeleteAsync(url + p);
+                string r = response.Content.ReadAsStringAsync().Result;
+                sendLogEvent.SendLog(r);
+                return r; 
+            }
+            catch (Exception ex) 
+            { 
+                sendLogEvent.SendLog($"{ex.Message}");
+                return ex.Message;
+            }
+        }
 
+        public static async Task<string> ClearBooking(HttpClient httpClient, string token, ClearBookingDTO clearBooking)
+        {
+            try
+            {
+                string url = $"{httpClient.BaseAddress}Booking/ClearBooking/{token}";
+                string json = JsonSerializer.Serialize(clearBooking);
+                var request = new StringContent(json, Encoding.UTF8, "application/json");
+                //sendLogEvent.SendLog(url);
+                var response = await httpClient.PutAsync(url, request);
+                string r = response.Content.ReadAsStringAsync().Result;
+                sendLogEvent.SendLog(r);
+                return r;
+            }
+            catch(Exception ex) 
+            {
+                sendLogEvent.SendLog($"{ex.Message}");
+                return ex.Message;
+            }
+
+        }
 
 
     }

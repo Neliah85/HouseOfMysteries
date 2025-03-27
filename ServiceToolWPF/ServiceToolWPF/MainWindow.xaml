@@ -38,13 +38,13 @@
             <TabItem Header="Bookings" Height="20" VerticalAlignment="Center" HorizontalAlignment="Left" Width="61">
                 <Grid>
                     <ComboBox Name="cmbBookingTime" HorizontalAlignment="Left" Margin="0,32,0,0" VerticalAlignment="Top" Width="179" SelectionChanged="cmbBookingTime_SelectionChanged"/>
-                    <DataGrid x:Name="dgrBookingData" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="184,3,4,-3" IsReadOnly="True" SelectionChanged="dgrBookingData_SelectionChanged"/>
+                    <DataGrid x:Name="dgrBookingData" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="184,3,4,-3" IsReadOnly="True" SelectionChanged="dgrBookingData_SelectionChanged" Background="#FFECF8FB"/>
                     <Button x:Name="btnCheckBooking" Content="Check booking" HorizontalAlignment="Left" Margin="0,86,0,0" VerticalAlignment="Top" Width="179" Click="btnCheckBooking_Click"/>
                     <Button x:Name="btnNewBooking" Content="New booking" HorizontalAlignment="Left" Margin="0,111,0,0" VerticalAlignment="Top" Width="179" Click="btnNewBooking_Click"/>
                     <ComboBox x:Name="cmbRooms" HorizontalAlignment="Left" Margin="0,59,0,0" VerticalAlignment="Top" Width="179" Height="22" />
                     <DatePicker x:Name="dtpBookingDate" HorizontalAlignment="Left" Margin="0,3,0,0" VerticalAlignment="Top" Width="179"/>
-                    <Button x:Name="btnClearBooking" Content="Clear booking" HorizontalAlignment="Left" Margin="0,136,0,0" VerticalAlignment="Top" Width="179"/>
-                    <Button x:Name="btnDeleteBooking" Content="Delete booking" HorizontalAlignment="Left" Margin="65,187,0,0" VerticalAlignment="Top" Width="114"/>
+                    <Button x:Name="btnClearBooking" Content="Clear booking" HorizontalAlignment="Left" Margin="0,136,0,0" VerticalAlignment="Top" Width="179" Click="btnClearBooking_Click"/>
+                    <Button x:Name="btnDeleteBooking" Content="Delete booking" HorizontalAlignment="Left" Margin="65,187,0,0" VerticalAlignment="Top" Width="114" Click="btnDeleteBooking_Click"/>
                     <Button x:Name="btnTeamCompetition" Content="Team competition" HorizontalAlignment="Left" Margin="0,251,0,0" VerticalAlignment="Top" Width="179"/>
                     <TextBox x:Name="txbReasultTime" HorizontalAlignment="Left" Margin="0,213,0,0" TextWrapping="Wrap" Text="01:00:00" VerticalAlignment="Top" Width="60" Height="20"/>
                     <Button x:Name="btnSaveResult" Content="Save result" HorizontalAlignment="Left" Margin="65,213,0,0" VerticalAlignment="Top" Width="114"/>
@@ -75,9 +75,6 @@
 
                 <Button x:Name="btnSaveLog" Content="Save log" HorizontalAlignment="Center" Width="146" Height="20" VerticalAlignment="Bottom" Margin="0,0,0,22" Click="btnSaveLog_Click"/>
                 <Button x:Name="btnClearLog" Content="Clear log" HorizontalAlignment="Center" Margin="0,111,0,0" VerticalAlignment="Bottom" Width="146" Grid.Column="1" Height="20" Click="btnClearLog_Click"/>
-
-
-
 
             </Grid>
 

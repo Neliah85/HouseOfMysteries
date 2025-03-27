@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\SULI\\Projektmunka\\Projekt_Rejtelyek_haza\\ServiceToolWPF\\ServiceToolWPF\\ServiceToolWPF.csproj",
+      "projectUniqueName": "E:\\Suli\\IKT_projektmunka\\Projekt_Rejtelyek_haza\\ServiceToolWPF\\ServiceToolWPF\\ServiceToolWPF.csproj",
       "projectName": "ServiceToolWPF",
-      "projectPath": "D:\\SULI\\Projektmunka\\Projekt_Rejtelyek_haza\\ServiceToolWPF\\ServiceToolWPF\\ServiceToolWPF.csproj",
+      "projectPath": "E:\\Suli\\IKT_projektmunka\\Projekt_Rejtelyek_haza\\ServiceToolWPF\\ServiceToolWPF\\ServiceToolWPF.csproj",
       "packagesPath": "C:\\Users\\mesza\\.nuget\\packages\\",
-      "outputPath": "D:\\SULI\\Projektmunka\\Projekt_Rejtelyek_haza\\ServiceToolWPF\\ServiceToolWPF\\obj\\",
+      "outputPath": "E:\\Suli\\IKT_projektmunka\\Projekt_Rejtelyek_haza\\ServiceToolWPF\\ServiceToolWPF\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -46,11 +46,6 @@
         "warnAsError": [
           "NU1605"
         ]
-      },
-      "restoreAuditProperties": {
-        "enableAudit": "true",
-        "auditLevel": "low",
-        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -75,7 +70,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

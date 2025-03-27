@@ -52,10 +52,17 @@ namespace HouseOfMysteries.Controllers
                     }
                     else
                     {
-                        user.RoleId = 2;
-                        context.Users.Update(user);
-                        await context.SaveChangesAsync();
-                        return Ok("Registration completed successfully!");
+                        if (user.RoleId == 1)
+                        {
+                            user.RoleId = 2;
+                            context.Users.Update(user);
+                            await context.SaveChangesAsync();
+                            return Ok("Registration completed successfully!");
+                        }
+                        else 
+                        {
+                            return BadRequest("The user has already confirmed their registration.");
+                        }
                     }
                 }
                 catch (Exception ex)
