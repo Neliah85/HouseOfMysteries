@@ -85,15 +85,8 @@ namespace ServiceToolWPF.Services
                 string json = JsonSerializer.Serialize(newBooking);
                 var request = new StringContent(json, Encoding.UTF8, "application/json");
                 //sendLogEvent.SendLog(url);
-                HttpResponseMessage? response = await httpClient.PostAsync(url, request);
-                if (response.IsSuccessStatusCode)
-                {
-                    sendLogEvent.SendLog(response.Content.ReadAsStringAsync().Result);
-                }
-                else
-                {
-                    sendLogEvent.SendLog($"New booking failed: {response.StatusCode}");
-                }
+                var response = await httpClient.PostAsync(url, request);
+                sendLogEvent.SendLog(response.Content.ReadAsStringAsync().Result);
                 return response.Content.ReadAsStringAsync().Result;
             }
             catch (Exception ex)
@@ -141,9 +134,34 @@ namespace ServiceToolWPF.Services
                 sendLogEvent.SendLog($"{ex.Message}");
                 return ex.Message;
             }
-
         }
 
-
+        //http://localhost:5131/Booking/TeamCompetition/4?limit=3
+        public static async Task<List<Booking>?> GetChallengeResult(HttpClient httpClient, int roomId, int limit)
+        {
+            try
+            {
+                List<Booking> bookings = new List<Booking>(); 
+                string url = $"{httpClient.BaseAddress}Booking/TeamCompetition/";
+                string p = $"{roomId}?liomit={limit}";
+                var response = await httpClient.GetAsync(url+p);
+                if (response.IsSuccessStatusCode)
+                {
+                    bookings = await response.Content.ReadFromJsonAsync<List<Booking>>();
+                    sendLogEvent.SendLog($"Successful query! {bookings.Count} result(s) found.");
+                    return bookings;
+                }
+                else
+                {
+                    sendLogEvent.SendLog(response.Content.ReadAsStringAsync().Result);
+                    return (null);
+                }
+            }
+            catch (Exception ex)
+            {
+                sendLogEvent.SendLog(ex.Message);
+                return null;
+            }
+        }
     }
 }

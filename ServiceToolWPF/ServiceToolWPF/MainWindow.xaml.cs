@@ -33,12 +33,12 @@ namespace ServiceToolWPF
             BaseAddress = new Uri("http://localhost:5131/"),
         };
 
-        ////Booking
-        //public static List<Booking> bookings = new List<Booking>();
+        //Booking
         public static string[] bookingTime = new string[7] {"09:00:00","10:30:00","12:00:00","13:30:00","15:00:00","16:30:00","18:00:00" };
         //public static string[] bookingTime = new string[7] { "09:00", "10:30", "12:00", "13:30", "15:00", "16:30", "18:00" };
         public static string[] rooms = new string[9] { "Menekülés az iskolából", "A pedellus bosszúja", "A tanári titkai", "A takarítónő visszanéz", "Szabadulás Kódja", "Időcsapda", "KódX Szoba", "Kalandok Kamrája", "Titkok Labirintusa" };
-
+        //Challenge
+        public static string[] ranking = new string[11] {"All","Top 1","Top 2","Top 3","Top 4","Top 5","Top 6","Top 7","Top 8","Top 9","Top 10"};
 
 
         #endregion
@@ -69,6 +69,11 @@ namespace ServiceToolWPF
             dtpBookingDate.SelectedDate = DateTime.Now;
             cmbRooms.ItemsSource = rooms;
             cmbRooms.SelectedIndex = 0;
+            //Challenge
+            cmbRoomsChallenge.ItemsSource = rooms;
+            cmbRoomsChallenge.SelectedIndex = 0;
+            cmbRanking.ItemsSource = ranking;
+            cmbRanking.SelectedIndex = 0;
 
         }
         #endregion
@@ -489,11 +494,10 @@ namespace ServiceToolWPF
             WriteLog($"[New booking >> Room: {cmbRooms.SelectedItem.ToString()} Date: {GetBookingDateTime()}]");
             TimeSpan time = TimeSpan.Parse(bookingTime[cmbBookingTime.SelectedIndex]);
             BookingDTO newBooking = new BookingDTO();
-            //newBooking.BookingDate = DateTime.Parse(dtpBookingDate.DisplayDate.ToShortDateString() + " " + time.ToString());
             newBooking.BookingDate = DateTime.Parse(dtpBookingDate.DisplayDate.ToShortDateString() + " " + TimeSpan.Parse(bookingTime[cmbBookingTime.SelectedIndex]).ToString());
-            newBooking.TeamId = null;
+            newBooking.TeamId = loggedInUser.TeamId;
             newBooking.RoomId = cmbRooms.SelectedIndex + 1;
-            newBooking.Comment = "Teszt";
+            newBooking.Comment = txbComment.Text;
             await BookingService.NewBooking(sharedClient, loggedInUser.Token, newBooking);
 
         }
@@ -531,37 +535,32 @@ namespace ServiceToolWPF
                 await BookingService.DeleteBooking(sharedClient, loggedInUser.Token, id);
             }   
         }
+        //Get challenge result
+        private void btnTeamCompetition_Click(object sender, RoutedEventArgs e)
+        {
+            GetTeanCompetition();
+        }
 
-
+        public async void GetTeanCompetition() 
+        {
+            WriteLog($"Get challenge result. >> Room: {cmbRoomsChallenge.SelectedItem.ToString()}; Ranking: {cmbRanking.SelectedItem.ToString()};");
+            dgrChallengeData.ItemsSource =  await BookingService.GetChallengeResult(sharedClient,cmbRoomsChallenge.SelectedIndex+1,cmbRanking.SelectedIndex);
+        }
         public DateTime GetBookingDateTime() 
         { 
-            return DateTime.Parse($"{dtpBookingDate.DisplayDate.ToShortDateString()} "+ bookingTime[cmbBookingTime.SelectedIndex]);
+            TimeSpan time = TimeSpan.Zero;
+            if (cmbBookingTime.SelectedIndex > -1)
+            {
+                time = TimeSpan.Parse(bookingTime[cmbBookingTime.SelectedIndex]);
+            } 
+            return DateTime.Parse($"{dtpBookingDate.DisplayDate.ToShortDateString()} "+ time);
         }
 
         public int GetIndexOfBookingTime(TimeSpan bookingTime) 
         {
-            //int index = 0;
             int index = cmbBookingTime.Items.IndexOf(bookingTime.ToString());
             return index;
         }
-
-
-
-
-
-
-        private void SetBookingDate()
-        {
-
-
-        }
-
-        private void cmbBookingTime_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            SetBookingDate();
-        }
-
-
         private void dgrBookingData_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             int index = dgrBookingData.SelectedIndex;
@@ -571,8 +570,8 @@ namespace ServiceToolWPF
                 dtpBookingDate.DisplayDate = (DateTime)row.BookingDate;
                 cmbRooms.SelectedIndex = row.RoomId.Value - 1;
                 cmbBookingTime.SelectedIndex = GetIndexOfBookingTime(row.BookingDate.Value.TimeOfDay);
-                //txbReasultTime.Text = row.BookingDate.ToString().Split(".")[3].Trim(' ').Substring(0, 5);
                 txbBookingId.Text = row.BookingId.ToString();
+                txbComment.Text = row.Comment;
 
             }
         }
@@ -587,8 +586,8 @@ namespace ServiceToolWPF
 
 
 
-        #endregion
 
+        #endregion
 
     }
 }
