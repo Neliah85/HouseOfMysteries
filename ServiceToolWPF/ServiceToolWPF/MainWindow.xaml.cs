@@ -13,6 +13,7 @@ using Microsoft.Win32;
 using System.IO;
 using System;
 using ServiceToolWPF.DTOs;
+using System.Linq;
 
 
 namespace ServiceToolWPF
@@ -34,11 +35,11 @@ namespace ServiceToolWPF
         };
 
         //Booking
-        public static string[] bookingTime = new string[7] {"09:00:00","10:30:00","12:00:00","13:30:00","15:00:00","16:30:00","18:00:00" };
+        public static string[] bookingTime = new string[7] { "09:00:00", "10:30:00", "12:00:00", "13:30:00", "15:00:00", "16:30:00", "18:00:00" };
         //public static string[] bookingTime = new string[7] { "09:00", "10:30", "12:00", "13:30", "15:00", "16:30", "18:00" };
         public static string[] rooms = new string[9] { "Menekülés az iskolából", "A pedellus bosszúja", "A tanári titkai", "A takarítónő visszanéz", "Szabadulás Kódja", "Időcsapda", "KódX Szoba", "Kalandok Kamrája", "Titkok Labirintusa" };
         //Challenge
-        public static string[] ranking = new string[11] {"All","Top 1","Top 2","Top 3","Top 4","Top 5","Top 6","Top 7","Top 8","Top 9","Top 10"};
+        public static string[] ranking = new string[11] { "All", "Top 1", "Top 2", "Top 3", "Top 4", "Top 5", "Top 6", "Top 7", "Top 8", "Top 9", "Top 10" };
 
 
         #endregion
@@ -473,6 +474,118 @@ namespace ServiceToolWPF
             }
         }
         #endregion
+        #region Booking input mask settings
+        private void txbComment_GotFocus(object sender, RoutedEventArgs e)
+        {
+            BookingCommentTextCheck();
+        }
+
+        private void txbComment_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            BookingCommentTextCheck();
+        }
+
+        private void BookingCommentTextCheck()
+        {
+            if (txbComment.Text == "")
+            {
+                txbComment.Background = null;
+            }
+            else
+            {
+                txbComment.Background = Brushes.White;
+            }
+        }
+        private void txbResultTime_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            BookingResultTimeTextCheck();
+        }
+        private void txbResultTime_GotFocus(object sender, RoutedEventArgs e)
+        {
+            BookingResultTimeTextCheck();
+        }
+
+        private void BookingResultTimeTextCheck()
+        {
+            if (txbResultTime.Text == "")
+            {
+                txbResultTime.Background = null;
+            }
+            else
+            {
+                txbResultTime.Background = Brushes.White;
+            }
+        }
+        private void txbResultTime_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            string mask = "0123456789";
+            if (mask.Contains(char.Parse(e.Text)) == false)
+            {
+                e.Handled = true;
+            }
+            else
+            {
+                switch (txbResultTime.Text.Length)
+                {
+                    case 0: if (int.Parse(e.Text) > 0) e.Handled = true; break;
+                    case 1: if (int.Parse(e.Text) > 1) e.Handled = true; break;
+                    case 3: if (int.Parse(e.Text) > 5) e.Handled = true; break;
+                    case 6: if (int.Parse(e.Text) > 5) e.Handled = true; break;
+                }
+            }
+        }
+
+        private void txbResultTime_PreviewKeyUp(object sender, KeyEventArgs e)
+        {
+            switch (txbResultTime.Text.Length)
+            {
+                case 2:
+                    {
+                        txbResultTime.Text += ":";
+                        txbResultTime.CaretIndex = 3;
+                    }; break;
+                case 5:
+                    {
+                        txbResultTime.Text += ":";
+                        txbResultTime.CaretIndex = 6;
+                    }; break;
+            }
+        }
+
+        private void txbResultTime_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Back) { txbResultTime.CaretIndex = txbResultTime.Text.Length+1; }
+           
+            if (txbResultTime.Text.Length == 3)
+            {
+                if (e.Key == Key.Back)
+                {
+                    e.Handled = true;
+                    string s = txbResultTime.Text;
+                    txbResultTime.Text = s.Remove(1, 2);
+                    txbResultTime.CaretIndex = 1;
+                }
+            }
+            if (txbResultTime.Text.Length == 6)
+            {
+                if (e.Key == Key.Back)
+                {
+                    e.Handled = true;
+                    string s = txbResultTime.Text;
+                    txbResultTime.Text = s.Remove(4, 2);
+                    txbResultTime.CaretIndex = 4;
+                }
+            }
+        }
+        private void txbResultTime_PreviewMouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            e.Handled = true;
+        }
+        private void txbResultTime_Pasting(object sender, DataObjectPastingEventArgs e)
+        {
+            e.CancelCommand();
+        }
+        #endregion
         #region Booking
         //CheckBooking
         private async void btnCheckBooking_Click(object sender, RoutedEventArgs e)
@@ -506,13 +619,13 @@ namespace ServiceToolWPF
         {
             ClearBooking();
         }
-        private async void ClearBooking() 
+        private async void ClearBooking()
         {
             WriteLog("Clear booking");
             ClearBookingDTO clearBooking = new ClearBookingDTO();
             clearBooking.BookingDate = GetBookingDateTime();
             clearBooking.RoomId = cmbRooms.SelectedIndex + 1;
-            await BookingService.ClearBooking(sharedClient,loggedInUser.Token,clearBooking);
+            await BookingService.ClearBooking(sharedClient, loggedInUser.Token, clearBooking);
         }
         //Get all booking
         private void btnGetAllBooking_Click(object sender, RoutedEventArgs e)
@@ -528,12 +641,12 @@ namespace ServiceToolWPF
         //Delete booking
         private async void btnDeleteBooking_Click(object sender, RoutedEventArgs e)
         {
-            if (txbBookingId.Text != "") 
+            if (txbBookingId.Text != "")
             {
                 int id = int.Parse(txbBookingId.Text);
                 WriteLog("[Delete booking]");
                 await BookingService.DeleteBooking(sharedClient, loggedInUser.Token, id);
-            }   
+            }
         }
         //Get challenge result
         private void btnTeamCompetition_Click(object sender, RoutedEventArgs e)
@@ -541,22 +654,22 @@ namespace ServiceToolWPF
             GetTeanCompetition();
         }
 
-        public async void GetTeanCompetition() 
+        public async void GetTeanCompetition()
         {
             WriteLog($"Get challenge result. >> Room: {cmbRoomsChallenge.SelectedItem.ToString()}; Ranking: {cmbRanking.SelectedItem.ToString()};");
-            dgrChallengeData.ItemsSource =  await BookingService.GetChallengeResult(sharedClient,cmbRoomsChallenge.SelectedIndex+1,cmbRanking.SelectedIndex);
+            dgrChallengeData.ItemsSource = await BookingService.GetChallengeResult(sharedClient, cmbRoomsChallenge.SelectedIndex + 1, cmbRanking.SelectedIndex);
         }
-        public DateTime GetBookingDateTime() 
-        { 
+        public DateTime GetBookingDateTime()
+        {
             TimeSpan time = TimeSpan.Zero;
             if (cmbBookingTime.SelectedIndex > -1)
             {
                 time = TimeSpan.Parse(bookingTime[cmbBookingTime.SelectedIndex]);
-            } 
-            return DateTime.Parse($"{dtpBookingDate.DisplayDate.ToShortDateString()} "+ time);
+            }
+            return DateTime.Parse($"{dtpBookingDate.DisplayDate.ToShortDateString()} " + time);
         }
 
-        public int GetIndexOfBookingTime(TimeSpan bookingTime) 
+        public int GetIndexOfBookingTime(TimeSpan bookingTime)
         {
             int index = cmbBookingTime.Items.IndexOf(bookingTime.ToString());
             return index;
@@ -586,6 +699,106 @@ namespace ServiceToolWPF
 
 
 
+
+
+
+        #endregion
+        #region Users input mask settings
+        private void txbUsersUserName_GotFocus(object sender, RoutedEventArgs e)
+        {
+            UsersUserNameTextCheck();
+        }
+        private void txbUsersUserName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UsersUserNameTextCheck();
+        }
+        private void UsersUserNameTextCheck()
+        {
+            if (txbUsersUserName.Text == "")
+            {
+                txbUsersUserName.Background = null;
+            }
+            else
+            {
+                txbUsersUserName.Background = Brushes.White;
+            }
+        }
+        private void txbUsersRealName_GotFocus(object sender, RoutedEventArgs e)
+        {
+            UsersRealNameTextCheck();
+        }
+        private void txbUsersRealName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UsersRealNameTextCheck();
+        }
+        private void UsersRealNameTextCheck()
+        {
+            if (txbUsersRealName.Text == "")
+            {
+                txbUsersRealName.Background = null;
+            }
+            else
+            {
+                txbUsersRealName.Background = Brushes.White;
+            }
+        }
+        private void txbUsersEmail_GotFocus(object sender, RoutedEventArgs e)
+        {
+            UsersEmailTextCheck();
+        }
+        private void txbUsersEmail_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UsersEmailTextCheck();
+        }
+        private void UsersEmailTextCheck()
+        {
+            if (txbUsersEmail.Text == "")
+            {
+                txbUsersEmail.Background = null;
+            }
+            else
+            {
+                txbUsersEmail.Background = Brushes.White;
+            }
+        }
+        private void txbUsersPhone_GotFocus(object sender, RoutedEventArgs e)
+        {
+            UsersPhoneTextCheck();
+        }
+        private void txbUsersPhone_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UsersPhoneTextCheck();
+        }
+        private void UsersPhoneTextCheck()
+        {
+            if (txbUsersPhone.Text == "")
+            {
+                txbUsersPhone.Background = null;
+            }
+            else
+            {
+                txbUsersPhone.Background = Brushes.White;
+            }
+        }
+        private void txbUsersTeamId_GotFocus(object sender, RoutedEventArgs e)
+        {
+            UsersTeamIdTextCheck();
+        }
+        private void txbUsersTeamId_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UsersTeamIdTextCheck();
+        }
+        private void UsersTeamIdTextCheck()
+        {
+            if (txbUsersTeamId.Text == "")
+            {
+                txbUsersTeamId.Background = null;
+            }
+            else
+            {
+                txbUsersTeamId.Background = Brushes.White;
+            }
+        }
 
         #endregion
 

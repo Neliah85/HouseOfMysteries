@@ -35,7 +35,7 @@ namespace ServiceToolWPF.Services
                 if (response.IsSuccessStatusCode)
                 {
                     bookings = await response.Content.ReadFromJsonAsync<List<Booking>>();
-                    sendLogEvent.SendLog($"Successful query! {bookings.Count} reservations found on the requested date.");
+                    sendLogEvent.SendLog($"Successful query! {bookings.Count} reservation(s) found on the requested date.");
                     return bookings;
                 }
                 else
@@ -61,7 +61,7 @@ namespace ServiceToolWPF.Services
                 if (response.IsSuccessStatusCode)
                 {
                     bookings = await response.Content.ReadFromJsonAsync<List<Booking>>();
-                    sendLogEvent.SendLog($"Successful query! {bookings.Count} reservations found.");
+                    sendLogEvent.SendLog($"Successful query! {bookings.Count} reservation(s) found.");
                     return bookings;
                 }
                 else 

@@ -8,7 +8,7 @@
         Title="House of mysteries - Service tool" Width="1000" Height="600" WindowStartupLocation="CenterScreen">
     <Grid x:Name="grid" >
         <GroupBox Header="Backend actions" Margin="0,2,162,128"/>
-        <TabControl Margin="4,20,166,132" SelectedIndex="3">
+        <TabControl Margin="4,20,166,132" SelectedIndex="1">
             <TabItem Header="Registration">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -39,26 +39,33 @@
             </TabItem>
             <TabItem Header="Bookings" Height="20" VerticalAlignment="Center" HorizontalAlignment="Left" Width="61">
                 <Grid>
-                    <Grid.ColumnDefinitions>
+                    <!--<Grid.ColumnDefinitions>
                         <ColumnDefinition Width="147*"/>
                         <ColumnDefinition Width="6*"/>
                         <ColumnDefinition Width="29*"/>
                         <ColumnDefinition Width="642*"/>
-                    </Grid.ColumnDefinitions>
-                    <ComboBox Name="cmbBookingTime" HorizontalAlignment="Left" Margin="0,32,0,0" VerticalAlignment="Top" Width="179" Grid.ColumnSpan="3"/>
-                    <DataGrid x:Name="dgrBookingData" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="2,0,0,0" IsReadOnly="True" SelectionChanged="dgrBookingData_SelectionChanged" Background="#FFECF8FB" Grid.Column="3"/>
+                    </Grid.ColumnDefinitions>-->
+                    <ComboBox Name="cmbBookingTime" HorizontalAlignment="Left" Margin="0,32,0,0" VerticalAlignment="Top" Width="179" Grid.ColumnSpan="3" Foreground="#FF5B5CAB" FontWeight="Bold"/>
+                    <DataGrid x:Name="dgrBookingData" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="185,0,0,0" IsReadOnly="True" SelectionChanged="dgrBookingData_SelectionChanged" Background="#FFECF8FB" Grid.Column="3"/>
                     <Button x:Name="btnCheckBooking" Content="Check booking" HorizontalAlignment="Left" VerticalAlignment="Top" Width="179" Click="btnCheckBooking_Click" Grid.ColumnSpan="3" Margin="0,178,0,0"/>
                     <Button x:Name="btnNewBooking" Content="New booking" HorizontalAlignment="Left" Margin="0,203,0,0" VerticalAlignment="Top" Width="179" Click="btnNewBooking_Click" Grid.ColumnSpan="3"/>
-                    <ComboBox x:Name="cmbRooms" HorizontalAlignment="Left" Margin="0,59,0,0" VerticalAlignment="Top" Width="179" Height="22" Grid.ColumnSpan="3" />
-                    <DatePicker x:Name="dtpBookingDate" HorizontalAlignment="Left" Margin="0,3,0,0" VerticalAlignment="Top" Width="179" Grid.ColumnSpan="3"/>
+                    <ComboBox x:Name="cmbRooms" HorizontalAlignment="Left" Margin="0,59,0,0" VerticalAlignment="Top" Width="179" Height="22" Grid.ColumnSpan="3" Foreground="#FF5B5CAB" FontWeight="Bold"/>
+                    <DatePicker x:Name="dtpBookingDate" HorizontalAlignment="Left" Margin="0,3,0,0" VerticalAlignment="Top" Width="179" Grid.ColumnSpan="3" Foreground="#FF5B5CAB" FontWeight="Bold"/>
                     <Button x:Name="btnClearBooking" Content="Clear booking" HorizontalAlignment="Left" Margin="0,228,0,0" VerticalAlignment="Top" Width="179" Click="btnClearBooking_Click" Grid.ColumnSpan="3"/>
                     <Button x:Name="btnDeleteBooking" Content="Delete booking" HorizontalAlignment="Left" Margin="65,279,0,0" VerticalAlignment="Top" Width="114" Click="btnDeleteBooking_Click" Grid.ColumnSpan="3"/>
-                    <TextBox x:Name="txbReasultTime" HorizontalAlignment="Left" Margin="0,305,0,0" TextWrapping="Wrap" Text="01:00:00" VerticalAlignment="Top" Width="60" Height="20"/>
+
+
+                    <Label Content="01:00:00" HorizontalAlignment="Left" Margin="0,301,0,0" VerticalAlignment="Top" Foreground="#FF7E7C7C"/>
+
+                    <TextBox x:Name="txbResultTime" HorizontalAlignment="Left" Margin="0,305,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="60" Height="20" Foreground="#FF5B5CAB" FontWeight="Bold" Background="{Binding ElementName=grid, Mode=OneWay}" MaxLines="1" MaxLength="8" GotFocus="txbResultTime_GotFocus" TextChanged="txbResultTime_TextChanged" PreviewTextInput="txbResultTime_PreviewTextInput" PreviewKeyUp="txbResultTime_PreviewKeyUp" AcceptsTab="True" PreviewKeyDown="txbResultTime_PreviewKeyDown" PreviewMouseRightButtonUp="txbResultTime_PreviewMouseRightButtonUp" DataObject.Pasting="txbResultTime_Pasting"/>
+                    
+                    
                     <Button x:Name="btnSaveResult" Content="Save result" HorizontalAlignment="Left" Margin="65,305,0,0" VerticalAlignment="Top" Width="114" Grid.ColumnSpan="3"/>
                     <Button x:Name="btnGetAllBooking" Content="Get all booking" HorizontalAlignment="Left" Margin="0,254,0,0" VerticalAlignment="Top" Width="179" Click="btnGetAllBooking_Click" Grid.ColumnSpan="3"/>
-                    <TextBox x:Name="txbBookingId" HorizontalAlignment="Left" Margin="0,279,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="60
-                             " Height="20" Focusable="False"/>
-                    <TextBox x:Name="txbComment" HorizontalAlignment="Left" Margin="0,86,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="179" Grid.ColumnSpan="3" Height="86"/>
+                    <TextBox x:Name="txbBookingId" HorizontalAlignment="Left" Margin="0,279,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="60" Height="20" Focusable="False" Foreground="#FF5B5CAB" FontWeight="Bold"/>
+                    <Label Content="Comment" HorizontalAlignment="Left" Margin="-2,82,0,0" VerticalAlignment="Top" Foreground="#FF7E7C7C"/>
+                    <TextBox x:Name="txbComment" HorizontalAlignment="Left" Margin="0,86,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="179" Grid.ColumnSpan="3" Height="86" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold" GotFocus="txbComment_GotFocus" TextChanged="txbComment_TextChanged"/>
+                    
                 </Grid>
             </TabItem>
             <TabItem Header="Challenge">
@@ -74,13 +81,14 @@
                     <Button x:Name="btnTeamCompetition" Content="Get challenge result" HorizontalAlignment="Left" Margin="0,59,0,0" VerticalAlignment="Top" Width="179" Click="btnTeamCompetition_Click"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Users">
+            <TabItem Header="Users" HorizontalAlignment="Left" Width="41">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="30*"/>
                         <ColumnDefinition Width="73*"/>
                         <ColumnDefinition Width="51*"/>
-                        <ColumnDefinition Width="670*"/>
+                        <ColumnDefinition Width="65*"/>
+                        <ColumnDefinition Width="605*"/>
                     </Grid.ColumnDefinitions>
                     <Label Content="Username" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="124" Foreground="#FF7E7C7C" Grid.ColumnSpan="3"/>
                     <Label Content="Name" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Width="124" Foreground="#FF7E7C7C" Grid.ColumnSpan="3"/>
@@ -90,18 +98,17 @@
                     <Label Content="" HorizontalAlignment="Left" Margin="0,125,0,0" VerticalAlignment="Top" Width="124" Foreground="#FF7E7C7C" Grid.ColumnSpan="3"/>
 
 
-                    <TextBox x:Name="UsersUserName" HorizontalAlignment="Left" Margin="0,3,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="179" BorderBrush="#FFABADB3" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold"  Grid.ColumnSpan="6" Height="20"/>
-                    <TextBox x:Name="UsersRealName" HorizontalAlignment="Left" Margin="0,28
-                             ,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="179" BorderBrush="#FFABADB3" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold"  Grid.ColumnSpan="4" Height="20"/>
+                    <TextBox x:Name="txbUsersUserName" HorizontalAlignment="Left" Margin="0,3,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="179" BorderBrush="#FFABADB3" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold"  Grid.ColumnSpan="4" Height="20" GotFocus="txbUsersUserName_GotFocus" TextChanged="txbUsersUserName_TextChanged"/>
+                    <TextBox x:Name="txbUsersRealName" HorizontalAlignment="Left" Margin="0,28
+                             ,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="179" BorderBrush="#FFABADB3" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold"  Grid.ColumnSpan="4" Height="20" GotFocus="txbUsersRealName_GotFocus" TextChanged="txbUsersRealName_TextChanged"/>
 
-                    <TextBox x:Name="UsersEmail" HorizontalAlignment="Left" Margin="0,53                              ,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="179" BorderBrush="#FFABADB3" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold"  Grid.ColumnSpan="4" Height="20"/>
+                    <TextBox x:Name="txbUsersEmail" HorizontalAlignment="Left" Margin="0,53                              ,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="179" BorderBrush="#FFABADB3" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold"  Grid.ColumnSpan="4" Height="20" GotFocus="txbUsersEmail_GotFocus" TextChanged="txbUsersEmail_TextChanged"/>
 
-                    <TextBox x:Name="UsersPhone" HorizontalAlignment="Left" Margin="0,78                              ,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="179" BorderBrush="#FFABADB3" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold"  Grid.ColumnSpan="4" Height="20"/>
+                    <TextBox x:Name="txbUsersPhone" HorizontalAlignment="Left" Margin="0,78                              ,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="179" BorderBrush="#FFABADB3" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold"  Grid.ColumnSpan="4" Height="20" TextChanged="txbUsersPhone_TextChanged" GotFocus="txbUsersPhone_GotFocus"/>
 
-                    <TextBox x:Name="UsersRealTeamId" HorizontalAlignment="Left" Margin="0,103                              ,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="179" BorderBrush="#FFABADB3" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold"  Grid.ColumnSpan="4" Height="20"/>
+                    <TextBox x:Name="txbUsersTeamId" HorizontalAlignment="Left" Margin="0,103                              ,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="179" BorderBrush="#FFABADB3" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold"  Grid.ColumnSpan="4" Height="20" GotFocus="txbUsersTeamId_GotFocus" TextChanged="txbUsersTeamId_TextChanged"/>
 
-                    <DataGrid x:Name="dgrUserData" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="30
-                              ,0,0,0" IsReadOnly="True" Background="#FFECF8FB" Grid.Column="3"/>
+                    <DataGrid x:Name="dgrUserData" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="30,0,0,0" IsReadOnly="True" Background="#FFECF8FB" Grid.Column="3" Grid.ColumnSpan="2"/>
 
 
 
