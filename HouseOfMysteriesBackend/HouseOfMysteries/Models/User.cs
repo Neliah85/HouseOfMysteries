@@ -21,6 +21,8 @@ public partial class User
     public string Salt { get; set; } = null!;
 
     public string Hash { get; set; } = null!;
+    [JsonIgnore]
     public virtual Role? Role { get; set; }
+    [JsonIgnore]
     public virtual Team? Team { get; set; }
 }

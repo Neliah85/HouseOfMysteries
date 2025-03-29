@@ -28,7 +28,7 @@ namespace HouseOfMysteries.Controllers
                     user.Hash = Program.CreateSHA256(user.Hash);
                     await context.Users.AddAsync(user);
                     await context.SaveChangesAsync();
-                    Program.SendEmail(user.Email, "Regisztráció", $"https://localhost:5131/Registry?felhasznaloNev={user.NickName}&email={user.Email}");
+                    _=Program.SendEmail(user.Email, "Regisztráció", $"https://localhost:5131/Registry?felhasznaloNev={user.NickName}&email={user.Email}");
                     return Ok("Successful registration. Complete your registration using the link sent to your email address!");
                 }
                 catch (Exception ex)

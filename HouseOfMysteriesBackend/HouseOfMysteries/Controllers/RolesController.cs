@@ -8,7 +8,7 @@ namespace HouseOfMysteries.Controllers
     public class RolesController : ControllerBase
     {
         [HttpGet("{token}")]
-        public async Task<ActionResult> Get(string token)
+        public ActionResult Get(string token)
         {
             int? roleId = Program.loggedInUsers.CheckTokenValidity(token).LoggedInUser.RoleId;
             if (roleId == -1)

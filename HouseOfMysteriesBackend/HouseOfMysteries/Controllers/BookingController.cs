@@ -122,9 +122,9 @@ namespace HouseOfMysteries.Controllers
                 {
                     try
                     {
-                        if (context.Bookings.FirstOrDefaultAsync(f => f.BookingDate.Equals(newResult.BookingDate) && f.RoomId == newResult.RoomId).Result != null)
-                        {
-                            booking = context.Bookings.FirstOrDefaultAsync(f => f.BookingDate.Equals(newResult.BookingDate) && f.RoomId == newResult.RoomId).Result;
+                        booking = context.Bookings.FirstOrDefaultAsync(f => f.BookingDate.Equals(newResult.BookingDate) && f.RoomId == newResult.RoomId).Result;
+                        if (booking != null)
+                        {                            
                             booking.Result = newResult.Result;
                             context.Bookings.Update(booking);
                             await context.SaveChangesAsync();
@@ -146,7 +146,6 @@ namespace HouseOfMysteries.Controllers
                 return BadRequest("You do not have permission to perform this operation!");
             }
         }
-
 
         [HttpPost("NewBooking/{token}")]
         public async Task<IActionResult> NewBooking(string token, BookingDTO newBooking)
@@ -237,7 +236,7 @@ namespace HouseOfMysteries.Controllers
         }
 
         [HttpGet("TeamCompetition/{roomId}")]
-        public async Task<ActionResult> TeamCompetition(int roomId, int limit)
+        public ActionResult TeamCompetition(int roomId, int? limit)
         {
             using (var context = new HouseofmysteriesContext())
             {

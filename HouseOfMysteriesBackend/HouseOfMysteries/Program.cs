@@ -40,7 +40,7 @@ namespace HouseOfMysteries
             }
         }
 
-        public static async Task SendEmail(string mailAddressTo, string subject, string body)
+        public static async Task SendEmail(string mailAddressTo, string? subject, string? body)
         {
             MailMessage mail = new MailMessage();
             SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");

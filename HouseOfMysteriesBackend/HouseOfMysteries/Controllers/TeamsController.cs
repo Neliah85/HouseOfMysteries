@@ -9,7 +9,7 @@ namespace HouseOfMysteries.Controllers
     public class TeamsController : ControllerBase
     {
         [HttpGet("{token}")]
-        public async Task<ActionResult> Get(string token)
+        public ActionResult Get(string token)
         {
             int? roleId = Program.loggedInUsers.CheckTokenValidity(token).LoggedInUser.RoleId;
             if (roleId == -1)
@@ -178,7 +178,7 @@ namespace HouseOfMysteries.Controllers
                         Team team = new Team { TeamName = teamName };
                         context.Teams.Add(team);
                         await context.SaveChangesAsync();
-                        int teamId = context.Teams.FirstOrDefault(f => f.TeamName == teamName).TeamId;
+                        int teamId = (int)context.Teams.FirstOrDefault(f => f.TeamName == teamName).TeamId;
                         User? mUser = new User();
                         mUser = context.Users.FirstOrDefault(f => f.UserId == user.UserId);
                         if (mUser == null) 
@@ -239,7 +239,7 @@ namespace HouseOfMysteries.Controllers
                             mUser.TeamId = context.Teams.FirstOrDefault(f => f.TeamName == teamName).TeamId;
                         }
 
-                        Program.SendEmail(mUser.Email, "Meghívó", $"Kedves {mUser.NickName}!\n\nEzt a levelet azért kaptad, mert a Rejtélyekháza  {teamName} nevü csapata szeretne felkérni, hogy csatlakozz hozzájuk.\nAzt tudnod kell, hogy ha elfogadod a felkérést, akkor jelenlegi csapatodtól el kell búcsúznod, mert egyszerre csak egy csapat színeiben versenyezhetsz.\nHa szeretnél hozzájuk csatlakozni, csupán annyit kell tenned, hogy rákattintasz az alábbi linkre:\n https://localhost:5131/Users/AcceptInvitation?felhasznaloNev={mUser.NickName}&teamName={teamName}\nHa nem szeretnél csapatot váltani, akkor semmilyen teendőd nincsen.\n\nÜdvözlettel: Rejtélyek háza");
+                        await Program.SendEmail(mUser.Email, "Meghívó", $"Kedves {mUser.NickName}!\n\nEzt a levelet azért kaptad, mert a Rejtélyekháza  {teamName} nevü csapata szeretne felkérni, hogy csatlakozz hozzájuk.\nAzt tudnod kell, hogy ha elfogadod a felkérést, akkor jelenlegi csapatodtól el kell búcsúznod, mert egyszerre csak egy csapat színeiben versenyezhetsz.\nHa szeretnél hozzájuk csatlakozni, csupán annyit kell tenned, hogy rákattintasz az alábbi linkre:\n https://localhost:5131/Users/AcceptInvitation?felhasznaloNev={mUser.NickName}&teamName={teamName}\nHa nem szeretnél csapatot váltani, akkor semmilyen teendőd nincsen.\n\nÜdvözlettel: Rejtélyek háza");
                         return Ok("Invitation sent!");
                     }
                     catch (Exception ex)
