@@ -21,6 +21,8 @@ public partial class User
     public string Salt { get; set; } = null!;
 
     public string Hash { get; set; } = null!;
-    public virtual Role? Role { get; set; }
-    public virtual Team? Team { get; set; }
+
+    public string RoleName { get; set; } = null!;
+    public string TeamName { get; set; } = null!;
+
 }

@@ -1,6 +1,8 @@
-﻿using System;
+﻿using ServiceToolWPF.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Text.Json.Serialization;
 
 namespace ServiceToolWPF.Classes;
 
@@ -23,6 +25,15 @@ public partial class UserDTO
     public string Salt { get; set; } = null!;
 
     public string Hash { get; set; } = null!;
+
+    [JsonIgnore]
+    public virtual Role? Role { get; set; }
+    [JsonIgnore]
+    public virtual Team? Team { get; set; }
+
+
+
+
 
 
 }

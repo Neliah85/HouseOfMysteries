@@ -14,6 +14,8 @@ using System.IO;
 using System;
 using ServiceToolWPF.DTOs;
 using System.Linq;
+using System.Runtime.Intrinsics.X86;
+using System.Runtime.InteropServices.Marshalling;
 
 
 namespace ServiceToolWPF
@@ -27,6 +29,8 @@ namespace ServiceToolWPF
         #region Declarations
         string SALT;
         string HASH;
+        string userSalt = "";
+        string userHash = "";      
         public static bool loggedIn = false;
         public static LoggedInUserDTO? loggedInUser;
         public static HttpClient? sharedClient = new()
@@ -36,7 +40,6 @@ namespace ServiceToolWPF
 
         //Booking
         public static string[] bookingTime = new string[7] { "09:00:00", "10:30:00", "12:00:00", "13:30:00", "15:00:00", "16:30:00", "18:00:00" };
-        //public static string[] bookingTime = new string[7] { "09:00", "10:30", "12:00", "13:30", "15:00", "16:30", "18:00" };
         public static string[] rooms = new string[9] { "Menekülés az iskolából", "A pedellus bosszúja", "A tanári titkai", "A takarítónő visszanéz", "Szabadulás Kódja", "Időcsapda", "KódX Szoba", "Kalandok Kamrája", "Titkok Labirintusa" };
         //Challenge
         public static string[] ranking = new string[11] { "All", "Top 1", "Top 2", "Top 3", "Top 4", "Top 5", "Top 6", "Top 7", "Top 8", "Top 9", "Top 10" };
@@ -60,9 +63,6 @@ namespace ServiceToolWPF
             RegUsernameTextCheck();
             RegPhoneTextCheck();
             RegEmailTextCheck();
-            //RegPassword1TextCheck();
-            //RegPassword2TextCheck();
-
 
             //Booking
             cmbBookingTime.ItemsSource = bookingTime;
@@ -75,7 +75,8 @@ namespace ServiceToolWPF
             cmbRoomsChallenge.SelectedIndex = 0;
             cmbRanking.ItemsSource = ranking;
             cmbRanking.SelectedIndex = 0;
-
+            //Users
+           
         }
         #endregion
         #region Generate Salt/Hash
@@ -516,6 +517,28 @@ namespace ServiceToolWPF
                 txbResultTime.Background = Brushes.White;
             }
         }
+
+        private void txbBookingId_GotFocus(object sender, RoutedEventArgs e)
+        {
+            BookingIdTextCheck();
+        }
+        private void txbBookingId_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            BookingIdTextCheck();
+        }
+        private void BookingIdTextCheck() 
+        {
+            if (txbBookingId.Text == "")
+            {
+                txbBookingId.Background = null;
+            }
+            else
+            {
+                txbBookingId.Background = Brushes.White;
+            }
+        }
+
+        //ResultTime input 
         private void txbResultTime_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             string mask = "0123456789";
@@ -533,9 +556,15 @@ namespace ServiceToolWPF
                     case 6: if (int.Parse(e.Text) > 5) e.Handled = true; break;
                 }
             }
+            CreateSeparator();
         }
 
         private void txbResultTime_PreviewKeyUp(object sender, KeyEventArgs e)
+        {
+            CreateSeparator();
+        }
+
+        private void CreateSeparator()
         {
             switch (txbResultTime.Text.Length)
             {
@@ -552,10 +581,11 @@ namespace ServiceToolWPF
             }
         }
 
+
         private void txbResultTime_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Back) { txbResultTime.CaretIndex = txbResultTime.Text.Length+1; }
-           
+            if (e.Key == Key.Back) { txbResultTime.CaretIndex = txbResultTime.Text.Length + 1; }
+            if (e.Key == Key.Tab) { e.Handled = true; }
             if (txbResultTime.Text.Length == 3)
             {
                 if (e.Key == Key.Back)
@@ -637,28 +667,45 @@ namespace ServiceToolWPF
             WriteLog("[Get all booking]");
             dgrBookingData.ItemsSource = await BookingService.GetAllBooking(sharedClient, loggedInUser.Token);
         }
-
         //Delete booking
         private async void btnDeleteBooking_Click(object sender, RoutedEventArgs e)
         {
             if (txbBookingId.Text != "")
             {
                 int id = int.Parse(txbBookingId.Text);
-                WriteLog("[Delete booking]");
+                WriteLog($"[Delete booking >> Id={id}]");                
                 await BookingService.DeleteBooking(sharedClient, loggedInUser.Token, id);
             }
         }
         //Get challenge result
         private void btnTeamCompetition_Click(object sender, RoutedEventArgs e)
         {
-            GetTeanCompetition();
+            GetTeamCompetition();
         }
-
-        public async void GetTeanCompetition()
+        public async void GetTeamCompetition()
         {
             WriteLog($"Get challenge result. >> Room: {cmbRoomsChallenge.SelectedItem.ToString()}; Ranking: {cmbRanking.SelectedItem.ToString()};");
             dgrChallengeData.ItemsSource = await BookingService.GetChallengeResult(sharedClient, cmbRoomsChallenge.SelectedIndex + 1, cmbRanking.SelectedIndex);
         }
+        //SaveResult
+        private void btnSaveResult_Click(object sender, RoutedEventArgs e)
+        {
+            SaveResult();
+        }
+
+        public async void SaveResult()
+        {
+            if (txbResultTime.Text.Length == 8)
+            {
+                SaveResultDTO saveResult = new SaveResultDTO();
+                saveResult.BookingDate = GetBookingDateTime();
+                saveResult.RoomId = cmbRooms.SelectedIndex + 1;
+                saveResult.Result = TimeSpan.Parse(txbResultTime.Text);
+                WriteLog($"[Save result >> {txbResultTime.Text}]");
+                await BookingService.SaveResult(sharedClient, loggedInUser.Token, saveResult);
+            }
+        }
+
         public DateTime GetBookingDateTime()
         {
             TimeSpan time = TimeSpan.Zero;
@@ -666,8 +713,11 @@ namespace ServiceToolWPF
             {
                 time = TimeSpan.Parse(bookingTime[cmbBookingTime.SelectedIndex]);
             }
-            return DateTime.Parse($"{dtpBookingDate.DisplayDate.ToShortDateString()} " + time);
+            return DateTime.Parse($"{dtpBookingDate.SelectedDate.Value.ToShortDateString()} " + time);
         }
+
+
+
 
         public int GetIndexOfBookingTime(TimeSpan bookingTime)
         {
@@ -680,7 +730,7 @@ namespace ServiceToolWPF
             if (index > -1)
             {
                 Booking row = (Booking)dgrBookingData.Items.GetItemAt(index);
-                dtpBookingDate.DisplayDate = (DateTime)row.BookingDate;
+                dtpBookingDate.SelectedDate = (DateTime)row.BookingDate;
                 cmbRooms.SelectedIndex = row.RoomId.Value - 1;
                 cmbBookingTime.SelectedIndex = GetIndexOfBookingTime(row.BookingDate.Value.TimeOfDay);
                 txbBookingId.Text = row.BookingId.ToString();
@@ -688,20 +738,6 @@ namespace ServiceToolWPF
 
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         #endregion
         #region Users input mask settings
         private void txbUsersUserName_GotFocus(object sender, RoutedEventArgs e)
@@ -800,7 +836,182 @@ namespace ServiceToolWPF
             }
         }
 
+
+        private void txbUsersTeamName_GotFocus(object sender, RoutedEventArgs e)
+        {
+            UsersTeamNameTextCheck();
+        }
+
+        private void txbUsersTeamName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UsersTeamNameTextCheck();
+        }
+
+        private void UsersTeamNameTextCheck() 
+        {
+            if (txbUsersTeamName.Text == "")
+            {
+                txbUsersTeamName.Background = null;
+            }
+            else
+            {
+                txbUsersTeamName.Background = Brushes.White;
+            }
+        }
+        private void txbUsersRoleId_GotFocus(object sender, RoutedEventArgs e)
+        {
+            UsersRoleIdTextCheck();
+        }
+
+        private void txbUsersRoleId_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UsersRoleIdTextCheck();
+        }
+        private void UsersRoleIdTextCheck()
+        {
+            if (txbUsersRoleId.Text == "")
+            {
+                txbUsersRoleId.Background = null;
+            }
+            else
+            {
+                txbUsersRoleId.Background = Brushes.White;
+            }
+        }
+
+        private void txbUsersRoleName_GotFocus(object sender, RoutedEventArgs e)
+        {
+            UsersRoleNameTextCheck();
+        }
+
+        private void txbUsersRoleName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UsersRoleNameTextCheck();
+        }
+        private void UsersRoleNameTextCheck()
+        {
+            if (txbUsersRoleName.Text == "")
+            {
+                txbUsersRoleName.Background = null;
+            }
+            else
+            {
+                txbUsersRoleName.Background = Brushes.White;
+            }
+        }
+
+        private void txbUserId_GotFocus(object sender, RoutedEventArgs e)
+        {
+            UserIdTextCheck();
+        }
+        private void txbUserId_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UserIdTextCheck();
+        }
+        private void UserIdTextCheck() 
+        {
+            if (txbUserId.Text == "")
+            {
+                txbUserId.Background = null;
+            }
+            else
+            {
+                txbUserId.Background = Brushes.White;
+            }
+        }
+
+
+        #endregion
+        #region Users
+        //Get all users
+        private void btnUsersGetAll_Click(object sender, RoutedEventArgs e)
+        {
+            GetAllUsers();  
+        }
+        public async void GetAllUsers() 
+        {
+            WriteLog("[Get all users]");
+            dgrUserData.ItemsSource = await UserService.GetAllUsers(sharedClient, loggedInUser.Token); 
+        }
+
+        //Get user by username
+        private async void btnUsersGetByUserName_Click(object sender, RoutedEventArgs e)
+        {
+            if (txbUsersUserName.Text != "")
+            {
+                WriteLog($"[Get user by username >> UserName={txbUsersUserName.Text}]");
+                List<User?> l = new List<User?>();
+                dgrUserData.ItemsSource = l;
+                var response = await UserService.GetUserByUserName(sharedClient, loggedInUser.Token, txbUsersUserName.Text);
+                if (response != null) { l.Add(response); }                              
+            }
+        }
+        //Delete user
+        private void btnUserDeleteUser_Click(object sender, RoutedEventArgs e)
+        {
+            if (txbUserId.Text != "")
+            {
+                int id = int.Parse(txbUserId.Text);
+                WriteLog($"[Delete users >> Id={id}]");
+                UserService.DeleteUser(sharedClient, loggedInUser.Token, id);
+            }
+        }
+        //Update user
+        private void btnUsersUpdateUser_Click(object sender, RoutedEventArgs e)
+        {
+            if (
+                txbUsersRealName.Text!=""&&
+                txbUsersUserName.Text!=""&&
+                txbUsersEmail.Text!=""&&
+                txbUsersPhone.Text!=""&&
+                txbUsersRoleId.Text!=""&&
+                txbUserId.Text!=""
+                ) 
+            { 
+            UserDTO user = new UserDTO();                
+                user.RealName = txbUsersRealName.Text;
+                user.NickName = txbUsersUserName.Text;
+                user.Email = txbUsersEmail.Text;
+                user.Phone = txbUsersPhone.Text;
+                user.RoleId = int.Parse(txbUsersRoleId.Text);
+                user.UserId = int.Parse(txbUserId.Text);
+                user.Hash = userHash;
+                user.Salt = userSalt;
+                if (txbUsersTeamId.Text == "")
+                {
+                    user.TeamId = null;
+                }
+                else 
+                {
+                    user.TeamId = int.Parse(txbUsersTeamId.Text);
+                }               
+                WriteLog($"[Update user >> Id={user.UserId}]");
+                UserService.UpdateUser(sharedClient,loggedInUser.Token, user);
+            }
+        }
+
+        private void dgrUserData_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int index = dgrUserData.SelectedIndex;
+            if (index > -1) 
+            {
+                User row = (User)dgrUserData.Items.GetItemAt(index);
+                txbUsersUserName.Text = row.NickName;
+                txbUsersRealName.Text = row.RealName;
+                txbUsersEmail.Text = row.Email;
+                txbUsersPhone.Text = row.Phone;
+                txbUsersTeamId.Text = row.TeamId.ToString();
+                txbUsersTeamName.Text = row.TeamName;
+                txbUsersRoleId.Text = row.RoleId.ToString();
+                txbUsersRoleName.Text = row.RoleName;
+                txbUserId.Text = row.UserId.ToString();
+                userHash = row.Hash;
+                userSalt = row.Salt;
+            }
+        }
+
         #endregion
 
+        
     }
 }

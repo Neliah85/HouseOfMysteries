@@ -135,8 +135,7 @@ namespace ServiceToolWPF.Services
                 return ex.Message;
             }
         }
-
-        //http://localhost:5131/Booking/TeamCompetition/4?limit=3
+       
         public static async Task<List<Booking>?> GetChallengeResult(HttpClient httpClient, int roomId, int limit)
         {
             try
@@ -163,5 +162,28 @@ namespace ServiceToolWPF.Services
                 return null;
             }
         }
+
+        public static async Task<string> SaveResult(HttpClient httpClient,string token, SaveResultDTO saveResult)
+        {
+            try
+            {
+                string url = $"{httpClient.BaseAddress}Booking/SaveResult/{token}";
+                string json = JsonSerializer.Serialize(saveResult);
+                var request = new StringContent(json, Encoding.UTF8, "application/json");
+                //sendLogEvent.SendLog(url);
+                var response = await httpClient.PutAsync(url, request);
+                string r = response.Content.ReadAsStringAsync().Result;
+                sendLogEvent.SendLog(r);
+                return r;
+            }
+            catch (Exception ex)
+            {
+                sendLogEvent.SendLog(ex.Message);
+                return ex.Message;
+            }                
+        }
+
+
+
     }
 }
