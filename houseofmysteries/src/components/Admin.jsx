@@ -32,7 +32,6 @@ const Admin = () => {
     const [competitionError, setCompetitionError] = useState("");
     
     
-    
 
     const handleCompetitionRoomChange = (event) => {
         setSelectedRoomIdForCompetition(event.target.value);
@@ -79,6 +78,21 @@ const Admin = () => {
         }
       };
 
+      const UserModify = (user) => {
+        navigate(`/modify-user/${user.UserId}`, { state: { user } });
+    };
+    
+    const UserDelete = async (userId) => {
+        const token = localStorage.getItem("token");
+        try {
+            await axios.delete(`http://localhost:5131/Users/${token},${userId}`);
+            setUsers(users.filter(user => user.UserId !== userId));
+        } catch (error) {
+            console.error("Hiba a felhasználó törlésekor:", error);
+            setError("Hiba történt a törlés során.");
+        }
+    };
+;
       const loadBookings = async () => {
         const token = localStorage.getItem("token");
         if (!selectedRoomId || !selectedDate) {
@@ -318,10 +332,10 @@ const Admin = () => {
                                 
                                 <td>
                                     <div>
-                                    <div className="icon-button edit" onClick={onclick}>
+                                    <div className="icon-button edit" onClick={() => UserModify(user)}>
                                         <FaEdit />
                                     </div>
-                                    <div className="icon-button delete" onClick={onclick}>
+                                    <div className="icon-button delete" onClick={() => UserDelete(user.UserId)}>
                                         <FaTrash />
                                     </div>
                                     </div>

@@ -15,6 +15,7 @@ import Register from "./components/Register";
 import Admin from "./components/Admin";
 import Profile from "./components/Profile";
 import PrivacyPolicy from './components/Privacy';
+import ModifyUser from './components/ModifyUser';
 
 function App() {
     return (
@@ -36,6 +37,8 @@ function App() {
                 <Route path="/admin" element={<Admin />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/privacy" element={<PrivacyPolicy />} />
+                <Route path="/modify-user/:id" element={<ModifyUser />} />
+
             </Routes>
         </Router>
     );
