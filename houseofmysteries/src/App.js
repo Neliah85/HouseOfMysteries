@@ -16,6 +16,7 @@ import Admin from "./components/Admin";
 import Profile from "./components/Profile";
 import PrivacyPolicy from './components/Privacy';
 import ModifyUser from './components/ModifyUser';
+import AcceptInvitation from './components/AcceptInvitation';
 
 function App() {
     return (
@@ -38,9 +39,11 @@ function App() {
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/privacy" element={<PrivacyPolicy />} />
                 <Route path="/modify-user/:id" element={<ModifyUser />} />
+                <Route path="/Users/AcceptInvitation" element={<AcceptInvitation />} />
 
             </Routes>
         </Router>
+        
     );
 }
 

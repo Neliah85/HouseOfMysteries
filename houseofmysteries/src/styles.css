@@ -1488,3 +1488,18 @@ p {
       .bookings-table td:last-child {
         text-align: center; /* A törlés gomb középre igazítása */
       }
+
+      .accept-button {
+        display: block; /* Vagy inline-block, ha megadod a width-et */
+        width: fit-content; /* Vagy egy konkrét szélesség */
+        margin: 0 auto;
+        background-color: #f84444;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background 0.3s;
+    }
+    .accept-button-container { /* A gombot tartalmazó elem */
+        text-align: center;
+      }

@@ -173,6 +173,8 @@ const Profile = () => {
                                 onChange={(e) => setAddUserNickname(e.target.value)}
                                 placeholder="Meghívandó felhasználó felhasználóneve"
                             />
+                            <br></br>
+                            <br></br>
                             
                             <button type="submit" onClick={handleSendInvitationToTeam}>
                                 Meghívó küldése
