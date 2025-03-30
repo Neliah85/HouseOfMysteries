@@ -69,7 +69,7 @@ const Register = () => {
                 let hash = CryptoJS.SHA256(password + salt).toString(CryptoJS.enc.Hex);
                 let finalHash = CryptoJS.SHA256(hash).toString(CryptoJS.enc.Hex);
 
-                const response = await axios.post("http://localhost:5000/Registry", {
+                const response = await axios.post("http://localhost:5131/Registry", {
                     RealName: realName,
                     NickName: nickName,
                     Email: email,

@@ -44,7 +44,7 @@ const Contact = () => {
 
         if (isValid) {
             try {
-                await axios.post("http://localhost:5000/api/contact", { // API végpont
+                await axios.post("http://localhost:5131/api/contact", { // API végpont
                     name,
                     email,
                     phone,

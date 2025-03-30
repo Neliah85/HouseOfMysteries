@@ -25,7 +25,7 @@ const FAQ = () => {
         if (question.trim() === "") return;
 
         try {
-            await axios.post("http://localhost:5000/api/questions", { // API végpont
+            await axios.post("http://localhost:5131/api/questions", { // API végpont
                 question,
             });
 

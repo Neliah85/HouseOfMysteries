@@ -28,7 +28,7 @@ const Profile = () => {
         const getUserData = async () => {
             try {
                 const userName = localStorage.getItem("username");
-                const response = await axios.get(`http://localhost:5000/Users/GetByUserName/${token},${userName}`);
+                const response = await axios.get(`http://localhost:5131/Users/GetByUserName/${token},${userName}`);
         setUserData({
                     realName: response.data.realName,
                     email: response.data.email,
@@ -57,7 +57,7 @@ const Profile = () => {
             };
 
             // Módosított PUT kérés a Swagger dokumentáció alapján
-            await axios.put(`http://localhost:5000/Users/${token},${userData.userId}`, updatedData);
+            await axios.put(`http://localhost:5131/Users/${token},${userData.userId}`, updatedData);
             setSuccessMessage("Profil sikeresen frissítve!"); // Sikeres üzenet beállítása
             setTimeout(() => {
                 setSuccessMessage(""); // Üzenet eltüntetése 3 másodperc után

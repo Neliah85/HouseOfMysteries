@@ -43,7 +43,7 @@ const Booking = () => {
         const getUserData = async () => {
             try {
                 const userName = localStorage.getItem("username");
-                const response = await axios.get(`http://localhost:5000/Users/GetByUserName/${token},${userName}`);
+                const response = await axios.get(`http://localhost:5131/Users/GetByUserName/${token},${userName}`);
                 setUserData({
                     realName: response.data.realName,
                     email: response.data.email,
@@ -62,7 +62,7 @@ const Booking = () => {
 
     useEffect(() => {
         if (selectedDate && roomId) {
-            axios.get(`http://localhost:5000/Booking/CheckBooking${token}`, {
+            axios.get(`http://localhost:5131/Booking/CheckBooking${token}`, {
                 params: { day: selectedDate, roomId: roomId }
             })
                 .then(response => {
@@ -83,7 +83,7 @@ const Booking = () => {
 
     const handleTeamRegistration = async () => { 
         try {
-            const response = await axios.post(`http://localhost:5000/Teams/TeamRegistration/${token},${teamName}`);
+            const response = await axios.post(`http://localhost:5131/Teams/TeamRegistration/${token},${teamName}`);
             if (response.status === 200) {
                 setTeamRegistrationError("Sikeres csapat regisztráció!");
                 console.log(response.data); // Sikeres regisztráció üzenet
@@ -111,7 +111,7 @@ const Booking = () => {
             };      
 
 
-            const response = await axios.post(`http://localhost:5000/Booking/NewBooking/${token}`, bookingData);
+            const response = await axios.post(`http://localhost:5131/Booking/NewBooking/${token}`, bookingData);
         
             if (response.status === 200) {
                 setBookingError("Sikeres fogkálás!"); 

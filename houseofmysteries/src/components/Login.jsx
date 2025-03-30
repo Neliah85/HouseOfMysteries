@@ -17,7 +17,7 @@ const Login = () => {
 
         try {
             // Salt lekérése
-            const saltResponse = await axios.post(`http://localhost:5000/Login/GetSalt/${userName}`);
+            const saltResponse = await axios.post(`http://localhost:5131/Login/GetSalt/${userName}`);
             const salt = saltResponse.data;
 
             // Hash generálás
@@ -25,7 +25,7 @@ const Login = () => {
             let hash = CryptoJS.SHA256(passwordWithSalt).toString(CryptoJS.enc.Hex);
 
             // Bejelentkezés
-            const loginResponse = await axios.post("http://localhost:5000/Login", {
+            const loginResponse = await axios.post("http://localhost:5131/Login", {
                 LoginName: userName,
                 TmpHash: hash,
             });

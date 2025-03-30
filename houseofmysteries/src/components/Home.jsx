@@ -40,7 +40,7 @@ const Home = () => {
 
         const interval = setInterval(() => {
             setCurrentSlide((prev) => (prev + 1) % slides.length);
-        }, 5000);
+        }, 5131);
         return () => clearInterval(interval);
     }, [navigate]);
 

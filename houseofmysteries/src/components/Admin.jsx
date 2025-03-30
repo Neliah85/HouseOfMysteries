@@ -72,7 +72,7 @@ const Admin = () => {
       const getUsers = async () => {
         const token = localStorage.getItem("token");
         try {
-          const response = await axios.get(`http://localhost:5000/Users/${token}`);
+          const response = await axios.get(`http://localhost:5131/Users/${token}`);
           setUsers(response.data);
         } catch {
           setError("Nem sikerült betölteni a felhasználókat.");
@@ -86,7 +86,7 @@ const Admin = () => {
             return;
         }
 
-        const url = `http://localhost:5000/Booking/CheckBooking${token}`;
+        const url = `http://localhost:5131/Booking/CheckBooking${token}`;
 
         try {
             const response = await axios.get(url, {
@@ -109,7 +109,7 @@ const Admin = () => {
         }
     
         try {
-            await axios.delete(`http://localhost:5000/Booking/${token}`, {
+            await axios.delete(`http://localhost:5131/Booking/${token}`, {
                 params: {
                     bookingId: bookingId
                 }
@@ -128,7 +128,7 @@ const Admin = () => {
         }
     
         try {
-            await axios.put(`http://localhost:5000/Booking/ClearBooking/${token}`, {
+            await axios.put(`http://localhost:5131/Booking/ClearBooking/${token}`, {
                 bookingDate: bookingDate,
                 
             });
@@ -160,7 +160,7 @@ const Admin = () => {
         
                 console.log("selectedmaintenanceData:", maintenanceData);
         
-                const response = await axios.post(`http://localhost:5000/Booking/NewBooking/${token}`, maintenanceData);
+                const response = await axios.post(`http://localhost:5131/Booking/NewBooking/${token}`, maintenanceData);
         
                 if (response.status === 200) {
                     setMaintenanceError("");
@@ -187,7 +187,7 @@ const Admin = () => {
                 };
         
                 const response = await axios.put(
-                    `http://localhost:5000/Booking/SaveResult/${token}`,
+                    `http://localhost:5131/Booking/SaveResult/${token}`,
                     competitionData 
                 );
         
