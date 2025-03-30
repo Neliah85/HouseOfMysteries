@@ -12,7 +12,7 @@ const Profile = () => {
         phone: "",
         teamId: null,
         userId: 0,
-        roleId: null, // Kezdetben null-ra állítjuk
+        roleId: 0, // Kezdetben 0-ra állítjuk, feltételezve, hogy a 0 az alapértelmezett nem admin roleId
     });
     const [password, setPassword] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
@@ -39,7 +39,7 @@ const Profile = () => {
                     userId: response.data.userId,
                     hash: response.data.hash,
                     salt: response.data.salt,
-                    roleId: response.data.roleId // Ha nincs roleId a válaszban, null-t állítunk be
+                    roleId: response.data.roleId !== null ? response.data.roleId : 0, // Ha nincs roleId a válaszban, 0-t állítunk be
                 });
             } catch (error) {
                 console.error("Hiba a felhasználói adatok lekérésekor:", error);
@@ -57,7 +57,7 @@ const Profile = () => {
                 ...userData,
                 password: password || undefined,
                 userId: userData.userId,
-                roleId: userData.roleId,
+                roleId: userData.roleId, // Használjuk a meglévő roleId-t
             };
 
             await axios.put(`http://localhost:5131/Users/UpdateUser/${token}`, updatedData);

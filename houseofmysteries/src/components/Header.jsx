@@ -8,6 +8,7 @@ const Header = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [username, setUsername] = useState("");
     const [isAdmin, setIsAdmin] = useState(false);
+    const logoutTimeout = 3600 * 250; 
 
     const checkAdminRole = useCallback(async (token, currentUsername) => {
         if (!token || !currentUsername) {
@@ -23,9 +24,17 @@ const Header = () => {
         }
     }, []);
 
-    // A handleStorageChange callback-ot a komponens fő testében definiáljuk,
-    // de nem használhatjuk benne közvetlenül a useCallback-kal létrehozott checkAdminRole-t.
-    // Ehelyett a checkAdminRole-t közvetlenül hívjuk meg az useEffect-ben.
+    const logoutUser = useCallback(() => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('username');
+        localStorage.removeItem('loggedIn');
+        setIsLoggedIn(false);
+        setUsername("");
+        setIsAdmin(false);
+        navigate("/login");
+    }, [navigate]);
+
+    
     const handleStorageChange = useCallback((e) => {
         if (e.key === 'token' || e.key === 'username') {
             const newToken = localStorage.getItem('token');
@@ -34,42 +43,53 @@ const Header = () => {
                 setIsLoggedIn(true);
                 setUsername(newUsername);
                 checkAdminRole(newToken, newUsername);
+                
+                clearTimeout(logoutTimerRef.current);
+                logoutTimerRef.current = setTimeout(logoutUser, logoutTimeout);
             } else {
                 setIsLoggedIn(false);
                 setUsername("");
                 setIsAdmin(false);
+              
+                clearTimeout(logoutTimerRef.current);
             }
         }
-    }, [checkAdminRole]);
+    }, [checkAdminRole, logoutUser, logoutTimeout]);
+
+    
+    const logoutTimerRef = React.useRef(null);
 
     useEffect(() => {
         const token = localStorage.getItem('token');
         const storedUsername = localStorage.getItem('username');
+
         if (token && storedUsername) {
             setIsLoggedIn(true);
             setUsername(storedUsername);
             checkAdminRole(token, storedUsername);
+
+           
+            logoutTimerRef.current = setTimeout(logoutUser, logoutTimeout);
         } else {
             setIsLoggedIn(false);
             setUsername("");
             setIsAdmin(false);
+            
+            clearTimeout(logoutTimerRef.current);
         }
 
         window.addEventListener('storage', handleStorageChange);
 
         return () => {
             window.removeEventListener('storage', handleStorageChange);
+            
+            clearTimeout(logoutTimerRef.current);
         };
-    }, [checkAdminRole, handleStorageChange]); // Hozzáadtuk a handleStorageChange-t a függőségekhez
+    }, [checkAdminRole, logoutUser, handleStorageChange, logoutTimeout]);
 
     const handleLogout = () => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('username');
-        localStorage.removeItem('loggedIn');
-        setIsLoggedIn(false);
-        setUsername("");
-        setIsAdmin(false);
-        navigate("/");
+        
+        logoutUser();
     };
 
     return (
