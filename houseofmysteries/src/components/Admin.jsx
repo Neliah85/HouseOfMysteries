@@ -22,6 +22,7 @@ const Admin = () => {
     const [selectedRoomIdForCompetition, setSelectedRoomIdForCompetition] = useState("");
     const [bookingDate, setBookingDate] = useState("");
     const [isAvailable, setIsAvailable] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
     const [competitionMessage, setCompetitionMessage] = useState("");
     const [hours, setHours] = useState('00');
     const [minutes, setMinutes] = useState('00');
@@ -53,8 +54,10 @@ const Admin = () => {
 
     const loadInitialData = useCallback(async () => {
         const token = localStorage.getItem("token");
-        await Promise.all([getUsers(token)]);
-    }, []);
+        if (isAdmin) { // Csak admin esetén töltjük be az adatokat
+            await Promise.all([getUsers(token)]);
+        }
+    }, [isAdmin]);
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -64,8 +67,26 @@ const Admin = () => {
             return;
         }
         setIsLoggedIn(true);
+
+        const checkAdminRole = async () => {
+            try {
+                const response = await axios.get(`http://localhost:5131/Roles/${token}`);
+                
+                setIsAdmin(response.data === true || response.data.roleId === 4); // Csak akkor admin, ha a roleId 4
+            } catch (error) {
+                console.error("Hiba a jogosultság lekérdezésekor:", error);
+                
+                setIsAdmin(false);
+                navigate("/"); 
+            }
+        };
+
+        checkAdminRole();
+    }, [navigate]);
+
+    useEffect(() => {
         loadInitialData();
-    }, [navigate, loadInitialData]);
+    }, [loadInitialData]);
 
     
       const getUsers = async () => {
