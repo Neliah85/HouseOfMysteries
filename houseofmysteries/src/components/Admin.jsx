@@ -82,17 +82,18 @@ const Admin = () => {
         navigate(`/modify-user/${user.UserId}`, { state: { user } });
     };
     
-    const UserDelete = async (userId) => {
+    const UserDelete = async (userNameToDelete) => {
         const token = localStorage.getItem("token");
         try {
-            await axios.delete(`http://localhost:5131/Users/${token},${userId}`);
-            setUsers(users.filter(user => user.UserId !== userId));
+            await axios.delete(`http://localhost:5131/Users/DeleteByUserName/${token},${userNameToDelete}`);
+            // Töröljük a felhasználót a helyi state-ből is, ha sikeres volt a törlés
+            setUsers(users.filter(user => user.nickName !== userNameToDelete));
         } catch (error) {
             console.error("Hiba a felhasználó törlésekor:", error);
-            setError("Hiba történt a törlés során.");
+            alert("Hiba történt a törlés során.");
         }
     };
-;
+
       const loadBookings = async () => {
         const token = localStorage.getItem("token");
         if (!selectedRoomId || !selectedDate) {
@@ -314,6 +315,7 @@ const Admin = () => {
                             <thead>
                             <tr>
                                 <th>Név</th>
+                                <th>Felhasználónév</th>
                                 <th>Email</th>
                                 <th>Telefon</th>
                                 <th>Jogosultság</th>
@@ -325,6 +327,7 @@ const Admin = () => {
                             {users.map((user) => (
                                 <tr key={user.UserId}>
                                 <td>{user.realName}</td>
+                                <td>{user.nickName}</td>
                                 <td>{user.email}</td>
                                 <td>{user.phone}</td>
                                 <td>{user.roleId}</td>
@@ -335,7 +338,7 @@ const Admin = () => {
                                     <div className="icon-button edit" onClick={() => UserModify(user)}>
                                         <FaEdit />
                                     </div>
-                                    <div className="icon-button delete" onClick={() => UserDelete(user.UserId)}>
+                                    <div className="icon-button delete" onClick={() => UserDelete(user.nickName)}>
                                         <FaTrash />
                                     </div>
                                     </div>
