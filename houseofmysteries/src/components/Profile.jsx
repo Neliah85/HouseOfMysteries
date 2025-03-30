@@ -54,6 +54,7 @@ const Profile = () => {
             const updatedData = {
                 ...userData,
                 password: password || undefined,
+                userId: userData.userId,                
             };
 
             // Módosított PUT kérés a Swagger dokumentáció alapján

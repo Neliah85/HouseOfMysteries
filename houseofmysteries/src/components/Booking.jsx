@@ -114,7 +114,7 @@ const Booking = () => {
             const response = await axios.post(`http://localhost:5131/Booking/NewBooking/${token}`, bookingData);
         
             if (response.status === 200) {
-                setBookingError("Sikeres fogkálás!"); 
+                setBookingError("Sikeres foglalás!"); 
                 console.log(response.data); 
             } else {
                 setBookingError("Hiba a foglalás beküldésekor."); 
