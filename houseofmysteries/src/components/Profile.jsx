@@ -12,9 +12,10 @@ const Profile = () => {
         phone: "",
         teamId: null,
         userId: 0,
+        roleId: null, // Kezdetben null-ra állítjuk
     });
     const [password, setPassword] = useState("");
-    const [successMessage, setSuccessMessage] = useState(""); // Új state a sikeres üzenethez
+    const [successMessage, setSuccessMessage] = useState("");
     const navigate = useNavigate();
     const token = localStorage.getItem("token");
     const userName = localStorage.getItem("userName");
@@ -29,7 +30,7 @@ const Profile = () => {
             try {
                 const userName = localStorage.getItem("username");
                 const response = await axios.get(`http://localhost:5131/Users/GetByUserName/${token},${userName}`);
-        setUserData({
+                setUserData({
                     realName: response.data.realName,
                     email: response.data.email,
                     phone: response.data.phone,
@@ -38,6 +39,7 @@ const Profile = () => {
                     userId: response.data.userId,
                     hash: response.data.hash,
                     salt: response.data.salt,
+                    roleId: response.data.roleId // Ha nincs roleId a válaszban, null-t állítunk be
                 });
             } catch (error) {
                 console.error("Hiba a felhasználói adatok lekérésekor:", error);
@@ -54,18 +56,18 @@ const Profile = () => {
             const updatedData = {
                 ...userData,
                 password: password || undefined,
-                userId: userData.userId,                
+                userId: userData.userId,
+                roleId: userData.roleId,
             };
 
-            // Módosított PUT kérés a Swagger dokumentáció alapján
-            await axios.put(`http://localhost:5131/Users/${token},${userData.userId}`, updatedData);
-            setSuccessMessage("Profil sikeresen frissítve!"); // Sikeres üzenet beállítása
+            await axios.put(`http://localhost:5131/Users/UpdateUser/${token}`, updatedData);
+            setSuccessMessage("Profil sikeresen frissítve!");
             setTimeout(() => {
-                setSuccessMessage(""); // Üzenet eltüntetése 3 másodperc után
+                setSuccessMessage("");
             }, 3000);
         } catch (error) {
             console.error("Hiba a profil frissítésekor:", error);
-            setSuccessMessage(""); // Sikeres üzenet törlése hiba esetén
+            setSuccessMessage("");
         }
     };
 
@@ -90,7 +92,7 @@ const Profile = () => {
                     <label>Új jelszó (opcionális):</label>
                     <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
 
-                    {successMessage && <p className="success-message">{successMessage}</p>} {/* Sikeres üzenet megjelenítése */}
+                    {successMessage && <p className="success-message">{successMessage}</p>}
 
                     <button type="submit">Mentés</button>
                 </form>
