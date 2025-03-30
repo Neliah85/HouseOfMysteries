@@ -1409,6 +1409,15 @@ p {
     color: #FFFCFC;
     }
 
+
+.challenge-table td {
+        border: 2px solid #f7d765;
+        padding: 10px;           
+        text-align: center;                
+        background-color: #181515; 
+        color: #e92e2e;          
+    }
+    
     .privacy-policy-container {
         text-align: left;
         padding: 50px 20px;

@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
+import axios from "axios";
 
 import room1 from "../assets/images/room1.jpg";
 import room2 from "../assets/images/room2.jpg";
@@ -62,19 +63,54 @@ const tracks = {
 };
 
 const TrackPage = () => {
-    const { id } = useParams();
-    const track = tracks[id];
+    const { id: roomIdString } = useParams();
+    const track = tracks[roomIdString];
     const navigate = useNavigate();
+    const [topTeams, setTopTeams] = useState([]);
+    const [allTeamsMap, setAllTeamsMap] = useState({});
+    const limit = 3;
+    const token = localStorage.getItem("token");
 
     useEffect(() => {
-        const userToken = localStorage.getItem("userToken");
-        if (!userToken) {
+        if (!token) {
             navigate("/login");
+            return;
         }
-    }, [navigate]);
+
+        const roomId = parseInt(roomIdString.replace("room", ""), 10);
+
+        const fetchAllTeams = async () => {
+            try {
+                const response = await axios.get(`http://localhost:5131/Teams/${token}`);
+                const teamsMap = {};
+                response.data.forEach(team => {
+                    teamsMap[team.teamId] = team.teamName;
+                });
+                setAllTeamsMap(teamsMap);
+            } catch (error) {
+                console.error("Hiba az összes csapat lekérésekor:", error);
+            }
+        };
+
+        const fetchTopTeamsData = async () => {
+            try {
+                const response = await axios.get(`http://localhost:5131/Booking/TeamCompetition/${roomId}?limit=${limit}`);
+                const teamsWithNames = response.data.map(topTeam => ({
+                    ...topTeam,
+                    teamName: allTeamsMap[topTeam.teamId] || "Ismeretlen csapat"
+                }));
+                setTopTeams(teamsWithNames);
+            } catch (error) {
+                console.error("Hiba a legjobb csapatok adatainak lekérésekor:", error);
+            }
+        };
+
+        fetchAllTeams().then(fetchTopTeamsData);
+
+    }, [roomIdString, navigate, token, allTeamsMap]);
 
     const handleBookingClick = () => {
-        navigate(`/booking/${id}`);
+        navigate(`/booking/${roomIdString}`);
     };
 
     if (!track) {
@@ -97,7 +133,13 @@ const TrackPage = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {/* challenge-table adatok */}
+                            {topTeams.map((team, index) => (
+                                <tr key={index}>
+                                    <td>{index + 1}</td>
+                                    <td>{team.teamName}</td>
+                                    <td>{team.result}</td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
                 </div>
