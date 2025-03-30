@@ -311,6 +311,90 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "HouseOfMysteries.Controllers.RoomsController",
+    "Method": "Get",
+    "RelativePath": "Rooms/{token}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "token",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HouseOfMysteries.Controllers.RoomsController",
+    "Method": "Delete",
+    "RelativePath": "Rooms/{token}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "token",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HouseOfMysteries.Controllers.RoomsController",
+    "Method": "Put",
+    "RelativePath": "Rooms/{token},{room}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "token",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "room",
+        "Type": "HouseOfMysteries.Models.Room",
+        "IsRequired": true
+      },
+      {
+        "Name": "room",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HouseOfMysteries.Controllers.RoomsController",
+    "Method": "Post",
+    "RelativePath": "Rooms/{token},{roomName}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "token",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "roomName",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "HouseOfMysteries.Controllers.TeamsController",
     "Method": "Get",
     "RelativePath": "Teams/{token}",
