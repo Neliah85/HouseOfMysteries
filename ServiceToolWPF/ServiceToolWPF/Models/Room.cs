@@ -8,5 +8,5 @@ public partial class Room
 
     public string RoomName { get; set; } = null!;
 
-    public virtual ICollection<Booking> Bookings { get; set; } = new List<Booking>();
+   // public virtual ICollection<Booking> Bookings { get; set; } = new List<Booking>();
 }
