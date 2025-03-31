@@ -23,6 +23,8 @@ namespace ServiceToolWPF.Services
     public class BookingService
     {
         public static SendLogEvent sendLogEvent = new SendLogEvent();
+        public static RefreshEvent refreshEvent = new RefreshEvent();
+
         public static async Task<List<Booking>?> CheckBooking(HttpClient httpClient, string token, DateTime day, int roomId)
         {
             try
@@ -87,6 +89,7 @@ namespace ServiceToolWPF.Services
                 //sendLogEvent.SendLog(url);
                 var response = await httpClient.PostAsync(url, request);
                 sendLogEvent.SendLog(response.Content.ReadAsStringAsync().Result);
+                refreshEvent.Refresh("CheckBooking");
                 return response.Content.ReadAsStringAsync().Result;
             }
             catch (Exception ex)
@@ -107,6 +110,7 @@ namespace ServiceToolWPF.Services
                 var response = await httpClient.DeleteAsync(url + p);
                 string r = response.Content.ReadAsStringAsync().Result;
                 sendLogEvent.SendLog(r);
+                refreshEvent.Refresh("CheckBooking");
                 return r; 
             }
             catch (Exception ex) 
@@ -127,6 +131,7 @@ namespace ServiceToolWPF.Services
                 var response = await httpClient.PutAsync(url, request);
                 string r = response.Content.ReadAsStringAsync().Result;
                 sendLogEvent.SendLog(r);
+                refreshEvent.Refresh("CheckBooking");
                 return r;
             }
             catch(Exception ex) 
@@ -142,7 +147,8 @@ namespace ServiceToolWPF.Services
             {
                 List<Booking> bookings = new List<Booking>(); 
                 string url = $"{httpClient.BaseAddress}Booking/TeamCompetition/";
-                string p = $"{roomId}?liomit={limit}";
+                string p = $"{roomId}?limit={limit}";
+                sendLogEvent.SendLog(url + p);
                 var response = await httpClient.GetAsync(url+p);
                 if (response.IsSuccessStatusCode)
                 {
@@ -174,6 +180,7 @@ namespace ServiceToolWPF.Services
                 var response = await httpClient.PutAsync(url, request);
                 string r = response.Content.ReadAsStringAsync().Result;
                 sendLogEvent.SendLog(r);
+                refreshEvent.Refresh("CheckBooking");
                 return r;
             }
             catch (Exception ex)

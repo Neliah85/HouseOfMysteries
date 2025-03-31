@@ -27,6 +27,7 @@ namespace ServiceToolWPF
         string HASH;
         string userSalt = "";
         string userHash = "";
+        string lastAction = "";
         public static bool loggedIn = false;
         public static LoggedInUserDTO? loggedInUser;
         public static HttpClient? sharedClient = new()
@@ -64,9 +65,14 @@ namespace ServiceToolWPF
             LoginService.sendLogEvent.LogSent += SendLogEvent_LogSent;
             LogoutService.sendLogEvent.LogSent += SendLogEvent_LogSent;
             BookingService.sendLogEvent.LogSent += SendLogEvent_LogSent;
+            BookingService.refreshEvent.Refreshed += RefreshEvent_Refreshed;
             TeamService.sendLogEvent.LogSent += SendLogEvent_LogSent;
             RoleService.sendLogEvent.LogSent += SendLogEvent_LogSent;
             RoomService.sendLogEvent.LogSent += SendLogEvent_LogSent;
+
+
+
+
 
 
             ResetLoggedInUser();
@@ -291,6 +297,16 @@ namespace ServiceToolWPF
                 WriteLog("Save log error!");
             }
         }
+        #endregion
+        #region Refresh 
+        private void RefreshEvent_Refreshed(object sender, string e)
+        {
+            if (lastAction == "" && e !="") { lastAction = e;}
+
+            if (lastAction == "CheckBooking") { CheckBooking(); }
+            if (lastAction == "GetAllBooking") { GetAllBooking(); }
+        }
+
         #endregion
         #region Registration input mask settings
         private void txbRegUserName_GotFocus(object sender, RoutedEventArgs e)
@@ -636,6 +652,7 @@ namespace ServiceToolWPF
         }
         private async void CheckBooking()
         {
+            lastAction = "CheckBooking";
             WriteLog($"[Check booking >> Date: {dtpBookingDate.DisplayDate.ToShortDateString()}]");
             dgrBookingData.ItemsSource = await BookingService.CheckBooking(sharedClient, loggedInUser.Token, DateTime.Parse(dtpBookingDate.SelectedDate.Value.ToShortDateString()), cmbRooms.SelectedIndex + 1);
         }
@@ -676,6 +693,7 @@ namespace ServiceToolWPF
         }
         private async void GetAllBooking()
         {
+            lastAction = "GetAllBooking";
             WriteLog("[Get all booking]");
             dgrBookingData.ItemsSource = await BookingService.GetAllBooking(sharedClient, loggedInUser.Token);
         }
@@ -932,6 +950,35 @@ namespace ServiceToolWPF
             }
         }
 
+        private void txbUsersTeamId_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!IsNumber(e.Text)) { e.Handled = true; }
+        }
+
+        private void txbUsersTeamId_PreviewMouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void txbUsersTeamId_Pasting(object sender, DataObjectPastingEventArgs e)
+        {
+            e.CancelCommand();
+        }
+
+        private void txbUsersRoleId_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!IsNumber(e.Text)) { e.Handled = true; }
+        }
+
+        private void txbUsersRoleId_PreviewMouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void txbUsersRoleId_Pasting(object sender, DataObjectPastingEventArgs e)
+        {
+            e.CancelCommand();
+        }
 
         #endregion
         #region Users
@@ -1058,6 +1105,26 @@ namespace ServiceToolWPF
                 txbTeamId.Background = Brushes.White;
             }
         }
+
+        private void txbTeamsUserName_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TeamsUserNameTextCheck();
+        }
+        private void txbTeamsUserName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TeamsUserNameTextCheck();
+        }
+        private void TeamsUserNameTextCheck()
+        {
+            if (txbTeamsUserName.Text == "")
+            {
+                txbTeamsUserName.Background = null;
+            }
+            else
+            {
+                txbTeamsUserName.Background = Brushes.White;
+            }
+        }
         #endregion
         #region Teams
         private void btnGetAllTeams_Click(object sender, RoutedEventArgs e)
@@ -1096,7 +1163,7 @@ namespace ServiceToolWPF
         private void txbRoleId_TextChanged(object sender, TextChangedEventArgs e)
         {
             RoleIdTextCheck();
-        }        
+        }
         private void RoleIdTextCheck()
         {
             if (txbRoleId.Text == "")
@@ -1178,6 +1245,9 @@ namespace ServiceToolWPF
 
 
         #endregion
+
+
+
 
     }
 }

@@ -63,42 +63,42 @@
             </TabItem>
             <TabItem Header="Users" HorizontalAlignment="Left" Width="41">
                 <Grid>
-                    <Label Content="Username" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Width="124" Foreground="#FF7E7C7C" Grid.ColumnSpan="3"/>
-                    <Label Content="Real name" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="124" Foreground="#FF7E7C7C" Grid.ColumnSpan="3"/>
-                    <Label Content="Email address" HorizontalAlignment="Left" Margin="0,50,0,0" VerticalAlignment="Top" Width="124" Foreground="#FF7E7C7C" Grid.ColumnSpan="3"/>
-                    <Label Content="Phone number" HorizontalAlignment="Left" Margin="0,75,0,0" VerticalAlignment="Top" Width="124" Foreground="#FF7E7C7C" Grid.ColumnSpan="3"/>
-                    <Label Content="Team Id" HorizontalAlignment="Left" Margin="0,100,0,0" VerticalAlignment="Top" Width="124" Foreground="#FF7E7C7C" Grid.ColumnSpan="3"/>
-                    <Label Content="Team name" HorizontalAlignment="Left" Margin="0,125,0,0" VerticalAlignment="Top" Width="124" Foreground="#FF7E7C7C" Grid.ColumnSpan="3"/>
-                    <Label Content="Role Id" HorizontalAlignment="Left" Margin="0,150,0,0" VerticalAlignment="Top" Width="124" Foreground="#FF7E7C7C" Grid.ColumnSpan="3"/>
-                    <Label Content="Role name" HorizontalAlignment="Left" Margin="0,175,0,0" VerticalAlignment="Top" Width="124" Foreground="#FF7E7C7C" Grid.ColumnSpan="3"/>
-                    <Label Content="Id" HorizontalAlignment="Left" Margin="0,276,0,0" VerticalAlignment="Top" Width="124" Foreground="#FF7E7C7C"/>
+                    <Label Content="Username" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Width="124" Foreground="#FF7E7C7C" Grid.ColumnSpan="2"/>
+                    <Label Content="Real name" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="124" Foreground="#FF7E7C7C" Grid.ColumnSpan="2"/>
+                    <Label Content="Email address" HorizontalAlignment="Left" Margin="0,50,0,0" VerticalAlignment="Top" Width="124" Foreground="#FF7E7C7C" Grid.ColumnSpan="2"/>
+                    <Label Content="Phone number" HorizontalAlignment="Left" Margin="0,75,0,0" VerticalAlignment="Top" Width="124" Foreground="#FF7E7C7C" Grid.ColumnSpan="2"/>
+                    <Label Content="Team Id" HorizontalAlignment="Left" Margin="0,100,0,0" VerticalAlignment="Top" Width="124" Foreground="#FF7E7C7C" Grid.ColumnSpan="2"/>
+                    <Label Content="Team name" HorizontalAlignment="Left" Margin="0,125,0,0" VerticalAlignment="Top" Width="124" Foreground="#FF7E7C7C" Grid.ColumnSpan="2"/>
+                    <Label Content="Role Id" HorizontalAlignment="Left" Margin="0,150,0,0" VerticalAlignment="Top" Width="124" Foreground="#FF7E7C7C" Grid.ColumnSpan="2"/>
+                    <Label Content="Role name" HorizontalAlignment="Left" Margin="0,175,0,0" VerticalAlignment="Top" Width="124" Foreground="#FF7E7C7C" Grid.ColumnSpan="2"/>
+                    <Label Content="Id" HorizontalAlignment="Left" Margin="0,276,0,0" VerticalAlignment="Top" Width="124" Foreground="#FF7E7C7C" Grid.ColumnSpan="2" />
 
-                    <TextBox x:Name="txbUsersUserName" HorizontalAlignment="Left" Margin="0,28,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="179" BorderBrush="#FFABADB3" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold"  Grid.ColumnSpan="4" Height="20" GotFocus="txbUsersUserName_GotFocus" TextChanged="txbUsersUserName_TextChanged"/>
-                    <TextBox x:Name="txbUsersRealName" HorizontalAlignment="Left" Margin="0,3,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="179" BorderBrush="#FFABADB3" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold"  Grid.ColumnSpan="4" Height="20" GotFocus="txbUsersRealName_GotFocus" TextChanged="txbUsersRealName_TextChanged"/>
+                    <TextBox x:Name="txbUsersUserName" HorizontalAlignment="Left" Margin="0,28,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="179" BorderBrush="#FFABADB3" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold"  Grid.ColumnSpan="2" Height="20" GotFocus="txbUsersUserName_GotFocus" TextChanged="txbUsersUserName_TextChanged"/>
+                    <TextBox x:Name="txbUsersRealName" HorizontalAlignment="Left" Margin="0,3,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="179" BorderBrush="#FFABADB3" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold"  Grid.ColumnSpan="2" Height="20" GotFocus="txbUsersRealName_GotFocus" TextChanged="txbUsersRealName_TextChanged"/>
 
-                    <TextBox x:Name="txbUsersEmail" HorizontalAlignment="Left" Margin="0,53,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="179" BorderBrush="#FFABADB3" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold"  Grid.ColumnSpan="4" Height="20" GotFocus="txbUsersEmail_GotFocus" TextChanged="txbUsersEmail_TextChanged"/>
+                    <TextBox x:Name="txbUsersEmail" HorizontalAlignment="Left" Margin="0,53,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="179" BorderBrush="#FFABADB3" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold"  Grid.ColumnSpan="2" Height="20" GotFocus="txbUsersEmail_GotFocus" TextChanged="txbUsersEmail_TextChanged"/>
 
-                    <TextBox x:Name="txbUsersPhone" HorizontalAlignment="Left" Margin="0,78,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="179" BorderBrush="#FFABADB3" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold"  Grid.ColumnSpan="4" Height="20" TextChanged="txbUsersPhone_TextChanged" GotFocus="txbUsersPhone_GotFocus"/>
+                    <TextBox x:Name="txbUsersPhone" HorizontalAlignment="Left" Margin="0,78,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="179" BorderBrush="#FFABADB3" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold"  Grid.ColumnSpan="2" Height="20" TextChanged="txbUsersPhone_TextChanged" GotFocus="txbUsersPhone_GotFocus"/>
 
-                    <TextBox x:Name="txbUsersTeamId" HorizontalAlignment="Left" Margin="0,103,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="179" BorderBrush="#FFABADB3" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold"  Grid.ColumnSpan="4" Height="20" GotFocus="txbUsersTeamId_GotFocus" TextChanged="txbUsersTeamId_TextChanged"/>
-
-
-                    <TextBox x:Name="txbUsersTeamName" HorizontalAlignment="Left" Margin="0,128,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="179" BorderBrush="#FFABADB3" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold"  Grid.ColumnSpan="4" Height="20" GotFocus="txbUsersTeamName_GotFocus" TextChanged="txbUsersTeamName_TextChanged" Focusable="False" />
-
-                    <TextBox x:Name="txbUsersRoleId" HorizontalAlignment="Left" Margin="0,153,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="179" BorderBrush="#FFABADB3" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold"  Grid.ColumnSpan="4" Height="20" GotFocus="txbUsersRoleId_GotFocus" TextChanged="txbUsersRoleId_TextChanged" />
-
-                    <TextBox x:Name="txbUsersRoleName" HorizontalAlignment="Left" Margin="0,178,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="179" BorderBrush="#FFABADB3" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold"  Grid.ColumnSpan="4" Height="20" GotFocus="txbUsersRoleName_GotFocus" TextChanged="txbUsersRoleName_TextChanged" Focusable="False" />
+                    <TextBox x:Name="txbUsersTeamId" HorizontalAlignment="Left" Margin="0,103,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="179" BorderBrush="#FFABADB3" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold"  Grid.ColumnSpan="2" Height="20" GotFocus="txbUsersTeamId_GotFocus" TextChanged="txbUsersTeamId_TextChanged" PreviewMouseRightButtonUp="txbUsersTeamId_PreviewMouseRightButtonUp" PreviewTextInput="txbUsersTeamId_PreviewTextInput" MaxLength="11" IsReadOnly="True" DataObject.Pasting="txbUsersTeamId_Pasting"/>
 
 
+                    <TextBox x:Name="txbUsersTeamName" HorizontalAlignment="Left" Margin="0,128,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="179" BorderBrush="#FFABADB3" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold"  Grid.ColumnSpan="2" Height="20" GotFocus="txbUsersTeamName_GotFocus" TextChanged="txbUsersTeamName_TextChanged" Focusable="False" />
 
-                    <DataGrid x:Name="dgrUserData" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="181,0,0,0" IsReadOnly="True" Background="#FFECF8FB" Grid.Column="3" Grid.ColumnSpan="2" CanUserReorderColumns="False" HorizontalGridLinesBrush="Black" SelectionChanged="dgrUserData_SelectionChanged"/>
+                    <TextBox x:Name="txbUsersRoleId" HorizontalAlignment="Left" Margin="0,153,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="179" BorderBrush="#FFABADB3" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold"  Grid.ColumnSpan="2" Height="20" GotFocus="txbUsersRoleId_GotFocus" TextChanged="txbUsersRoleId_TextChanged" PreviewMouseRightButtonUp="txbUsersRoleId_PreviewMouseRightButtonUp" PreviewTextInput="txbUsersRoleId_PreviewTextInput" MaxLength="1" DataObject.Pasting="txbUsersRoleId_Pasting"/>
+
+                    <TextBox x:Name="txbUsersRoleName" HorizontalAlignment="Left" Margin="0,178,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="179" BorderBrush="#FFABADB3" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold"  Grid.ColumnSpan="2" Height="20" GotFocus="txbUsersRoleName_GotFocus" TextChanged="txbUsersRoleName_TextChanged" Focusable="False" />
 
 
-                    <Button x:Name="btnUsersGetAll" Content="Get all users" HorizontalAlignment="Left" Margin="0,203,0,0" VerticalAlignment="Top" Width="179" Height="20" Click="btnUsersGetAll_Click"/>
-                    <Button x:Name="btnUsersGetByUserName" Content="Get user by username" HorizontalAlignment="Left" Margin="0,228,0,0" VerticalAlignment="Top" Width="179" Height="20" Click="btnUsersGetByUserName_Click"/>
-                    <Button x:Name="btnUsersUpdateUser" Content="Update user" HorizontalAlignment="Left" Margin="0,254,0,0" VerticalAlignment="Top" Width="179" Height="20" Click="btnUsersUpdateUser_Click"/>
 
-                    <Button x:Name="btnUserDeleteUser" Content="Delete user" HorizontalAlignment="Left" Margin="65,279,0,0" VerticalAlignment="Top" Width="114" Click="btnUserDeleteUser_Click"/>
+                    <DataGrid x:Name="dgrUserData" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="181,0,0,0" IsReadOnly="True" Background="#FFECF8FB" Grid.Column="1" CanUserReorderColumns="False" HorizontalGridLinesBrush="Black" SelectionChanged="dgrUserData_SelectionChanged"/>
+
+
+                    <Button x:Name="btnUsersGetAll" Content="Get all users" HorizontalAlignment="Left" Margin="0,203,0,0" VerticalAlignment="Top" Width="179" Height="20" Click="btnUsersGetAll_Click" Grid.ColumnSpan="2"/>
+                    <Button x:Name="btnUsersGetByUserName" Content="Get user by username" HorizontalAlignment="Left" Margin="0,228,0,0" VerticalAlignment="Top" Width="179" Height="20" Click="btnUsersGetByUserName_Click" Grid.ColumnSpan="2"/>
+                    <Button x:Name="btnUsersUpdateUser" Content="Update user" HorizontalAlignment="Left" Margin="0,254,0,0" VerticalAlignment="Top" Width="179" Height="20" Click="btnUsersUpdateUser_Click" Grid.ColumnSpan="2"/>
+
+                    <Button x:Name="btnUserDeleteUser" Content="Delete user" HorizontalAlignment="Left" Margin="65,279,0,0" VerticalAlignment="Top" Width="114" Click="btnUserDeleteUser_Click" Grid.ColumnSpan="2"/>
 
                     <TextBox x:Name="txbUserId" HorizontalAlignment="Left" Margin="0,279,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="60
                              " Height="20" Focusable="False" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold" GotFocus="txbUserId_GotFocus" TextChanged="txbUserId_TextChanged"/>
@@ -121,10 +121,10 @@
                     <Label Content="Id" HorizontalAlignment="Left" Margin="0,125,0,0" VerticalAlignment="Top" Width="124" Foreground="#FF7E7C7C"/>
 
                     <Label Content="User name" HorizontalAlignment="Left" Margin="0,150,0,0" VerticalAlignment="Top" Width="124" Foreground="#FF7E7C7C"/>
-                    <TextBox x:Name="txbTeamsUserName" HorizontalAlignment="Left" Margin="0,153,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="179" BorderBrush="#FFABADB3" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold" Height="20" GotFocus="txbTeamsTeamName_GotFocus" TextChanged="txbTeamsTeamName_TextChanged" />
+                    <TextBox x:Name="txbTeamsUserName" HorizontalAlignment="Left" Margin="0,153,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="179" BorderBrush="#FFABADB3" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold" Height="20" GotFocus="txbTeamsUserName_GotFocus" TextChanged="txbTeamsUserName_TextChanged" />
 
                     <Button x:Name="btnTeamsAddUserToTeam" Content="Add user to team" HorizontalAlignment="Left" Margin="0,178,0,0" VerticalAlignment="Top" Width="179" Height="20" />
-                    
+
                     <DataGrid x:Name="dgrTeamsData" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="181,0,0,0" IsReadOnly="True"  Background="#FFECF8FB" Grid.ColumnSpan="2" />
                 </Grid>
             </TabItem>
