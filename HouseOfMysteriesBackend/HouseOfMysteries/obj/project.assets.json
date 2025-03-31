@@ -4001,11 +4001,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\SULI\\Projektmunka\\Projekt_Rejtelyek_haza\\HouseOfMysteriesBackend\\HouseOfMysteries\\HouseOfMysteries.csproj",
+      "projectUniqueName": "C:\\Projekt_Rejtelyek_haza\\Projekt_Rejtelyek_haza\\HouseOfMysteriesBackend\\HouseOfMysteries\\HouseOfMysteries.csproj",
       "projectName": "HouseOfMysteries",
-      "projectPath": "D:\\SULI\\Projektmunka\\Projekt_Rejtelyek_haza\\HouseOfMysteriesBackend\\HouseOfMysteries\\HouseOfMysteries.csproj",
+      "projectPath": "C:\\Projekt_Rejtelyek_haza\\Projekt_Rejtelyek_haza\\HouseOfMysteriesBackend\\HouseOfMysteries\\HouseOfMysteries.csproj",
       "packagesPath": "C:\\Users\\mesza\\.nuget\\packages\\",
-      "outputPath": "D:\\SULI\\Projektmunka\\Projekt_Rejtelyek_haza\\HouseOfMysteriesBackend\\HouseOfMysteries\\obj\\",
+      "outputPath": "C:\\Projekt_Rejtelyek_haza\\Projekt_Rejtelyek_haza\\HouseOfMysteriesBackend\\HouseOfMysteries\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -4078,7 +4078,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

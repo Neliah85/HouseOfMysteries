@@ -278,17 +278,3 @@ namespace HouseOfMysteries.Controllers
     }
 
 }
-
-//int? roleId = Program.loggedInUsers.CheckTokenValidity(token).LoggedInUser.RoleId;
-//if (roleId == -1)
-//{
-//    return BadRequest("Invalid token!");
-//}
-//else if (roleId > 1)
-//{
-
-//}
-//else
-//{
-//    return BadRequest("You do not have permission to perform this operation!");
-//}

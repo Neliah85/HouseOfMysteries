@@ -244,9 +244,12 @@ namespace HouseOfMysteries.Controllers
                 {
                     if (limit == 0 || limit == null)
                     {
-                        limit = 1;
+                        return Ok(context.Bookings.FromSql($"SELECT * FROM `booking` WHERE(result IS NOT null)AND(roomId = {roomId})AND(teamId IS NOT null) ORDER by result").ToList());
                     }
-                    return Ok(context.Bookings.FromSql($"SELECT * FROM `booking` WHERE(result IS NOT null)AND(roomId = {roomId})AND(teamId IS NOT null) ORDER by result LIMIT {limit}").ToList());
+                    else
+                    {
+                        return Ok(context.Bookings.FromSql($"SELECT * FROM `booking` WHERE(result IS NOT null)AND(roomId = {roomId})AND(teamId IS NOT null) ORDER by result LIMIT {limit}").ToList());
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -254,8 +257,6 @@ namespace HouseOfMysteries.Controllers
                 }
             }
         }
-
-
 
     }
 }

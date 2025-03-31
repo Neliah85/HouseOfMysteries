@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HouseOfMysteries")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0daeefdc82dc2516dbed2769b31bc1d1e9abe052")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7256d93e3a517bccaaa4a7e736e2c8b5fccc3e57")]
 [assembly: System.Reflection.AssemblyProductAttribute("HouseOfMysteries")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HouseOfMysteries")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
