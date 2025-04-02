@@ -17,6 +17,7 @@ import Profile from "./components/Profile";
 import PrivacyPolicy from './components/Privacy';
 import ModifyUser from './components/ModifyUser';
 import AcceptInvitation from './components/AcceptInvitation';
+import AcceptRegistration from './components/AcceptRegistration';
 
 function App() {
     return (
@@ -40,6 +41,7 @@ function App() {
                 <Route path="/privacy" element={<PrivacyPolicy />} />
                 <Route path="/modify-user/:id" element={<ModifyUser />} />
                 <Route path="/Users/AcceptInvitation" element={<AcceptInvitation />} />
+                <Route path="/Registry" element={<AcceptRegistration />} />
 
             </Routes>
         </Router>

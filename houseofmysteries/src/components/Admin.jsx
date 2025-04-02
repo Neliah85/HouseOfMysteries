@@ -31,6 +31,7 @@ const Admin = () => {
     const [bookingsError, setBookingsError] = useState("");
     const [maintenanceError, setMaintenanceError] = useState("");
     const [competitionError, setCompetitionError] = useState("");
+   
     
     
 
@@ -104,16 +105,20 @@ const Admin = () => {
     };
     
     const UserDelete = async (userNameToDelete) => {
-        const token = localStorage.getItem("token");
-        try {
-            await axios.delete(`http://localhost:5131/Users/DeleteByUserName/${token},${userNameToDelete}`);
-            // Töröljük a felhasználót a helyi state-ből is, ha sikeres volt a törlés
-            setUsers(users.filter(user => user.nickName !== userNameToDelete));
-        } catch (error) {
-            console.error("Hiba a felhasználó törlésekor:", error);
-            alert("Hiba történt a törlés során.");
-        }
-    };
+    const confirmDelete = window.confirm(`Biztosan törölni szeretnéd ${userNameToDelete} felhasználót?`);
+    if (!confirmDelete) return;
+
+    const token = localStorage.getItem("token");
+    try {
+        await axios.delete(`http://localhost:5131/Users/DeleteByUserName/${token},${userNameToDelete}`);
+        // Töröljük a felhasználót a helyi state-ből is, ha sikeres volt a törlés
+        setUsers(users.filter(user => user.nickName !== userNameToDelete));
+    } catch (error) {
+        console.error("Hiba a felhasználó törlésekor:", error);
+        alert("Hiba történt a törlés során.");
+    }
+};
+
 
       const loadBookings = async () => {
         const token = localStorage.getItem("token");
@@ -166,6 +171,7 @@ const Admin = () => {
         try {
             await axios.put(`http://localhost:5131/Booking/ClearBooking/${token}`, {
                 bookingDate: bookingDate,
+                roomId: selectedRoomId
                 
             });
             return { success: true };
@@ -295,7 +301,7 @@ const Admin = () => {
                                     <td>{booking.comment}</td>
                                     <td>
                                         <button onClick={() => deleteBooking(booking.bookingId)}>Törlés</button>
-                                        <button onClick={() => clearBooking(booking.bookingId)}>Felszabadít</button>
+                                        <button onClick={() => clearBooking(booking.bookingDate)}>Felszabadít</button>
                                     </td>
                                 </tr>
                             ))}
