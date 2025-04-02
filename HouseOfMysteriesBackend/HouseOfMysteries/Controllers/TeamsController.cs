@@ -239,7 +239,7 @@ namespace HouseOfMysteries.Controllers
                             mUser.TeamId = context.Teams.FirstOrDefault(f => f.TeamName == teamName).TeamId;
                         }
 
-                        await Program.SendEmail(mUser.Email, "Meghívó", $"Kedves {mUser.NickName}!\n\nEzt a levelet azért kaptad, mert a Rejtélyekháza  {teamName} nevü csapata szeretne felkérni, hogy csatlakozz hozzájuk.\nAzt tudnod kell, hogy ha elfogadod a felkérést, akkor jelenlegi csapatodtól el kell búcsúznod, mert egyszerre csak egy csapat színeiben versenyezhetsz.\nHa szeretnél hozzájuk csatlakozni, csupán annyit kell tenned, hogy rákattintasz az alábbi linkre:\n https://localhost:5131/Users/AcceptInvitation?felhasznaloNev={mUser.NickName}&teamName={teamName}\nHa nem szeretnél csapatot váltani, akkor semmilyen teendőd nincsen.\n\nÜdvözlettel: Rejtélyek háza");
+                        await Program.SendEmail(mUser.Email, "Meghívó", $"Kedves {mUser.NickName}!\n\nEzt a levelet azért kaptad, mert a Rejtélyekháza  {teamName} nevü csapata szeretne felkérni, hogy csatlakozz hozzájuk.\nAzt tudnod kell, hogy ha elfogadod a felkérést, akkor jelenlegi csapatodtól el kell búcsúznod, mert egyszerre csak egy csapat színeiben versenyezhetsz.\nHa szeretnél hozzájuk csatlakozni, csupán annyit kell tenned, hogy rákattintasz az alábbi linkre:\n https://localhost:3000/Users/AcceptInvitation?felhasznaloNev={mUser.NickName}&teamName={teamName}\nHa nem szeretnél csapatot váltani, akkor semmilyen teendőd nincsen.\n\nÜdvözlettel: Rejtélyek háza");
                         return Ok("Invitation sent!");
                     }
                     catch (Exception ex)
