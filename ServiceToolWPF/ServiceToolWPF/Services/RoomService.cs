@@ -13,6 +13,7 @@ namespace ServiceToolWPF.Services
     public class RoomService
     {
         public static SendLogEvent sendLogEvent = new SendLogEvent();
+        public static RefreshEvent refreshEvent = new RefreshEvent();
         public static async Task<List<Room>> GetAllRooms(HttpClient httpClient, string token)
         {
             try

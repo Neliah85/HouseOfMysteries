@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ServiceToolWPF")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7256d93e3a517bccaaa4a7e736e2c8b5fccc3e57")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+eae29df52c42c91da43ab7a88e2ce9252943e9a1")]
 [assembly: System.Reflection.AssemblyProductAttribute("ServiceToolWPF")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ServiceToolWPF")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -8,6 +8,7 @@ namespace ServiceToolWPF.Services
     public class RoleService
     {
         public static SendLogEvent sendLogEvent = new SendLogEvent();
+        public static RefreshEvent refreshEvent = new RefreshEvent();
         public static async Task<List<Role>> GetAllRoles(HttpClient httpClient, string token)
         {
             try

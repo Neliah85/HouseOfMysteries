@@ -3,20 +3,40 @@
   "WorkspaceRootPath": "C:\\Projekt_Rejtelyek_haza\\Projekt_Rejtelyek_haza\\ServiceToolWPF\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{BBAA0100-93FE-4F46-AA65-7101D133FA1A}|ServiceToolWPF\\ServiceToolWPF.csproj|c:\\projekt_rejtelyek_haza\\projekt_rejtelyek_haza\\servicetoolwpf\\servicetoolwpf\\services\\bookingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BBAA0100-93FE-4F46-AA65-7101D133FA1A}|ServiceToolWPF\\ServiceToolWPF.csproj|solutionrelative:servicetoolwpf\\services\\bookingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{BBAA0100-93FE-4F46-AA65-7101D133FA1A}|ServiceToolWPF\\ServiceToolWPF.csproj|c:\\projekt_rejtelyek_haza\\projekt_rejtelyek_haza\\servicetoolwpf\\servicetoolwpf\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BBAA0100-93FE-4F46-AA65-7101D133FA1A}|ServiceToolWPF\\ServiceToolWPF.csproj|solutionrelative:servicetoolwpf\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BBAA0100-93FE-4F46-AA65-7101D133FA1A}|ServiceToolWPF\\ServiceToolWPF.csproj|c:\\projekt_rejtelyek_haza\\projekt_rejtelyek_haza\\servicetoolwpf\\servicetoolwpf\\refreshevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BBAA0100-93FE-4F46-AA65-7101D133FA1A}|ServiceToolWPF\\ServiceToolWPF.csproj|solutionrelative:servicetoolwpf\\refreshevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BBAA0100-93FE-4F46-AA65-7101D133FA1A}|ServiceToolWPF\\ServiceToolWPF.csproj|c:\\projekt_rejtelyek_haza\\projekt_rejtelyek_haza\\servicetoolwpf\\servicetoolwpf\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{BBAA0100-93FE-4F46-AA65-7101D133FA1A}|ServiceToolWPF\\ServiceToolWPF.csproj|solutionrelative:servicetoolwpf\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BBAA0100-93FE-4F46-AA65-7101D133FA1A}|ServiceToolWPF\\ServiceToolWPF.csproj|c:\\projekt_rejtelyek_haza\\projekt_rejtelyek_haza\\servicetoolwpf\\servicetoolwpf\\services\\roleservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BBAA0100-93FE-4F46-AA65-7101D133FA1A}|ServiceToolWPF\\ServiceToolWPF.csproj|solutionrelative:servicetoolwpf\\services\\roleservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BBAA0100-93FE-4F46-AA65-7101D133FA1A}|ServiceToolWPF\\ServiceToolWPF.csproj|c:\\projekt_rejtelyek_haza\\projekt_rejtelyek_haza\\servicetoolwpf\\servicetoolwpf\\services\\teamservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BBAA0100-93FE-4F46-AA65-7101D133FA1A}|ServiceToolWPF\\ServiceToolWPF.csproj|solutionrelative:servicetoolwpf\\services\\teamservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BBAA0100-93FE-4F46-AA65-7101D133FA1A}|ServiceToolWPF\\ServiceToolWPF.csproj|c:\\projekt_rejtelyek_haza\\projekt_rejtelyek_haza\\servicetoolwpf\\servicetoolwpf\\services\\bookingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BBAA0100-93FE-4F46-AA65-7101D133FA1A}|ServiceToolWPF\\ServiceToolWPF.csproj|solutionrelative:servicetoolwpf\\services\\bookingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BBAA0100-93FE-4F46-AA65-7101D133FA1A}|ServiceToolWPF\\ServiceToolWPF.csproj|c:\\projekt_rejtelyek_haza\\projekt_rejtelyek_haza\\servicetoolwpf\\servicetoolwpf\\services\\roomservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BBAA0100-93FE-4F46-AA65-7101D133FA1A}|ServiceToolWPF\\ServiceToolWPF.csproj|solutionrelative:servicetoolwpf\\services\\roomservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BBAA0100-93FE-4F46-AA65-7101D133FA1A}|ServiceToolWPF\\ServiceToolWPF.csproj|c:\\projekt_rejtelyek_haza\\projekt_rejtelyek_haza\\servicetoolwpf\\servicetoolwpf\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BBAA0100-93FE-4F46-AA65-7101D133FA1A}|ServiceToolWPF\\ServiceToolWPF.csproj|solutionrelative:servicetoolwpf\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{BBAA0100-93FE-4F46-AA65-7101D133FA1A}|ServiceToolWPF\\ServiceToolWPF.csproj|c:\\projekt_rejtelyek_haza\\projekt_rejtelyek_haza\\servicetoolwpf\\servicetoolwpf\\classes\\sendlogevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BBAA0100-93FE-4F46-AA65-7101D133FA1A}|ServiceToolWPF\\ServiceToolWPF.csproj|solutionrelative:servicetoolwpf\\classes\\sendlogevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BBAA0100-93FE-4F46-AA65-7101D133FA1A}|ServiceToolWPF\\ServiceToolWPF.csproj|c:\\projekt_rejtelyek_haza\\projekt_rejtelyek_haza\\servicetoolwpf\\servicetoolwpf\\refreshevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BBAA0100-93FE-4F46-AA65-7101D133FA1A}|ServiceToolWPF\\ServiceToolWPF.csproj|solutionrelative:servicetoolwpf\\refreshevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,7 +46,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,7 +54,71 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "RoleService.cs",
+              "DocumentMoniker": "C:\\Projekt_Rejtelyek_haza\\Projekt_Rejtelyek_haza\\ServiceToolWPF\\ServiceToolWPF\\Services\\RoleService.cs",
+              "RelativeDocumentMoniker": "ServiceToolWPF\\Services\\RoleService.cs",
+              "ToolTip": "C:\\Projekt_Rejtelyek_haza\\Projekt_Rejtelyek_haza\\ServiceToolWPF\\ServiceToolWPF\\Services\\RoleService.cs",
+              "RelativeToolTip": "ServiceToolWPF\\Services\\RoleService.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAwAsAAABFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-01T14:56:36.985Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "RoomService.cs",
+              "DocumentMoniker": "C:\\Projekt_Rejtelyek_haza\\Projekt_Rejtelyek_haza\\ServiceToolWPF\\ServiceToolWPF\\Services\\RoomService.cs",
+              "RelativeDocumentMoniker": "ServiceToolWPF\\Services\\RoomService.cs",
+              "ToolTip": "C:\\Projekt_Rejtelyek_haza\\Projekt_Rejtelyek_haza\\ServiceToolWPF\\ServiceToolWPF\\Services\\RoomService.cs",
+              "RelativeToolTip": "ServiceToolWPF\\Services\\RoomService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAABFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-01T14:56:30.055Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "TeamService.cs",
+              "DocumentMoniker": "C:\\Projekt_Rejtelyek_haza\\Projekt_Rejtelyek_haza\\ServiceToolWPF\\ServiceToolWPF\\Services\\TeamService.cs",
+              "RelativeDocumentMoniker": "ServiceToolWPF\\Services\\TeamService.cs",
+              "ToolTip": "C:\\Projekt_Rejtelyek_haza\\Projekt_Rejtelyek_haza\\ServiceToolWPF\\ServiceToolWPF\\Services\\TeamService.cs",
+              "RelativeToolTip": "ServiceToolWPF\\Services\\TeamService.cs",
+              "ViewState": "AgIAACcAAAAAAAAAAAAgwD0AAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-01T14:17:39.677Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Projekt_Rejtelyek_haza\\Projekt_Rejtelyek_haza\\ServiceToolWPF\\ServiceToolWPF\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "ServiceToolWPF\\MainWindow.xaml",
+              "ToolTip": "C:\\Projekt_Rejtelyek_haza\\Projekt_Rejtelyek_haza\\ServiceToolWPF\\ServiceToolWPF\\MainWindow.xaml",
+              "RelativeToolTip": "ServiceToolWPF\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-04-01T14:09:11.471Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "UserService.cs",
+              "DocumentMoniker": "C:\\Projekt_Rejtelyek_haza\\Projekt_Rejtelyek_haza\\ServiceToolWPF\\ServiceToolWPF\\Services\\UserService.cs",
+              "RelativeDocumentMoniker": "ServiceToolWPF\\Services\\UserService.cs",
+              "ToolTip": "C:\\Projekt_Rejtelyek_haza\\Projekt_Rejtelyek_haza\\ServiceToolWPF\\ServiceToolWPF\\Services\\UserService.cs",
+              "RelativeToolTip": "ServiceToolWPF\\Services\\UserService.cs",
+              "ViewState": "AgIAAGQAAAAAAAAAAAAgwG4AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-01T13:55:29.8Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "SendLogEvent.cs",
               "DocumentMoniker": "C:\\Projekt_Rejtelyek_haza\\Projekt_Rejtelyek_haza\\ServiceToolWPF\\ServiceToolWPF\\Classes\\SendLogEvent.cs",
               "RelativeDocumentMoniker": "ServiceToolWPF\\Classes\\SendLogEvent.cs",
@@ -47,7 +131,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 8,
               "Title": "RefreshEvent.cs",
               "DocumentMoniker": "C:\\Projekt_Rejtelyek_haza\\Projekt_Rejtelyek_haza\\ServiceToolWPF\\ServiceToolWPF\\RefreshEvent.cs",
               "RelativeDocumentMoniker": "ServiceToolWPF\\RefreshEvent.cs",
@@ -60,26 +144,26 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "BookingService.cs",
               "DocumentMoniker": "C:\\Projekt_Rejtelyek_haza\\Projekt_Rejtelyek_haza\\ServiceToolWPF\\ServiceToolWPF\\Services\\BookingService.cs",
               "RelativeDocumentMoniker": "ServiceToolWPF\\Services\\BookingService.cs",
               "ToolTip": "C:\\Projekt_Rejtelyek_haza\\Projekt_Rejtelyek_haza\\ServiceToolWPF\\ServiceToolWPF\\Services\\BookingService.cs",
               "RelativeToolTip": "ServiceToolWPF\\Services\\BookingService.cs",
-              "ViewState": "AgIAAHoAAAAAAAAAAAA7wLYAAAA1AAAAAAAAAA==",
+              "ViewState": "AgIAAIgAAAAAAAAAAAAuwLQAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-31T05:31:05.632Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "MainWindow.xaml.cs",
               "DocumentMoniker": "C:\\Projekt_Rejtelyek_haza\\Projekt_Rejtelyek_haza\\ServiceToolWPF\\ServiceToolWPF\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "ServiceToolWPF\\MainWindow.xaml.cs",
               "ToolTip": "C:\\Projekt_Rejtelyek_haza\\Projekt_Rejtelyek_haza\\ServiceToolWPF\\ServiceToolWPF\\MainWindow.xaml.cs",
               "RelativeToolTip": "ServiceToolWPF\\MainWindow.xaml.cs",
-              "ViewState": "AgIAAL4AAAAAAAAAAAAYwC8BAAAqAAAAAAAAAA==",
+              "ViewState": "AgIAABUBAAAAAAAAAAAgwB8BAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-31T04:42:55.994Z",
               "EditorCaption": ""

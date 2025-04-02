@@ -61,14 +61,18 @@ namespace ServiceToolWPF
         public MainWindow()
         {
             InitializeComponent();
+            //Events
             UserService.sendLogEvent.LogSent += SendLogEvent_LogSent;
             LoginService.sendLogEvent.LogSent += SendLogEvent_LogSent;
             LogoutService.sendLogEvent.LogSent += SendLogEvent_LogSent;
             BookingService.sendLogEvent.LogSent += SendLogEvent_LogSent;
             BookingService.refreshEvent.Refreshed += RefreshEvent_Refreshed;
             TeamService.sendLogEvent.LogSent += SendLogEvent_LogSent;
+            TeamService.refreshEvent.Refreshed += RefreshEvent_Refreshed;
             RoleService.sendLogEvent.LogSent += SendLogEvent_LogSent;
+            RoleService.refreshEvent.Refreshed -= RefreshEvent_Refreshed;
             RoomService.sendLogEvent.LogSent += SendLogEvent_LogSent;
+            RoomService.refreshEvent.Refreshed += RefreshEvent_Refreshed;
 
 
 
@@ -281,7 +285,10 @@ namespace ServiceToolWPF
                 SaveFileDialog saveFileDialog1 = new SaveFileDialog();
                 saveFileDialog1.Filter = "txt | *.txt";
                 saveFileDialog1.Title = "Save log";
-                saveFileDialog1.FileName = "log " + DateTime.Now.ToString();
+                string dateTime = DateTime.Now.ToString();
+                dateTime=dateTime.Trim( );
+                dateTime=dateTime.Replace('.','_');
+                saveFileDialog1.FileName = "log_" + dateTime;//DateTime.Now.ToString();
                 if (saveFileDialog1.ShowDialog() == true)
                 {
                     StreamWriter sw = new StreamWriter(saveFileDialog1.FileName);
@@ -305,6 +312,10 @@ namespace ServiceToolWPF
 
             if (lastAction == "CheckBooking") { CheckBooking(); }
             if (lastAction == "GetAllBooking") { GetAllBooking(); }
+            if (lastAction == "GetAllUsers") { GetAllUsers(); }
+            if (lastAction == "GetUserByUserName") { GetUserByUserName(); }
+            if (lastAction == "GetAllTeams") { GetAllTeams(); }
+
         }
 
         #endregion
@@ -666,7 +677,7 @@ namespace ServiceToolWPF
             WriteLog($"[New booking >> Room: {cmbRooms.SelectedItem.ToString()} Date: {GetBookingDateTime()}]");
             TimeSpan time = TimeSpan.Parse(bookingTime[cmbBookingTime.SelectedIndex]);
             BookingDTO newBooking = new BookingDTO();
-            newBooking.BookingDate = DateTime.Parse(dtpBookingDate.DisplayDate.ToShortDateString() + " " + TimeSpan.Parse(bookingTime[cmbBookingTime.SelectedIndex]).ToString());
+            newBooking.BookingDate = GetBookingDateTime();
             newBooking.TeamId = loggedInUser.TeamId;
             newBooking.RoomId = cmbRooms.SelectedIndex + 1;
             newBooking.Comment = txbComment.Text;
@@ -994,7 +1005,12 @@ namespace ServiceToolWPF
         }
 
         //Get user by username
-        private async void btnUsersGetByUserName_Click(object sender, RoutedEventArgs e)
+        private void btnUsersGetByUserName_Click(object sender, RoutedEventArgs e)
+        {
+            GetUserByUserName();
+        }
+
+        private async void GetUserByUserName() 
         {
             if (txbUsersUserName.Text != "")
             {
@@ -1135,9 +1151,35 @@ namespace ServiceToolWPF
         {
             WriteLog("[Get all teams]");
             dgrTeamsData.ItemsSource = await TeamService.GetAllTeam(sharedClient, loggedInUser.Token);
-
-
         }
+
+        private async void btnTeamsAddNewTeam_Click(object sender, RoutedEventArgs e)
+        {
+            if (txbTeamsTeamName.Text == "")
+            {
+                txbTeamsTeamName.Background = Brushes.LightPink;
+            }
+            else
+            {
+                WriteLog($"[Add new team >> Team name: {txbTeamsTeamName.Text}]");
+                await TeamService.AddNewTeam(sharedClient, loggedInUser.Token, txbTeamsTeamName.Text);
+            }
+        }
+
+        private async void btnTeamsUpdateTeam_Click(object sender, RoutedEventArgs e)
+        {
+            if (txbTeamsTeamName.Text == "")
+            {
+                txbTeamsTeamName.Background = Brushes.LightPink;
+            }
+            else
+            {
+                WriteLog($"[Update team >> Team name: {txbTeamsTeamName.Text}]");
+                //await TeamService.UpdateTeam(sharedClient, loggedInUser.Token, txbTeamsTeamName.Text);
+            }
+        }
+
+
         #endregion
         #region Roles input mask settings
         private void txbRolesRoleName_GotFocus(object sender, RoutedEventArgs e)
@@ -1244,9 +1286,15 @@ namespace ServiceToolWPF
 
 
 
+
+
+
         #endregion
 
-
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            lastAction = "";
+        }
 
 
     }

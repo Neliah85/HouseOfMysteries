@@ -10,6 +10,7 @@ namespace ServiceToolWPF.Services
     public class UserService
     {
         public static SendLogEvent sendLogEvent = new SendLogEvent();
+        public static RefreshEvent refreshEvent = new RefreshEvent();
         public static async Task<string> Post(HttpClient httpClient, UserDTO user)
         {
             try
@@ -52,6 +53,7 @@ namespace ServiceToolWPF.Services
                 if (response.IsSuccessStatusCode)
                 {
                     sendLogEvent.SendLog(content);
+                    refreshEvent.Refresh("GetUserByUserName");
                     return content;
                 }
                 else
@@ -131,6 +133,7 @@ namespace ServiceToolWPF.Services
                 var response = await httpClient.DeleteAsync(url + p);
                 string r = response.Content.ReadAsStringAsync().Result;
                 sendLogEvent.SendLog(r);
+                refreshEvent.Refresh("GetUserByUserName");
                 return r;
             }
             catch (Exception ex)
@@ -149,6 +152,7 @@ namespace ServiceToolWPF.Services
                 var response = await httpClient.PutAsync(url, request);
                 string r = response.Content.ReadAsStringAsync().Result;
                 sendLogEvent.SendLog(r);
+                refreshEvent.Refresh("GetUserByUserName");
                 return r;
             }
             catch (Exception ex)

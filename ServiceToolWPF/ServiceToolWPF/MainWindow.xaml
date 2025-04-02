@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ServiceToolWPF"
         mc:Ignorable="d"
-        Title="House of mysteries - Service tool" Width="1000" Height="600" WindowStartupLocation="CenterScreen">
+        Title="House of mysteries - Service tool" Width="1000" Height="600" WindowStartupLocation="CenterScreen" Icon="/log3.png">
     <Grid x:Name="grid" >
         <GroupBox Header="Backend actions" Margin="0,2,162,128"/>
-        <TabControl Margin="4,20,166,132" SelectedIndex="4">
+        <TabControl Margin="4,20,166,132" SelectedIndex="4" SelectionChanged="TabControl_SelectionChanged">
             <TabItem Header="Registration">
                 <Grid>
                     <Label Content="Username" HorizontalAlignment="Left" Margin="8,6,0,0" VerticalAlignment="Top" Width="124" Foreground="#FF7E7C7C" Grid.ColumnSpan="5"/>
@@ -25,6 +25,7 @@
                     <TextBox x:Name="txbRegEmail" HorizontalAlignment="Left" Margin="10,90,0,0" TextWrapping="Wrap" Text="meszarostibor74@outlook.hu" VerticalAlignment="Top" Width="250" GotFocus="txbRegEmail_GotFocus"  TextChanged="txbRegEmail_TextChanged" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold" KeyDown="txbRegEmail_KeyDown" Grid.ColumnSpan="8"/>
                     <TextBox x:Name="txbRegPhone" HorizontalAlignment="Left" Margin="10,110,0,0" TextWrapping="Wrap" Text="+36703330719" VerticalAlignment="Top" Width="250"    Background="{Binding ElementName=grid, Mode=OneWay}" GotFocus="txbRegPhone_GotFocus" TextChanged="txbRegPhone_TextChanged" Foreground="#FF5B5CAB" FontWeight="Bold" SelectionTextBrush="White" KeyDown="txbRegPhone_KeyDown" Grid.ColumnSpan="8"/>
                     <Button x:Name="btnConfirmRegistration"  Content="Confirm registration" HorizontalAlignment="Left" Margin="10,152,0,0" VerticalAlignment="Top" Width="250"  Grid.ColumnSpan="8" Click="btnConfirmRegistration_Click"/>
+                    <Image Margin="356,39,115,12" Source="/log3.png" Opacity="0.3"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Bookings" Height="20" VerticalAlignment="Center" HorizontalAlignment="Left" Width="61">
@@ -112,9 +113,9 @@
                     <Label Content="Team name" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Width="124" Foreground="#FF7E7C7C"/>
                     <TextBox x:Name="txbTeamsTeamName" HorizontalAlignment="Left" Margin="0,28,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="179" BorderBrush="#FFABADB3" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold" Height="20" GotFocus="txbTeamsTeamName_GotFocus" TextChanged="txbTeamsTeamName_TextChanged" />
 
-                    <Button x:Name="btnTeamsAddNewTeam" Content="Add new team" HorizontalAlignment="Left" Margin="0,53,0,0" VerticalAlignment="Top" Width="179" Height="20" />
+                    <Button x:Name="btnTeamsAddNewTeam" Content="Add new team" HorizontalAlignment="Left" Margin="0,53,0,0" VerticalAlignment="Top" Width="179" Height="20" Click="btnTeamsAddNewTeam_Click" />
                     <Button x:Name="btnTeamsRegistration" Content="Team registration" HorizontalAlignment="Left" Margin="0,78,0,0" VerticalAlignment="Top" Width="179" Height="20" />
-                    <Button x:Name="btnTeamsUpdateTeam" Content="Update team" HorizontalAlignment="Left" Margin="0,103,0,0" VerticalAlignment="Top" Width="179" Height="20" />
+                    <Button x:Name="btnTeamsUpdateTeam" Content="Update team" HorizontalAlignment="Left" Margin="0,103,0,0" VerticalAlignment="Top" Width="179" Height="20" Click="btnTeamsUpdateTeam_Click" />
                     <Button x:Name="btnTeamsDeleteTeam" Content="Delete team" HorizontalAlignment="Left" Margin="65,128,0,0" VerticalAlignment="Top" Width="114" />
                     <TextBox x:Name="txbTeamId" HorizontalAlignment="Left" Margin="0,128,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="60
                              " Height="20" Focusable="False" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold" TextChanged="txbTeamId_TextChanged" />
