@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using HouseOfMysteries.DTOs;
+using static System.Net.WebRequestMethods;
 
 namespace HouseOfMysteries.Controllers
 {
@@ -28,7 +29,10 @@ namespace HouseOfMysteries.Controllers
                     user.Hash = Program.CreateSHA256(user.Hash);
                     await context.Users.AddAsync(user);
                     await context.SaveChangesAsync();
-                    _=Program.SendEmail(user.Email, "Regisztráció", $"https://localhost:3000/Registry?felhasznaloNev={user.NickName}&email={user.Email}");
+
+                    string emailBody = $"Kedves {user.NickName}!\n\nEzt a levelet azért kaptad, mert regisztráltál a weboldalunkon. Regisztrációdat az alábbi linkre kattintva erősítheted meg:\n https://localhost:3000/Registry?felhasznaloNev={{user.NickName}}&email={{user.Email}}\nHa nem Te kezdeményezted a regisztrációt, levelünket hagyd figyelmen kívül!\nÜdvözlettel: Rejtélyek háza";
+
+                    _ = Program.SendEmail(user.Email, "Regisztráció", emailBody);
                     return Ok("Successful registration. Complete your registration using the link sent to your email address!");
                 }
                 catch (Exception ex)
