@@ -25,7 +25,7 @@
                     <TextBox x:Name="txbRegEmail" HorizontalAlignment="Left" Margin="10,90,0,0" TextWrapping="Wrap" Text="meszarostibor74@outlook.hu" VerticalAlignment="Top" Width="250" GotFocus="txbRegEmail_GotFocus"  TextChanged="txbRegEmail_TextChanged" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold" KeyDown="txbRegEmail_KeyDown" Grid.ColumnSpan="8"/>
                     <TextBox x:Name="txbRegPhone" HorizontalAlignment="Left" Margin="10,110,0,0" TextWrapping="Wrap" Text="+36703330719" VerticalAlignment="Top" Width="250"    Background="{Binding ElementName=grid, Mode=OneWay}" GotFocus="txbRegPhone_GotFocus" TextChanged="txbRegPhone_TextChanged" Foreground="#FF5B5CAB" FontWeight="Bold" SelectionTextBrush="White" KeyDown="txbRegPhone_KeyDown" Grid.ColumnSpan="8"/>
                     <Button x:Name="btnConfirmRegistration"  Content="Confirm registration" HorizontalAlignment="Left" Margin="10,152,0,0" VerticalAlignment="Top" Width="250"  Grid.ColumnSpan="8" Click="btnConfirmRegistration_Click"/>
-                    <Image Margin="356,39,115,12" Source="/log3.png" Opacity="0.3"/>
+                    <Image Margin="280,39,115,12" Source="/log3.png" Opacity="0.3"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Bookings" Height="20" VerticalAlignment="Center" HorizontalAlignment="Left" Width="61">
@@ -126,7 +126,7 @@
 
                     <Button x:Name="btnTeamsAddUserToTeam" Content="Add user to team" HorizontalAlignment="Left" Margin="0,178,0,0" VerticalAlignment="Top" Width="179" Height="20" />
 
-                    <DataGrid x:Name="dgrTeamsData" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="181,0,0,0" IsReadOnly="True"  Background="#FFECF8FB" Grid.ColumnSpan="2" />
+                    <DataGrid x:Name="dgrTeamsData" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="181,0,0,0" IsReadOnly="True"  Background="#FFECF8FB" Grid.ColumnSpan="2" SelectionChanged="dgrTeamsData_SelectionChanged" />
                 </Grid>
             </TabItem>
 

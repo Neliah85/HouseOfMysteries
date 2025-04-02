@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = ServiceToolWPF
-build_property.ProjectDir = C:\Projekt_Rejtelyek_haza\Projekt_Rejtelyek_haza\ServiceToolWPF\ServiceToolWPF\
+build_property.ProjectDir = D:\SULI\Projektmunka\Projekt_Rejtelyek_haza\ServiceToolWPF\ServiceToolWPF\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

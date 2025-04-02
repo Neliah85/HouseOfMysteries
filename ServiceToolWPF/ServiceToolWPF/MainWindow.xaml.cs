@@ -62,11 +62,12 @@ namespace ServiceToolWPF
         {
             InitializeComponent();
             //Events
-            UserService.sendLogEvent.LogSent += SendLogEvent_LogSent;
             LoginService.sendLogEvent.LogSent += SendLogEvent_LogSent;
             LogoutService.sendLogEvent.LogSent += SendLogEvent_LogSent;
             BookingService.sendLogEvent.LogSent += SendLogEvent_LogSent;
             BookingService.refreshEvent.Refreshed += RefreshEvent_Refreshed;
+            UserService.sendLogEvent.LogSent += SendLogEvent_LogSent;
+            UserService.refreshEvent.Refreshed += RefreshEvent_Refreshed;
             TeamService.sendLogEvent.LogSent += SendLogEvent_LogSent;
             TeamService.refreshEvent.Refreshed += RefreshEvent_Refreshed;
             RoleService.sendLogEvent.LogSent += SendLogEvent_LogSent;
@@ -1001,6 +1002,7 @@ namespace ServiceToolWPF
         public async void GetAllUsers()
         {
             WriteLog("[Get all users]");
+            lastAction = "GetAllUsers";
             dgrUserData.ItemsSource = await UserService.GetAllUsers(sharedClient, loggedInUser.Token);
         }
 
@@ -1015,6 +1017,7 @@ namespace ServiceToolWPF
             if (txbUsersUserName.Text != "")
             {
                 WriteLog($"[Get user by username >> UserName={txbUsersUserName.Text}]");
+                lastAction = "GetUserByUserName";
                 List<User?> l = new List<User?>();
                 dgrUserData.ItemsSource = l;
                 var response = await UserService.GetUserByUserName(sharedClient, loggedInUser.Token, txbUsersUserName.Text);
@@ -1166,6 +1169,10 @@ namespace ServiceToolWPF
             }
         }
 
+
+
+
+
         private async void btnTeamsUpdateTeam_Click(object sender, RoutedEventArgs e)
         {
             if (txbTeamsTeamName.Text == "")
@@ -1179,7 +1186,17 @@ namespace ServiceToolWPF
             }
         }
 
-
+        private void dgrTeamsData_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int index = dgrTeamsData.SelectedIndex;
+            if (index > -1)
+            {
+                Team team = new Team();
+                team=(Team)dgrTeamsData.Items.GetItemAt(index);
+                txbTeamsTeamName.Text = team.TeamName;
+                txbTeamId.Text = team.TeamId.ToString();
+            }
+        }
         #endregion
         #region Roles input mask settings
         private void txbRolesRoleName_GotFocus(object sender, RoutedEventArgs e)
@@ -1293,7 +1310,7 @@ namespace ServiceToolWPF
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            lastAction = "";
+           // lastAction = "";
         }
 
 
