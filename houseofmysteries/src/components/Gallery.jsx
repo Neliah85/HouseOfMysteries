@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+
 import axios from "axios";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -8,7 +8,7 @@ const Gallery = () => {
     const [userData, setUserData] = useState({ userId: 0, roleId: 0 });
     const [images, setImages] = useState([]);
     const [previewImage, setPreviewImage] = useState(null);
-    const navigate = useNavigate();
+    
     
     const token = localStorage.getItem("token");
     const userLoggedIn = !!token;
