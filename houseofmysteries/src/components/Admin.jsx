@@ -379,7 +379,7 @@ const Admin = () => {
 
                     {/* 4. Versenytábla kezelése */}
                    <section className="admin-section">
-                <h2>Versenytábla kezelése</h2>
+                <h2>Verseny-eredmények rögzítése</h2>
                 <label>Szoba:</label>
                 <select
                     value={selectedRoomIdForCompetition}
