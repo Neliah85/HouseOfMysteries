@@ -75,11 +75,6 @@ namespace ServiceToolWPF
             RoomService.sendLogEvent.LogSent += SendLogEvent_LogSent;
             RoomService.refreshEvent.Refreshed += RefreshEvent_Refreshed;
 
-
-
-
-
-
             ResetLoggedInUser();
 
             unTextCheck();
@@ -193,10 +188,27 @@ namespace ServiceToolWPF
             }
         }
         #endregion
+        #region Login input test
+        private bool LoginInputTest()
+        {
+            bool result = true;
+            if (txbUserName.Text == "")
+            {
+                txbUserName.Background = Brushes.LightPink;
+                result = false;
+            }
+            if (txbPassword.Password == "")
+            {
+                txbPassword.Background = Brushes.LightPink;
+                result = false;
+            }
+            return result;
+        }
+        #endregion
         #region Login
         private void UserLogin()
         {
-            if (txbUserName.Text != "" && txbPassword.Password != "")
+            if (LoginInputTest())
             {
                 WriteLog($"[Login: {txbUserName.Text}]");
                 var salt = LoginService.GetSalt(ServiceToolWPF.MainWindow.sharedClient, txbUserName.Text);
@@ -287,8 +299,8 @@ namespace ServiceToolWPF
                 saveFileDialog1.Filter = "txt | *.txt";
                 saveFileDialog1.Title = "Save log";
                 string dateTime = DateTime.Now.ToString();
-                dateTime=dateTime.Trim( );
-                dateTime=dateTime.Replace('.','_');
+                dateTime = dateTime.Trim();
+                dateTime = dateTime.Replace('.', '_');
                 saveFileDialog1.FileName = "log_" + dateTime;//DateTime.Now.ToString();
                 if (saveFileDialog1.ShowDialog() == true)
                 {
@@ -309,7 +321,7 @@ namespace ServiceToolWPF
         #region Refresh 
         private void RefreshEvent_Refreshed(object sender, string e)
         {
-            if (lastAction == "" && e !="") { lastAction = e;}
+            if (lastAction == "" && e != "") { lastAction = e; }
 
             if (lastAction == "CheckBooking") { CheckBooking(); }
             if (lastAction == "GetAllBooking") { GetAllBooking(); }
@@ -487,10 +499,48 @@ namespace ServiceToolWPF
             ConfirmRegistration();
         }
         #endregion
+        #region Registration input test
+        private bool RegistrationInputTest()
+        {
+            bool result = true;
+            if (txbRegUserName.Text == "")
+            {
+                txbRegUserName.Background = Brushes.LightPink;
+                result = false;
+            }
+            if (txbRegPassword1.Password == "")
+            {
+                txbRegPassword1.Background = Brushes.LightPink;
+                result = false;
+            }
+            if (txbRegPassword2.Password == "")
+            {
+                txbRegPassword2.Background = Brushes.LightPink;
+                result = false;
+            }
+            if (txbRegName.Text == "")
+            {
+                txbRegName.Background = Brushes.LightPink;
+                result = false;
+            }
+            if (txbRegEmail.Text == "")
+            {
+                txbRegEmail.Background = Brushes.LightPink;
+                result = false;
+            }
+            if (txbRegPhone.Text == "")
+            {
+                txbRegPhone.Background = Brushes.LightPink;
+                result = false;
+            }
+
+            return result;
+        }
+        #endregion
         #region Registration
         private void Registration()
         {
-            if (txbRegUserName.Text != "" && txbRegPassword1.Password != "" && txbRegPassword1.Password == txbRegPassword2.Password && txbRegName.Text != "" && txbRegEmail.Text != "" && txbRegPhone.Text != "")
+            if (RegistrationInputTest())
             {
                 WriteLog("[Registration]");
                 SALT = GenerateSalt();
@@ -656,6 +706,29 @@ namespace ServiceToolWPF
             e.CancelCommand();
         }
         #endregion
+        #region Booking input test
+        private bool BookingIdTest()
+        {
+            bool result = true;
+            if (txbBookingId.Text == "")
+            {
+                txbBookingId.Background = Brushes.LightPink;
+                result = false;
+            }
+            return result;
+        }
+
+        private bool BookingResultTimeTest()
+        {
+            bool result = true;
+            if (txbResultTime.Text.Length < 8)
+            {
+                txbResultTime.Background = Brushes.LightPink;
+                result = false;
+            }
+            return result;
+        }
+        #endregion
         #region Booking
         //CheckBooking
         private async void btnCheckBooking_Click(object sender, RoutedEventArgs e)
@@ -712,7 +785,7 @@ namespace ServiceToolWPF
         //Delete booking
         private async void btnDeleteBooking_Click(object sender, RoutedEventArgs e)
         {
-            if (txbBookingId.Text != "")
+            if (BookingIdTest())
             {
                 int id = int.Parse(txbBookingId.Text);
                 WriteLog($"[Delete booking >> Id={id}]");
@@ -737,7 +810,7 @@ namespace ServiceToolWPF
 
         public async void SaveResult()
         {
-            if (txbResultTime.Text.Length == 8)
+            if (BookingResultTimeTest())
             {
                 SaveResultDTO saveResult = new SaveResultDTO();
                 saveResult.BookingDate = GetBookingDateTime();
@@ -993,6 +1066,54 @@ namespace ServiceToolWPF
         }
 
         #endregion
+        #region Users input test
+        private bool UsersInputTest()
+        {
+            bool result = true;
+            if (txbUsersRealName.Text == "")
+            {
+                txbUsersRealName.Background = Brushes.LightPink;
+                result = false;
+            }
+            if (txbUsersUserName.Text == "")
+            {
+                txbUsersUserName.Background = Brushes.LightPink;
+                result = false;
+            }
+            if (txbUsersEmail.Text == "")
+            {
+                txbUsersEmail.Background = Brushes.LightPink;
+                result = false;
+            }
+            if (txbUsersPhone.Text == "")
+            {
+                txbUsersPhone.Background = Brushes.LightPink;
+                result = false;
+            }
+            if (txbUsersRoleId.Text == "")
+            {
+                txbUsersRoleId.Background = Brushes.LightPink;
+                result = false;
+            }
+            if (txbUserId.Text == "")
+            {
+                txbUserId.Background = Brushes.LightPink;
+                result = false;
+            }
+            return result;
+        }
+
+        private bool UsersIdTest()
+        {
+            bool result = true;
+            if (txbUserId.Text == "")
+            {
+                txbUserId.Background = Brushes.LightPink;
+                result = false;
+            }
+            return result;
+        }
+        #endregion
         #region Users
         //Get all users
         private void btnUsersGetAll_Click(object sender, RoutedEventArgs e)
@@ -1012,7 +1133,7 @@ namespace ServiceToolWPF
             GetUserByUserName();
         }
 
-        private async void GetUserByUserName() 
+        private async void GetUserByUserName()
         {
             if (txbUsersUserName.Text != "")
             {
@@ -1027,7 +1148,7 @@ namespace ServiceToolWPF
         //Delete user
         private void btnUserDeleteUser_Click(object sender, RoutedEventArgs e)
         {
-            if (txbUserId.Text != "")
+            if (UsersIdTest())
             {
                 int id = int.Parse(txbUserId.Text);
                 WriteLog($"[Delete users >> Id={id}]");
@@ -1037,14 +1158,7 @@ namespace ServiceToolWPF
         //Update user
         private void btnUsersUpdateUser_Click(object sender, RoutedEventArgs e)
         {
-            if (
-                txbUsersRealName.Text != "" &&
-                txbUsersUserName.Text != "" &&
-                txbUsersEmail.Text != "" &&
-                txbUsersPhone.Text != "" &&
-                txbUsersRoleId.Text != "" &&
-                txbUserId.Text != ""
-                )
+            if (UsersInputTest())
             {
                 UserDTO user = new UserDTO();
                 user.RealName = txbUsersRealName.Text;
@@ -1145,6 +1259,40 @@ namespace ServiceToolWPF
             }
         }
         #endregion
+        #region Teams input test
+        private bool TeamsIdTest()
+        {
+            bool result = true;
+            if (txbTeamId.Text == "")
+            {
+                txbTeamId.Background = Brushes.LightPink;
+                result = false;
+            }
+            return result;
+        }
+        private bool TeamsTeamNameTest()
+        {
+            bool result = true;
+            if (txbTeamsTeamName.Text == "")
+            {
+                txbTeamsTeamName.Background = Brushes.LightPink;
+                result = false;
+            }
+            return result;
+        }
+        private bool TeamsUserNameTest()
+        {
+            bool result = true;
+            if (txbTeamsUserName.Text == "")
+            {
+                txbTeamsUserName.Background = Brushes.LightPink;
+                result = false;
+            }
+            return result;
+        }
+
+
+        #endregion
         #region Teams
         private void btnGetAllTeams_Click(object sender, RoutedEventArgs e)
         {
@@ -1158,7 +1306,7 @@ namespace ServiceToolWPF
 
         private async void btnTeamsAddNewTeam_Click(object sender, RoutedEventArgs e)
         {
-            if (txbTeamsTeamName.Text == "")
+            if (TeamsTeamNameTest())
             {
                 txbTeamsTeamName.Background = Brushes.LightPink;
             }
@@ -1192,7 +1340,7 @@ namespace ServiceToolWPF
             if (index > -1)
             {
                 Team team = new Team();
-                team=(Team)dgrTeamsData.Items.GetItemAt(index);
+                team = (Team)dgrTeamsData.Items.GetItemAt(index);
                 txbTeamsTeamName.Text = team.TeamName;
                 txbTeamId.Text = team.TeamId.ToString();
             }
@@ -1233,6 +1381,14 @@ namespace ServiceToolWPF
             {
                 txbRoleId.Background = Brushes.White;
             }
+        }
+        #endregion
+        #region Roles input test
+        private bool RolesInputTest()
+        {
+            bool result = true;
+
+            return result;
         }
         #endregion
         #region Roles
@@ -1285,6 +1441,14 @@ namespace ServiceToolWPF
             }
         }
         #endregion
+        #region Rooms input test
+        private bool RoomsInputTest()
+        {
+            bool result = true;
+
+            return result;
+        }
+        #endregion
         #region Rooms
         private void btnGetAllRooms_Click(object sender, RoutedEventArgs e)
         {
@@ -1310,7 +1474,7 @@ namespace ServiceToolWPF
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-           // lastAction = "";
+            // lastAction = "";
         }
 
 
