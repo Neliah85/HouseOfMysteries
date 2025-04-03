@@ -1,5 +1,5 @@
+Login:
 Admin: neliah69 - Botond20221024!
 user: BaKissa - 2MacskaHus!
 
-De ha a regisztrációt is tesztelni akarjátok, akkor sima userként be tudtok regisztrálni, csak valós emailcímet kell megadni, mert oda érkezik a megerősítő link,
-ami után megfelelő role-t kap a user.
+De ha a regisztrációt is tesztelni akarják, akkor sima userként be lehet regisztrálni, csak valós emailcímet kell megadni, mert oda érkezik a megerősítő link,ami után megfelelő role-t kap a user.
