@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Reflection.Metadata;
@@ -18,7 +19,7 @@ namespace ServiceToolWPF.Services
         public static RefreshEvent refreshEvent = new RefreshEvent();
 
 
-        public static async Task<List<Team>> GetAllTeam(HttpClient httpClient, string token) 
+        public static async Task<List<Team>> GetAllTeams(HttpClient httpClient, string token) 
         {
             try
             {
@@ -62,6 +63,83 @@ namespace ServiceToolWPF.Services
                 return response.Content.ReadAsStringAsync().Result;
             }
             catch (Exception ex)
+            {
+                sendLogEvent.SendLog(ex.Message);
+                return ex.Message;
+            }
+        }
+
+
+        public static async Task<string> DeleteTeam(HttpClient httpClient, string token, int id)
+        {
+            try
+            {
+                string url = $"{httpClient.BaseAddress}Teams/{token}?teamId={id}";               
+                var response = await httpClient.DeleteAsync(url);
+                string r = await response.Content.ReadAsStringAsync();
+                sendLogEvent.SendLog(r);
+                refreshEvent.Refresh("GetAllTeams");
+                return r;
+            }
+            catch (Exception ex) 
+            {
+                sendLogEvent.SendLog(ex.Message);
+                return ex.Message;
+            }
+        }
+
+        public static async Task<string> UpdateTeam(HttpClient httpClient, string token, Team team)
+        {
+            try
+            {
+                string url = $"{httpClient.BaseAddress}Teams/{token}/";
+                string json = JsonSerializer.Serialize(team, JsonSerializerOptions.Default);
+                var request = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await httpClient.PutAsync(url,request);
+
+                string r = response.Content.ReadAsStringAsync().Result.ToString();
+                sendLogEvent.SendLog(r);
+                refreshEvent.Refresh("GetAllTeams");
+                return r;
+            }
+            catch (Exception ex) 
+            {
+                sendLogEvent.SendLog(ex.Message);
+                return ex.Message;
+            }               
+        }
+
+        public static async Task<string> AddUserToTeam(HttpClient httpClient, string token, string userName, string teamName)
+        {
+            try
+            {
+                string url = httpClient.BaseAddress + $"Teams/AddUserToTeam/{token}?userName={userName}&teamName={teamName}";
+                var response = await httpClient.PutAsync(url,null);
+                sendLogEvent.SendLog(url);
+                string r = response.Content.ReadAsStringAsync().Result.ToString();
+                sendLogEvent.SendLog(r);
+                return r;
+            }
+            catch (Exception ex) 
+            { 
+                sendLogEvent.SendLog(ex.Message);
+                return ex.Message;  
+            }      
+        }
+
+        public static async Task<string> TeamRegistration(HttpClient httpClient, string token, string teamName)
+        {
+            try
+            {            
+                string url= httpClient.BaseAddress + $"Teams/TeamRegistration/{token},{WebUtility.UrlEncode(teamName)}";
+                var response = await httpClient.PostAsync(url,null);
+                sendLogEvent.SendLog(url);
+                string r = response.Content.ReadAsStringAsync().Result.ToString();
+                sendLogEvent.SendLog(r);
+                refreshEvent.Refresh("GetAllTeams");
+                return r;
+            }
+            catch (Exception ex) 
             {
                 sendLogEvent.SendLog(ex.Message);
                 return ex.Message;

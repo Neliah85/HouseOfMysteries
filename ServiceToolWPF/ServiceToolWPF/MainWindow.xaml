@@ -8,7 +8,7 @@
         Title="House of mysteries - Service tool" Width="1000" Height="600" WindowStartupLocation="CenterScreen" Icon="/log3.png">
     <Grid x:Name="grid" >
         <GroupBox Header="Backend actions" Margin="0,2,162,128"/>
-        <TabControl Margin="4,20,166,132" SelectedIndex="4" SelectionChanged="TabControl_SelectionChanged">
+        <TabControl Margin="4,20,166,132" SelectedIndex="0" SelectionChanged="TabControl_SelectionChanged">
             <TabItem Header="Registration">
                 <Grid>
                     <Label Content="Username" HorizontalAlignment="Left" Margin="8,6,0,0" VerticalAlignment="Top" Width="124" Foreground="#FF7E7C7C" Grid.ColumnSpan="5"/>
@@ -18,12 +18,12 @@
                     <Label Content="Email address" HorizontalAlignment="Left" Margin="8,86,0,0" VerticalAlignment="Top" Width="124" Foreground="#FF7E7C7C" Grid.ColumnSpan="5"/>
                     <Label Content="Phone number" HorizontalAlignment="Left" Margin="8,106,0,0" VerticalAlignment="Top" Width="124" Foreground="#FF7E7C7C" Grid.ColumnSpan="5"/>
                     <Button x:Name="btnRegistration"  Content="Registration" HorizontalAlignment="Left" Margin="10,130,0,0" VerticalAlignment="Top" Width="250" Click="btnRegistration_Click" Grid.ColumnSpan="8"/>
-                    <TextBox x:Name="txbRegUserName" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="meszarostibor74" VerticalAlignment="Top" Width="250" GotFocus="txbRegUserName_GotFocus" TextChanged="txbRegUserName_TextChanged" BorderBrush="#FFABADB3" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold" KeyDown="txbRegUserName_KeyDown" Grid.ColumnSpan="8"/>
+                    <TextBox x:Name="txbRegUserName" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="250" GotFocus="txbRegUserName_GotFocus" TextChanged="txbRegUserName_TextChanged" BorderBrush="#FFABADB3" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold" KeyDown="txbRegUserName_KeyDown" Grid.ColumnSpan="8"/>
                     <PasswordBox x:Name="txbRegPassword1" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top" Width="250" GotFocus="txbRegPassword1_GotFocus" PasswordChanged="txbRegPassword1_PasswordChanged" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold" KeyDown="txbRegPassword1_KeyDown" Grid.ColumnSpan="8" />
                     <PasswordBox x:Name="txbRegPassword2"  HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" Width="250" GotFocus="txbRegPassword2_GotFocus"  PasswordChanged="txbRegPassword2_PasswordChanged" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold" KeyDown="txbRegPassword2_KeyDown" Grid.ColumnSpan="8"/>
-                    <TextBox x:Name="txbRegName" HorizontalAlignment="Left" Margin="10,70,0,0" TextWrapping="Wrap" Text="Mészáros Tibor" VerticalAlignment="Top" Width="250" GotFocus="txbRegName_GotFocus"  TextChanged="txbRegName_TextChanged" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold" KeyDown="txbRegName_KeyDown" Grid.ColumnSpan="8"/>
-                    <TextBox x:Name="txbRegEmail" HorizontalAlignment="Left" Margin="10,90,0,0" TextWrapping="Wrap" Text="meszarostibor74@outlook.hu" VerticalAlignment="Top" Width="250" GotFocus="txbRegEmail_GotFocus"  TextChanged="txbRegEmail_TextChanged" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold" KeyDown="txbRegEmail_KeyDown" Grid.ColumnSpan="8"/>
-                    <TextBox x:Name="txbRegPhone" HorizontalAlignment="Left" Margin="10,110,0,0" TextWrapping="Wrap" Text="+36703330719" VerticalAlignment="Top" Width="250"    Background="{Binding ElementName=grid, Mode=OneWay}" GotFocus="txbRegPhone_GotFocus" TextChanged="txbRegPhone_TextChanged" Foreground="#FF5B5CAB" FontWeight="Bold" SelectionTextBrush="White" KeyDown="txbRegPhone_KeyDown" Grid.ColumnSpan="8"/>
+                    <TextBox x:Name="txbRegName" HorizontalAlignment="Left" Margin="10,70,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="250" GotFocus="txbRegName_GotFocus"  TextChanged="txbRegName_TextChanged" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold" KeyDown="txbRegName_KeyDown" Grid.ColumnSpan="8"/>
+                    <TextBox x:Name="txbRegEmail" HorizontalAlignment="Left" Margin="10,90,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="250" GotFocus="txbRegEmail_GotFocus"  TextChanged="txbRegEmail_TextChanged" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold" KeyDown="txbRegEmail_KeyDown" Grid.ColumnSpan="8"/>
+                    <TextBox x:Name="txbRegPhone" HorizontalAlignment="Left" Margin="10,110,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="250"    Background="{Binding ElementName=grid, Mode=OneWay}" GotFocus="txbRegPhone_GotFocus" TextChanged="txbRegPhone_TextChanged" Foreground="#FF5B5CAB" FontWeight="Bold" SelectionTextBrush="White" KeyDown="txbRegPhone_KeyDown" Grid.ColumnSpan="8"/>
                     <Button x:Name="btnConfirmRegistration"  Content="Confirm registration" HorizontalAlignment="Left" Margin="10,152,0,0" VerticalAlignment="Top" Width="250"  Grid.ColumnSpan="8" Click="btnConfirmRegistration_Click"/>
                     <Image Margin="280,39,115,12" Source="/log3.png" Opacity="0.3"/>
                 </Grid>
@@ -114,17 +114,17 @@
                     <TextBox x:Name="txbTeamsTeamName" HorizontalAlignment="Left" Margin="0,28,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="179" BorderBrush="#FFABADB3" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold" Height="20" GotFocus="txbTeamsTeamName_GotFocus" TextChanged="txbTeamsTeamName_TextChanged" />
 
                     <Button x:Name="btnTeamsAddNewTeam" Content="Add new team" HorizontalAlignment="Left" Margin="0,53,0,0" VerticalAlignment="Top" Width="179" Height="20" Click="btnTeamsAddNewTeam_Click" />
-                    <Button x:Name="btnTeamsRegistration" Content="Team registration" HorizontalAlignment="Left" Margin="0,78,0,0" VerticalAlignment="Top" Width="179" Height="20" />
+                    <Button x:Name="btnTeamsRegistration" Content="Team registration" HorizontalAlignment="Left" Margin="0,78,0,0" VerticalAlignment="Top" Width="179" Height="20" Click="btnTeamsRegistration_Click" />
                     <Button x:Name="btnTeamsUpdateTeam" Content="Update team" HorizontalAlignment="Left" Margin="0,103,0,0" VerticalAlignment="Top" Width="179" Height="20" Click="btnTeamsUpdateTeam_Click" />
-                    <Button x:Name="btnTeamsDeleteTeam" Content="Delete team" HorizontalAlignment="Left" Margin="65,128,0,0" VerticalAlignment="Top" Width="114" />
+                    <Label Content="Id" HorizontalAlignment="Left" Margin="0,125,0,0" VerticalAlignment="Top" Width="124" Foreground="#FF7E7C7C"/>
                     <TextBox x:Name="txbTeamId" HorizontalAlignment="Left" Margin="0,128,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="60
                              " Height="20" Focusable="False" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold" TextChanged="txbTeamId_TextChanged" />
-                    <Label Content="Id" HorizontalAlignment="Left" Margin="0,125,0,0" VerticalAlignment="Top" Width="124" Foreground="#FF7E7C7C"/>
+                    <Button x:Name="btnTeamsDeleteTeam" Content="Delete team" HorizontalAlignment="Left" Margin="65,128,0,0" VerticalAlignment="Top" Width="114" Click="btnTeamsDeleteTeam_Click" />
 
                     <Label Content="User name" HorizontalAlignment="Left" Margin="0,150,0,0" VerticalAlignment="Top" Width="124" Foreground="#FF7E7C7C"/>
                     <TextBox x:Name="txbTeamsUserName" HorizontalAlignment="Left" Margin="0,153,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="179" BorderBrush="#FFABADB3" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold" Height="20" GotFocus="txbTeamsUserName_GotFocus" TextChanged="txbTeamsUserName_TextChanged" />
 
-                    <Button x:Name="btnTeamsAddUserToTeam" Content="Add user to team" HorizontalAlignment="Left" Margin="0,178,0,0" VerticalAlignment="Top" Width="179" Height="20" />
+                    <Button x:Name="btnTeamsAddUserToTeam" Content="Add user to team" HorizontalAlignment="Left" Margin="0,178,0,0" VerticalAlignment="Top" Width="179" Height="20" Click="btnTeamsAddUserToTeam_Click" />
 
                     <DataGrid x:Name="dgrTeamsData" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="181,0,0,0" IsReadOnly="True"  Background="#FFECF8FB" Grid.ColumnSpan="2" SelectionChanged="dgrTeamsData_SelectionChanged" />
                 </Grid>
@@ -133,18 +133,18 @@
             <TabItem Header="Rooms">
                 <Grid>
                     <Button x:Name="btnGetAllRooms" Content="Get all rooms" HorizontalAlignment="Left" Margin="0,2,0,0" VerticalAlignment="Top" Width="179" Click="btnGetAllRooms_Click" />
-                    <Label Content="Room name" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Width="124" Foreground="#FF7E7C7C" Grid.ColumnSpan="3"/>
-                    <TextBox x:Name="txbRoomsRoomName" HorizontalAlignment="Left" Margin="0,28,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="179" BorderBrush="#FFABADB3" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold"  Grid.ColumnSpan="4" Height="20" GotFocus="txbRoomsRoomName_GotFocus" TextChanged="txbRoomsRoomName_TextChanged" />
+                    <Label Content="Room name" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Width="124" Foreground="#FF7E7C7C"/>
+                    <TextBox x:Name="txbRoomsRoomName" HorizontalAlignment="Left" Margin="0,28,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="179" BorderBrush="#FFABADB3" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold" Height="20" GotFocus="txbRoomsRoomName_GotFocus" TextChanged="txbRoomsRoomName_TextChanged" />
 
-                    <Button x:Name="btnRoomsAddNewTeam" Content="Add new room" HorizontalAlignment="Left" Margin="0,53,0,0" VerticalAlignment="Top" Width="179" Height="20" />
-                    <Button x:Name="btnRoomsUpdateTeam" Content="Update room" HorizontalAlignment="Left" Margin="0,78,0,0" VerticalAlignment="Top" Width="179" Height="20" />
-                    <Button x:Name="btnRoomsDeleteTeam" Content="Delete room" HorizontalAlignment="Left" Margin="65,103,0,0" VerticalAlignment="Top" Width="114" />
+                    <Button x:Name="btnRoomsAddNewRoom" Content="Add new room" HorizontalAlignment="Left" Margin="0,53,0,0" VerticalAlignment="Top" Width="179" Height="20" Click="btnRoomsAddNewRoom_Click"  />
+                    <Button x:Name="btnRoomsUpdateRoom" Content="Update room" HorizontalAlignment="Left" Margin="0,78,0,0" VerticalAlignment="Top" Width="179" Height="20" Click="btnRoomsUpdateRoom_Click"  />
+                    <Label Content="Id" HorizontalAlignment="Left" Margin="0,100,0,0" VerticalAlignment="Top" Width="124" Foreground="#FF7E7C7C"/>
                     <TextBox x:Name="txbRoomId" HorizontalAlignment="Left" Margin="0,103,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="60
                              " Height="20" Focusable="False" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold" TextChanged="txbRoomId_TextChanged" />
-                    <Label Content="Id" HorizontalAlignment="Left" Margin="0,100,0,0" VerticalAlignment="Top" Width="124" Foreground="#FF7E7C7C"/>
+                    <Button x:Name="btnRoomsDeleteRoom" Content="Delete room" HorizontalAlignment="Left" Margin="65,103,0,0" VerticalAlignment="Top" Width="114" Click="btnRoomsDeleteRoom_Click"  />
 
 
-                    <DataGrid x:Name="dgrRoomsData" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="181,0,0,0" IsReadOnly="True"  Background="#FFECF8FB" Grid.ColumnSpan="2" />
+                    <DataGrid x:Name="dgrRoomsData" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="181,0,0,0" IsReadOnly="True"  Background="#FFECF8FB" Grid.ColumnSpan="2" SelectionChanged="dgrRoomsData_SelectionChanged" />
                 </Grid>
             </TabItem>
 
@@ -154,15 +154,16 @@
                     <Label Content="Role name" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Width="124" Foreground="#FF7E7C7C" Grid.ColumnSpan="3"/>
                     <TextBox x:Name="txbRolesRoleName" HorizontalAlignment="Left" Margin="0,28,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="179" BorderBrush="#FFABADB3" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold"  Grid.ColumnSpan="4" Height="20" GotFocus="txbRolesRoleName_GotFocus" TextChanged="txbRolesRoleName_TextChanged" />
 
-                    <Button x:Name="btnRolesAddNewRole" Content="Add new role" HorizontalAlignment="Left" Margin="0,53,0,0" VerticalAlignment="Top" Width="179" Height="20" />
-                    <Button x:Name="btnRolesUpdateRole" Content="Update role" HorizontalAlignment="Left" Margin="0,78,0,0" VerticalAlignment="Top" Width="179" Height="20" />
-                    <Button x:Name="btnRolesDeleteRole" Content="Delete role" HorizontalAlignment="Left" Margin="65,103,0,0" VerticalAlignment="Top" Width="114" />
-                    <TextBox x:Name="txbRoleId" HorizontalAlignment="Left" Margin="0,103,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="60
-                             " Height="20" Focusable="False" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold" TextChanged="txbRoleId_TextChanged" />
+                    <Button x:Name="btnRolesAddNewRole" Content="Add new role" HorizontalAlignment="Left" Margin="0,53,0,0" VerticalAlignment="Top" Width="179" Height="20" Click="btnRolesAddNewRole_Click" />
+                    <Button x:Name="btnRolesUpdateRole" Content="Update role" HorizontalAlignment="Left" Margin="0,78,0,0" VerticalAlignment="Top" Width="179" Height="20" Click="btnRolesUpdateRole_Click" />
                     <Label Content="Id" HorizontalAlignment="Left" Margin="0,100,0,0" VerticalAlignment="Top" Width="124" Foreground="#FF7E7C7C"/>
 
+                    <TextBox x:Name="txbRoleId" HorizontalAlignment="Left" Margin="0,103,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="60
+                             " Height="20" Focusable="False" Background="{Binding ElementName=grid, Mode=OneWay}" Foreground="#FF5B5CAB" FontWeight="Bold" TextChanged="txbRoleId_TextChanged" />
+                    <Button x:Name="btnRolesDeleteRole" Content="Delete role" HorizontalAlignment="Left" Margin="65,103,0,0" VerticalAlignment="Top" Width="114" Click="btnRolesDeleteRole_Click" />
 
-                    <DataGrid x:Name="dgrRolesData" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="181,0,0,0" IsReadOnly="True"  Background="#FFECF8FB" Grid.ColumnSpan="2" />
+
+                    <DataGrid x:Name="dgrRolesData" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="181,0,0,0" IsReadOnly="True"  Background="#FFECF8FB" Grid.ColumnSpan="2" SelectionChanged="dgrRolesData_SelectionChanged" />
                 </Grid>
             </TabItem>
 
@@ -172,8 +173,8 @@
 
                 <TextBox x:Name="txbUserNameBackgrnd" HorizontalAlignment="Center" Margin="0,5,0,0" TextWrapping="Wrap" Text="Username" VerticalAlignment="Top" Width="146" Grid.Column="1" Height="18" Foreground="#FF7E7C7C"/>
                 <TextBox x:Name="txbPasswordBackgrnd" HorizontalAlignment="Center" Margin="0,25,0,0" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" Width="146" Grid.Column="1" Height="18" Foreground="#FF7E7C7C"/>
-                <TextBox x:Name="txbUserName" HorizontalAlignment="Center" Margin="0,5,0,0" TextWrapping="Wrap" Text="mtibi74" VerticalAlignment="Top" Width="146" Height="18" UseLayoutRounding="False" GotFocus="txbUserName_GotFocus" Foreground="#FF5B5CAB" FontWeight="Bold" Background="{Binding ElementName=txbPassword, Mode=OneWay}" TextChanged="txbUserName_TextChanged" KeyDown="txbUserName_KeyDown" />
-                <PasswordBox x:Name="txbPassword" HorizontalAlignment="Center" Margin="0,25,0,0" VerticalAlignment="Top" Width="146" Password="a" Grid.Column="1" Height="18" GotFocus="txbPassword_GotFocus" Foreground="#FF5B5CAB" FontWeight="Bold" PasswordChanged="txbPassword_PasswordChanged" Background="{Binding ElementName=txbUserNameBackgrnd, Mode=OneWay}" KeyDown="txbPassword_KeyDown"/>
+                <TextBox x:Name="txbUserName" HorizontalAlignment="Center" Margin="0,5,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="146" Height="18" UseLayoutRounding="False" GotFocus="txbUserName_GotFocus" Foreground="#FF5B5CAB" FontWeight="Bold" Background="{Binding ElementName=txbPassword, Mode=OneWay}" TextChanged="txbUserName_TextChanged" KeyDown="txbUserName_KeyDown" />
+                <PasswordBox x:Name="txbPassword" HorizontalAlignment="Center" Margin="0,25,0,0" VerticalAlignment="Top" Width="146" Password="" Grid.Column="1" Height="18" GotFocus="txbPassword_GotFocus" Foreground="#FF5B5CAB" FontWeight="Bold" PasswordChanged="txbPassword_PasswordChanged" Background="{Binding ElementName=txbUserNameBackgrnd, Mode=OneWay}" KeyDown="txbPassword_KeyDown"/>
                 <Button x:Name="btnLogin" Content="Login" HorizontalAlignment="Center" Margin="0,45,0,0" VerticalAlignment="Top" Width="146" Grid.Column="1" Height="20" Click="btnLogin_Click"/>
 
                 <Button x:Name="btnSaveLog" Content="Save log" HorizontalAlignment="Center" Width="146" Height="20" VerticalAlignment="Bottom" Margin="0,0,0,22" Click="btnSaveLog_Click"/>
