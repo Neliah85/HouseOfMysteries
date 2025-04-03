@@ -88,13 +88,15 @@ namespace HouseOfMysteries.Controllers
                 {
                     try
                     {
-                        if (context.Roles.FirstOrDefault(f => f.RoleId == id) == null)
+                        Role role = new Role { RoleId = id };
+                        role = context.Roles.FirstOrDefault(f => f.RoleId == id);
+                        if(role==null)
                         {
                             return BadRequest("RoleId not found!");
                         }
                         else
                         {
-                            Role role = new Role { RoleId = id };
+                            
                             context.Remove(role);
                             await context.SaveChangesAsync();
                             return Ok("Role successfully deleted!");

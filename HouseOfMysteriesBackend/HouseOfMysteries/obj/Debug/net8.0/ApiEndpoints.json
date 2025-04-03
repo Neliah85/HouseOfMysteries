@@ -434,7 +434,7 @@
   {
     "ContainingType": "HouseOfMysteries.Controllers.TeamsController",
     "Method": "Put",
-    "RelativePath": "Teams/{token},{team}",
+    "RelativePath": "Teams/{token}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -447,11 +447,6 @@
       {
         "Name": "team",
         "Type": "HouseOfMysteries.Models.Team",
-        "IsRequired": true
-      },
-      {
-        "Name": "team",
-        "Type": "",
         "IsRequired": true
       }
     ],
@@ -502,7 +497,7 @@
   {
     "ContainingType": "HouseOfMysteries.Controllers.TeamsController",
     "Method": "AddUserToTeam",
-    "RelativePath": "Teams/AddUserToTeam/{token},{userName},teamName",
+    "RelativePath": "Teams/AddUserToTeam/{token}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -515,7 +510,7 @@
       {
         "Name": "userName",
         "Type": "System.String",
-        "IsRequired": true
+        "IsRequired": false
       },
       {
         "Name": "teamName",

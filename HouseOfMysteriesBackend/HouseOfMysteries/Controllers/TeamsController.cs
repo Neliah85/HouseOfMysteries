@@ -49,7 +49,7 @@ namespace HouseOfMysteries.Controllers
                 using (var context = new HouseofmysteriesContext())
                 {
                     try
-                    {                        
+                    {
                         if (context.Teams.FirstOrDefault(f => f.TeamName == teamName) != null)
                         {
                             return BadRequest("This teamname is already in use!");
@@ -57,7 +57,7 @@ namespace HouseOfMysteries.Controllers
                         else
                         {
                             Team team = new Team();
-                            team.TeamName = teamName; 
+                            team.TeamName = teamName;
                             context.Teams.Add(team);
                             await context.SaveChangesAsync();
                             return Ok("Team added successfully!");
@@ -72,7 +72,7 @@ namespace HouseOfMysteries.Controllers
             else
             {
                 return BadRequest("You do not have permission to perform this operation!");
-            }                      
+            }
         }
 
         [HttpDelete("{token}")]
@@ -89,13 +89,14 @@ namespace HouseOfMysteries.Controllers
                 {
                     try
                     {
-                        if (context.Teams.FirstOrDefault(f => f.TeamId == teamId) == null)
+                        Team? team = new Team { TeamId = teamId };
+                        team = context.Teams.FirstOrDefault(f => f.TeamId == teamId);
+                        if (team == null)
                         {
                             return BadRequest("Team not found!");
                         }
                         else
                         {
-                            Team team = new Team { TeamId = teamId };
                             context.Remove(team);
                             await context.SaveChangesAsync();
                             return Ok("Team successfully deleted!");
@@ -113,7 +114,7 @@ namespace HouseOfMysteries.Controllers
             }
         }
 
-        [HttpPut("{token},{team}")]
+        [HttpPut("{token}")]
         public async Task<ActionResult> Put(string token, Team team)
         {
             LoggedInUserDTO user = Program.loggedInUsers.CheckTokenValidity(token).LoggedInUser;
@@ -127,20 +128,23 @@ namespace HouseOfMysteries.Controllers
                 {
                     try
                     {
-                        if (context.Teams.FirstOrDefault(f => f.TeamId == team.TeamId) == null)
+                        Team mTeam = new Team();
+                        mTeam = context.Teams.FirstOrDefault(f => f.TeamId == team.TeamId);
+                        if ( mTeam== null)
                         {
                             return BadRequest("Team not found!");
                         }
                         else
                         {
-                            if (user.RoleId == 2) 
+                            if (user.RoleId == 2)
                             {
-                                if (team.TeamId != user.TeamId) 
+                                if (team.TeamId != user.TeamId)
                                 {
                                     return BadRequest("You can only change the name of your own team!");
                                 }
                             }
-                            context.Update(team);
+                            mTeam.TeamName = team.TeamName;
+                            context.Update(mTeam);
                             await context.SaveChangesAsync();
                             return Ok("The modification was successful!");
                         }
@@ -181,7 +185,7 @@ namespace HouseOfMysteries.Controllers
                         int teamId = (int)context.Teams.FirstOrDefault(f => f.TeamName == teamName).TeamId;
                         User? mUser = new User();
                         mUser = context.Users.FirstOrDefault(f => f.UserId == user.UserId);
-                        if (mUser == null) 
+                        if (mUser == null)
                         {
                             return BadRequest("Only registered users can create a new team!");
                         }
@@ -194,7 +198,7 @@ namespace HouseOfMysteries.Controllers
                     {
                         return BadRequest($"{ex.Message}");
                     }
-                }
+                } 
             }
             else
             {
@@ -202,7 +206,7 @@ namespace HouseOfMysteries.Controllers
             }
         }
 
-        [HttpPut("AddUserToTeam/{token},{userName},teamName")]
+        [HttpPut("AddUserToTeam/{token}")]
         public async Task<ActionResult> AddUserToTeam(string token, string userName, string teamName)
         {
             LoggedInUserDTO user = Program.loggedInUsers.CheckTokenValidity(token).LoggedInUser;

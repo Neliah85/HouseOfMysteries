@@ -92,13 +92,14 @@ namespace HouseOfMysteries.Controllers
                 {
                     try
                     {
-                        if (context.Rooms.FirstOrDefault(f => f.RoomId == id) == null)
+                        Room room = new Room { RoomId = id };
+                        room = context.Rooms.FirstOrDefault(f => f.RoomId == id);
+                        if (room == null)
                         {
                             return BadRequest("RoomId not found!");
                         }
                         else
-                        {
-                            Room room = new Room { RoomId = id };
+                        {                        
                             context.Remove(room);
                             await context.SaveChangesAsync();
                             return Ok("Room successfully deleted!");
