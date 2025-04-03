@@ -1,15 +1,37 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import Header from "./Header";
 import Footer from "./Footer";
 
 const Gallery = () => {
+    const [userData, setUserData] = useState({ userId: 0, roleId: 0 });
     const [images, setImages] = useState([]);
     const [previewImage, setPreviewImage] = useState(null);
+    const navigate = useNavigate();
+    
+    const token = localStorage.getItem("token");
+    const userLoggedIn = !!token;
+    const isAdmin = userData.roleId === 4;
 
     useEffect(() => {
-        const storedImages = JSON.parse(localStorage.getItem("galleryImages")) || [];
-        setImages(storedImages);
-    }, []);
+        const fetchUserData = async () => {
+            if (!token) return;
+            try {
+                const userName = localStorage.getItem("userName");
+                const response = await axios.get(`http://localhost:5131/Users/GetByUserName/${token},${userName}`);
+                setUserData({
+                    userId: response.data.userId,
+                    roleId: response.data.roleId || 0,
+                });
+            } catch (error) {
+                console.error("Hiba a felhasználói adatok lekérésekor:", error);
+            }
+        };
+        
+        fetchUserData();
+        setImages(JSON.parse(localStorage.getItem("galleryImages")) || []);
+    }, [token]);
 
     const handleImageUpload = (event) => {
         const file = event.target.files[0];
@@ -36,6 +58,10 @@ const Gallery = () => {
     };
 
     const handleDeleteImage = (index) => {
+        if (!userLoggedIn && !isAdmin) {
+            alert("Csak bejelentkezett felhasználók és adminok törölhetnek képeket.");
+            return;
+        }
         const newImages = images.filter((_, i) => i !== index);
         setImages(newImages);
         localStorage.setItem("galleryImages", JSON.stringify(newImages));
@@ -48,10 +74,12 @@ const Gallery = () => {
                 <h1>Galéria</h1>
                 <p>Itt láthatod a sikeresen kiszabadult csapatokat!</p>
 
-                <label className="upload-button">
-                    📷 Kép feltöltése
-                    <input type="file" accept="image/*" onChange={handleImageUpload} />
-                </label>
+                {userLoggedIn && (
+                    <label className="upload-button">
+                        📷 Kép feltöltése
+                        <input type="file" accept="image/*" onChange={handleImageUpload} />
+                    </label>
+                )}
 
                 {previewImage && (
                     <div className="preview-container">
@@ -65,7 +93,7 @@ const Gallery = () => {
                     {images.map((image, index) => (
                         <div key={index} className="gallery-item">
                             <img src={image} alt={`Feltöltött kép ${index + 1}`} />
-                            <button onClick={() => handleDeleteImage(index)}>Törlés</button>
+                            {(userLoggedIn || isAdmin) && <button onClick={() => handleDeleteImage(index)}>Törlés</button>}
                         </div>
                     ))}
                 </div>
