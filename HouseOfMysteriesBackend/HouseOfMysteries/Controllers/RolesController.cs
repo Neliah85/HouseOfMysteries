@@ -7,6 +7,14 @@ namespace HouseOfMysteries.Controllers
     [ApiController]
     public class RolesController : ControllerBase
     {
+        #region DbContext
+        private readonly HouseofmysteriesContext _context;
+        public RolesController(HouseofmysteriesContext context)
+        {
+            _context = context;
+        }
+        #endregion
+        #region Get
         [HttpGet("{token}")]
         public ActionResult Get(string token)
         {
@@ -17,16 +25,13 @@ namespace HouseOfMysteries.Controllers
             }
             else if (roleId > 3)
             {
-                using (var context = new HouseofmysteriesContext())
+                try
                 {
-                    try
-                    {
-                        return Ok(context.Roles.ToList());
-                    }
-                    catch (Exception ex)
-                    {
-                        return BadRequest($"{ex.Message}");
-                    }
+                    return Ok(_context.Roles.ToList());
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest($"{ex.Message}");
                 }
             }
             else
@@ -34,7 +39,8 @@ namespace HouseOfMysteries.Controllers
                 return BadRequest("You do not have permission to perform this operation!");
             }
         }
-
+        #endregion
+        #region Post
         [HttpPost("{token},{roleName}")]
         public async Task<ActionResult> Post(string token, string roleName)
         {
@@ -45,27 +51,24 @@ namespace HouseOfMysteries.Controllers
             }
             else if (roleId > 3)
             {
-                using (var context = new HouseofmysteriesContext())
+                try
                 {
-                    try
+                    if (_context.Roles.FirstOrDefault(f => f.RoleName == roleName) != null)
                     {
-                        if (context.Roles.FirstOrDefault(f => f.RoleName == roleName) != null)
-                        {
-                            return BadRequest("This role name is already in use!");
-                        }
-                        else
-                        {
-                            Role role = new Role();
-                            role.RoleName = roleName;
-                            context.Roles.Add(role);
-                            await context.SaveChangesAsync();
-                            return Ok("Role added successfully!");
-                        }
+                        return BadRequest("This role name is already in use!");
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        return BadRequest($"{ex.Message}");
+                        Role role = new Role();
+                        role.RoleName = roleName;
+                        _context.Roles.Add(role);
+                        await _context.SaveChangesAsync();
+                        return Ok("Role added successfully!");
                     }
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest($"{ex.Message}");
                 }
             }
             else
@@ -73,7 +76,8 @@ namespace HouseOfMysteries.Controllers
                 return BadRequest("You do not have permission to perform this operation!");
             }
         }
-
+        #endregion
+        #region Delete
         [HttpDelete("{token}")]
         public async Task<ActionResult> Delete(string token, int id)
         {
@@ -84,40 +88,38 @@ namespace HouseOfMysteries.Controllers
             }
             else if (roleId > 3)
             {
-                using (var context = new HouseofmysteriesContext())
+                try
                 {
-                    try
+                    Role role = new Role { RoleId = id };
+                    role = _context.Roles.FirstOrDefault(f => f.RoleId == id);
+                    if (role == null)
                     {
-                        Role role = new Role { RoleId = id };
-                        role = context.Roles.FirstOrDefault(f => f.RoleId == id);
-                        if(role==null)
-                        {
-                            return BadRequest("RoleId not found!");
-                        }
-                        else
-                        {
-                            
-                            context.Remove(role);
-                            await context.SaveChangesAsync();
-                            return Ok("Role successfully deleted!");
-                        }
+                        return BadRequest("RoleId not found!");
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        return BadRequest(ex.Message);
+
+                        _context.Remove(role);
+                        await _context.SaveChangesAsync();
+                        return Ok("Role successfully deleted!");
                     }
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
                 }
             }
             else
             {
                 return BadRequest("You do not have permission to perform this operation!");
             }
-
         }
-
-        [HttpPut("{token},{role}")]
+        #endregion
+        #region Put
+        [HttpPut("{token}")]
         public async Task<ActionResult> Put(string token, Role role)
         {
+            Role? mRole = new Role(); 
             int? roleId = Program.loggedInUsers.CheckTokenValidity(token).LoggedInUser.RoleId;
             if (roleId == -1)
             {
@@ -125,26 +127,24 @@ namespace HouseOfMysteries.Controllers
             }
             else if (roleId > 3)
             {
-                using (var context = new HouseofmysteriesContext())
+                try
                 {
-                    try
+                    mRole = _context.Roles.FirstOrDefault(f => f.RoleId == role.RoleId);
+                    if (mRole == null)
                     {
-                        if (context.Roles.FirstOrDefault(f => f.RoleId == role.RoleId) == null)
-                        {
-                            return BadRequest("RoleId not found!");
-                        }
-                        else
-                        {
-                            Role mRole = new Role { RoleId = role.RoleId};
-                            context.Update(role);
-                            await context.SaveChangesAsync();
-                            return Ok("The modification was successful!");
-                        }
+                        return BadRequest("RoleId not found!");
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        return BadRequest(ex.Message);
+                        mRole.RoleName = role.RoleName;
+                        _context.Update(mRole);
+                        await _context.SaveChangesAsync();
+                        return Ok("The modification was successful!");
                     }
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
                 }
             }
             else
@@ -152,7 +152,6 @@ namespace HouseOfMysteries.Controllers
                 return BadRequest("You do not have permission to perform this operation!");
             }
         }
-
+        #endregion
     }
-
 }

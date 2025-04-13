@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace HouseOfMysteries.Models;
-
 public partial class Team
 {
     public int? TeamId { get; set; }

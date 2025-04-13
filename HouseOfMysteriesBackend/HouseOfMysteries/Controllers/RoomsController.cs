@@ -1,5 +1,4 @@
 ﻿using HouseOfMysteries.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HouseOfMysteries.Controllers
@@ -8,7 +7,14 @@ namespace HouseOfMysteries.Controllers
     [ApiController]
     public class RoomsController : ControllerBase
     {
-
+        #region DbContext
+        private readonly HouseofmysteriesContext _context;
+        public RoomsController(HouseofmysteriesContext context)
+        {
+            _context = context;
+        }
+        #endregion
+        #region Get
         [HttpGet("{token}")]
         public ActionResult Get(string token)
         {
@@ -19,24 +25,23 @@ namespace HouseOfMysteries.Controllers
             }
             else if (roleId > 3)
             {
-                using (var context = new HouseofmysteriesContext())
+                try
                 {
-                    try
-                    {
-                        return Ok(context.Rooms.ToList());
-                    }
-                    catch (Exception ex)
-                    {
-                        return BadRequest($"{ex.Message}");
-                    }
+                    return Ok(_context.Rooms.ToList());
                 }
+                catch (Exception ex)
+                {
+                    return BadRequest($"{ex.Message}");
+                }
+
             }
             else
             {
                 return BadRequest("You do not have permission to perform this operation!");
             }
         }
-
+        #endregion
+        #region Post
         [HttpPost("{token},{roomName}")]
         public async Task<ActionResult> Post(string token, string roomName)
         {
@@ -47,27 +52,24 @@ namespace HouseOfMysteries.Controllers
             }
             else if (roleId > 3)
             {
-                using (var context = new HouseofmysteriesContext())
+                try
                 {
-                    try
+                    if (_context.Rooms.FirstOrDefault(f => f.RoomName == roomName) != null)
                     {
-                        if (context.Rooms.FirstOrDefault(f => f.RoomName == roomName) != null)
-                        {
-                            return BadRequest("This room name is already in use!");
-                        }
-                        else
-                        {
-                            Room room = new Room();
-                            room.RoomName = roomName;
-                            context.Rooms.Add(room);
-                            await context.SaveChangesAsync();
-                            return Ok("Room added successfully!");
-                        }
+                        return BadRequest("This room name is already in use!");
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        return BadRequest($"{ex.Message}");
+                        Room room = new Room();
+                        room.RoomName = roomName;
+                        _context.Rooms.Add(room);
+                        await _context.SaveChangesAsync();
+                        return Ok("Room added successfully!");
                     }
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest($"{ex.Message}");
                 }
             }
             else
@@ -75,9 +77,8 @@ namespace HouseOfMysteries.Controllers
                 return BadRequest("You do not have permission to perform this operation!");
             }
         }
-
-
-
+        #endregion
+        #region Delete
         [HttpDelete("{token}")]
         public async Task<ActionResult> Delete(string token, int id)
         {
@@ -88,20 +89,18 @@ namespace HouseOfMysteries.Controllers
             }
             else if (roleId > 3)
             {
-                using (var context = new HouseofmysteriesContext())
-                {
                     try
                     {
-                        Room room = new Room { RoomId = id };
-                        room = context.Rooms.FirstOrDefault(f => f.RoomId == id);
+                        Room? room = new Room { RoomId = id };
+                        room = _context.Rooms.FirstOrDefault(f => f.RoomId == id);
                         if (room == null)
                         {
                             return BadRequest("RoomId not found!");
                         }
                         else
-                        {                        
-                            context.Remove(room);
-                            await context.SaveChangesAsync();
+                        {
+                            _context.Remove(room);
+                            await _context.SaveChangesAsync();
                             return Ok("Room successfully deleted!");
                         }
                     }
@@ -109,17 +108,15 @@ namespace HouseOfMysteries.Controllers
                     {
                         return BadRequest(ex.Message);
                     }
-                }
             }
             else
             {
                 return BadRequest("You do not have permission to perform this operation!");
             }
-
         }
-
-
-        [HttpPut("{token},{room}")]
+        #endregion
+        #region Put
+        [HttpPut("{token}")]
         public async Task<ActionResult> Put(string token, Room room)
         {
             int? roleId = Program.loggedInUsers.CheckTokenValidity(token).LoggedInUser.RoleId;
@@ -129,19 +126,19 @@ namespace HouseOfMysteries.Controllers
             }
             else if (roleId > 3)
             {
-                using (var context = new HouseofmysteriesContext())
-                {
-                    try
+                Room? mRoom = new Room();
+                try
                     {
-                        if (context.Rooms.FirstOrDefault(f => f.RoomId == room.RoomId) == null)
+                    mRoom = _context.Rooms.FirstOrDefault(f => f.RoomId == room.RoomId);
+                        if (mRoom == null)
                         {
                             return BadRequest("RoomId not found!");
                         }
                         else
                         {
-                            Room mRoom = new Room { RoomId = room.RoomId };
-                            context.Update(room);
-                            await context.SaveChangesAsync();
+                        mRoom.RoomName = room.RoomName;
+                            _context.Update(mRoom);
+                            await _context.SaveChangesAsync();
                             return Ok("The modification was successful!");
                         }
                     }
@@ -149,14 +146,12 @@ namespace HouseOfMysteries.Controllers
                     {
                         return BadRequest(ex.Message);
                     }
-                }
             }
             else
             {
                 return BadRequest("You do not have permission to perform this operation!");
             }
         }
-
-
+        #endregion
     }
 }

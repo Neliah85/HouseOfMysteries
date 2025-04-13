@@ -9,11 +9,13 @@ using System.Net.Mail;
 namespace HouseOfMysteries
 {
     public class Program
-    {
+    { 
+        #region Declarations
         public static int SaltLength = 64;
-
-        public static TokenHolder loggedInUsers = new TokenHolder(Guid.Parse("724bdf82-0e13-4dc4-a596-ee660d0a700a"),false, 1000);//Master token
-
+        public static TokenHolder loggedInUsers = new TokenHolder(Guid.Parse("724bdf82-0e13-4dc4-a596-ee660d0a700a"),false, 1000);
+        //Master token: 724bdf82-0e13-4dc4-a596-ee660d0a700a 
+        #endregion
+        #region Methods
         public static string GenerateSalt()
         {
             Random random = new Random();
@@ -39,7 +41,6 @@ namespace HouseOfMysteries
                 return sBuilder.ToString();
             }
         }
-
         public static async Task SendEmail(string mailAddressTo, string? subject, string? body)
         {
             MailMessage mail = new MailMessage();
@@ -55,19 +56,18 @@ namespace HouseOfMysteries
             SmtpServer.EnableSsl = true;
             await SmtpServer.SendMailAsync(mail);
         }
-
+        #endregion
+        #region Main()
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
-            var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-
             builder.Services.AddDbContext<HouseofmysteriesContext>(options =>
             {
-                var ConnectionString = builder.Configuration.GetConnectionString("MySQL");
-                options.UseMySQL(ConnectionString);
+                var connectionString = builder.Configuration.GetConnectionString("MySQL");
+                options.UseMySQL(connectionString);
             }
-            );
+);
+            var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
             builder.Services.AddCors(options => 
             {
@@ -81,23 +81,18 @@ namespace HouseOfMysteries
                                                                 .AllowAnyMethod();
                                       });
             });
-
             // Add services to the container.
-
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-
             var app = builder.Build();
-
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
@@ -108,6 +103,6 @@ namespace HouseOfMysteries
 
             app.Run();
         }
+        #endregion
     }
 }
-//Scaffold-DbContext "server=localhost;database=houseofmysteries;user=root;password=;sslmode=none;" mysql.entityframeworkcore -outputdir Models –f

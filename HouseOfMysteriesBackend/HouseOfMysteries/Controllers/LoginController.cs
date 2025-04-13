@@ -10,47 +10,51 @@ namespace HouseOfMysteries.Controllers;
 [ApiController]
 public class LoginController : ControllerBase
 {
+    #region DbContext
+    private readonly HouseofmysteriesContext _context;
+    public LoginController(HouseofmysteriesContext context)
+    {
+        _context = context;
+    }
+    #endregion
+    #region GetSalt
     [HttpPost("GetSalt/{userName}")]
     public async Task<IActionResult> GetSalt(string userName)
     {
-        using (var context = new HouseofmysteriesContext())
+        try
         {
-            try
-            {
-                User? response = await context.Users.FirstOrDefaultAsync(f => f.NickName == userName);
-                return response == null ? BadRequest("Error") : Ok(response.Salt);
-            }
-            catch
-            (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            User? response = await _context.Users.FirstOrDefaultAsync(f => f.NickName == userName);
+            return response == null ? BadRequest("Error") : Ok(response.Salt);
+        }
+        catch
+        (Exception ex)
+        {
+            return BadRequest(ex.Message);
         }
     }
+    #endregion
+    #region Login
     [HttpPost]
     public async Task<IActionResult> Login(LoginDTO loginDTO)
     {
-        using (var context = new HouseofmysteriesContext())
+        try
         {
-            try
+            string Hash = Program.CreateSHA256(loginDTO.TmpHash);
+            Hash = Program.CreateSHA256(Hash);
+            User? loginUser = await _context.Users.FirstOrDefaultAsync(f => f.NickName == loginDTO.LoginName && f.Hash == Hash);
+            if (loginUser != null)
             {
-                string Hash = Program.CreateSHA256(loginDTO.TmpHash);
-                Hash = Program.CreateSHA256(Hash);
-                User? loginUser = await context.Users.FirstOrDefaultAsync(f => f.NickName == loginDTO.LoginName && f.Hash == Hash);
-                if (loginUser != null)
-                {
-                    return Ok(Program.loggedInUsers.GenerateToken(3600, loginUser));
-                }
-                else
-                {
-                    return BadRequest("Incorrect username or password!");
-                }
+                return Ok(Program.loggedInUsers.GenerateToken(3600, loginUser));
             }
-            catch (Exception ex)
+            else
             {
-                return BadRequest(ex.Message);
+                return BadRequest("Incorrect username or password!");
             }
         }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
-
+    #endregion
 }

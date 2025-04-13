@@ -6,6 +6,7 @@ namespace HouseOfMysteries.Controllers
     [ApiController]
     public class LogoutController : ControllerBase
     {
+        #region Logout
         [HttpPost("{token}")]
         public IActionResult Logout(string token)
         {
@@ -19,5 +20,6 @@ namespace HouseOfMysteries.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        #endregion
     }
 }
