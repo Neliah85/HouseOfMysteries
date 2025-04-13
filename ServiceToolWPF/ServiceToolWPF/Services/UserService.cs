@@ -9,8 +9,11 @@ namespace ServiceToolWPF.Services
 {
     public class UserService
     {
+        #region Events
         public static SendLogEvent sendLogEvent = new SendLogEvent();
         public static RefreshEvent refreshEvent = new RefreshEvent();
+        #endregion
+        #region NewUser
         public static async Task<string> Post(HttpClient httpClient, UserDTO user)
         {
             try
@@ -41,6 +44,8 @@ namespace ServiceToolWPF.Services
                 return ex.Message;
             }
         }
+        #endregion
+        #region GetUserByUserName
         public static async Task<string> Post(HttpClient httpClient, ConfirmRegDTO confirmReg)
         {
             try
@@ -68,36 +73,6 @@ namespace ServiceToolWPF.Services
                 return ex.Message;
             }
         }
-
-
-
-
-        public static async Task<List<User>?> GetAllUsers(HttpClient httpClient, string token)
-        {
-            try
-            {
-                List<User>? users = new List<User>();
-                string url = $"{httpClient.BaseAddress}Users/{token}";
-                var response = await httpClient.GetAsync(url);
-                if (response.IsSuccessStatusCode)
-                {
-                    users = await response.Content.ReadFromJsonAsync<List<User>>();
-                    sendLogEvent.SendLog($"Successful query! {users.Count} user(s) found.");
-                    return users;
-                }
-                else
-                {
-                    sendLogEvent.SendLog(response.Content.ReadAsStringAsync().Result);
-                    return null;
-                }
-            }
-            catch (Exception ex)
-            {
-                sendLogEvent.SendLog(ex.Message);
-                return null;
-            }
-        }
-
         public static async Task<User?> GetUserByUserName(HttpClient httpClient, string token, string userName)
         {
             try
@@ -123,6 +98,35 @@ namespace ServiceToolWPF.Services
                 return null;
             }
         }
+        #endregion
+        #region GetAllUsers
+        public static async Task<List<User>?> GetAllUsers(HttpClient httpClient, string token)
+        {
+            try
+            {
+                List<User>? users = new List<User>();
+                string url = $"{httpClient.BaseAddress}Users/{token}";
+                var response = await httpClient.GetAsync(url);
+                if (response.IsSuccessStatusCode)
+                {
+                    users = await response.Content.ReadFromJsonAsync<List<User>>();
+                    sendLogEvent.SendLog($"Successful query! {users.Count} user(s) found.");
+                    return users;
+                }
+                else
+                {
+                    sendLogEvent.SendLog(response.Content.ReadAsStringAsync().Result);
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                sendLogEvent.SendLog(ex.Message);
+                return null;
+            }
+        }
+        #endregion
+        #region DeleteUser
         public static async Task<string> DeleteUser(HttpClient httpClient, string token, int userId)
         {
             try
@@ -141,7 +145,8 @@ namespace ServiceToolWPF.Services
                 return ex.Message;
             }
         }
-
+        #endregion
+        #region UpdateUser
         public static async Task<string> UpdateUser(HttpClient httpClient, string token, UserDTO user)
         {
             try
@@ -160,6 +165,6 @@ namespace ServiceToolWPF.Services
                 return ex.Message;
             }
         }
-
+        #endregion
     }
 }

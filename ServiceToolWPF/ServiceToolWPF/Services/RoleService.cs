@@ -9,15 +9,18 @@ namespace ServiceToolWPF.Services
 {
     public class RoleService
     {
+        #region Events
         public static SendLogEvent sendLogEvent = new SendLogEvent();
         public static RefreshEvent refreshEvent = new RefreshEvent();
+        #endregion
+        #region GetAllRoles
         public static async Task<List<Role>> GetAllRoles(HttpClient httpClient, string token)
         {
             try
             {
-                List<Role> roles = new List<Role>();
+                List<Role>? roles = new List<Role>();
                 string url = $"{httpClient.BaseAddress}Roles/{token}";
-                sendLogEvent.SendLog(url);
+                //sendLogEvent.SendLog(url);
                 var response = await httpClient.GetAsync(url);
                 if (response.IsSuccessStatusCode)
                 {
@@ -37,13 +40,15 @@ namespace ServiceToolWPF.Services
                 return null;
             }
         }
+        #endregion
+        #region AddNewRole
         public static async Task<string> AddNewRole(HttpClient httpClient, string token, string roleName)
         {
             try
             {
                 string url = $"{httpClient.BaseAddress}Roles/{token},{roleName}";
                 string json = JsonSerializer.Serialize(roleName);
-                sendLogEvent.SendLog(url);
+                //sendLogEvent.SendLog(url);
                 var request = new StringContent(json, Encoding.UTF8, "application/json");
                 var response = await httpClient.PostAsync(url, null);
                 if (response.IsSuccessStatusCode)
@@ -59,7 +64,8 @@ namespace ServiceToolWPF.Services
                 return ex.Message;
             }
         }
-
+        #endregion
+        #region UpdateRole
         public static async Task<string> UpdateRole(HttpClient httpClient, string token, Role role)
         {
             try
@@ -68,7 +74,6 @@ namespace ServiceToolWPF.Services
                 string json = JsonSerializer.Serialize(role, JsonSerializerOptions.Default);
                 var request = new StringContent(json, Encoding.UTF8, "application/json");
                 var response = await httpClient.PutAsync(url, request);
-
                 string r = response.Content.ReadAsStringAsync().Result.ToString();
                 sendLogEvent.SendLog(r);
                 refreshEvent.Refresh("GetAllRoles");
@@ -80,7 +85,8 @@ namespace ServiceToolWPF.Services
                 return ex.Message;
             }
         }
-
+        #endregion
+        #region DeleteRole
         public static async Task<string> DeleteRole(HttpClient httpClient, string token, int id)
         {
             try
@@ -101,6 +107,6 @@ namespace ServiceToolWPF.Services
                 return ex.Message;
             }
         }
-
+        #endregion
     }
 }

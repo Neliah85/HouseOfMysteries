@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 using ServiceToolWPF.Classes;
 
 namespace ServiceToolWPF.Services
@@ -13,6 +8,7 @@ namespace ServiceToolWPF.Services
     internal class LoginService
     {
         public static SendLogEvent sendLogEvent = new SendLogEvent();
+        #region GetSalt
         public static string? GetSalt(HttpClient httpClient, string loginName)
         {
             try
@@ -34,7 +30,9 @@ namespace ServiceToolWPF.Services
             {
                 return ex.Message;
             }
-        }  
+        }
+        #endregion
+        #region Login
         public static string? Login(HttpClient httpClient, string loginName, string tmpHash)
         {
             string url = $"{httpClient.BaseAddress}Login";
@@ -50,6 +48,7 @@ namespace ServiceToolWPF.Services
                 MainWindow.ResetLoggedInUser(); 
             }
             return response.Content.ReadAsStringAsync().Result;
-        }       
+        }
+        #endregion
     }
 }

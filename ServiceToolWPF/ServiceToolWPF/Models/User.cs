@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
-
-namespace ServiceToolWPF.Models;
+﻿namespace ServiceToolWPF.Models;
 
 public partial class User
 {

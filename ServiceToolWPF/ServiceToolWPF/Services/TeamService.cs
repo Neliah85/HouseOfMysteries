@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
 using System.Net.Http.Json;
-using System.Reflection.Metadata;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 using ServiceToolWPF.Classes;
 using ServiceToolWPF.Models;
 
@@ -15,15 +10,16 @@ namespace ServiceToolWPF.Services
 {
     public class TeamService
     {
+        #region Events
         public static SendLogEvent sendLogEvent = new SendLogEvent();
         public static RefreshEvent refreshEvent = new RefreshEvent();
-
-
+        #endregion
+        #region GetAllTimes
         public static async Task<List<Team>> GetAllTeams(HttpClient httpClient, string token) 
         {
             try
             {
-                List<Team>teams = new List<Team>(); 
+                List<Team>?teams = new List<Team>(); 
                 string url = $"{httpClient.BaseAddress}Teams/{token}";
                 //sendLogEvent.SendLog(url);
                 var response = await httpClient.GetAsync(url);
@@ -45,14 +41,15 @@ namespace ServiceToolWPF.Services
                 return null;
             }        
         }
-
+        #endregion
+        #region AddNewTeam
         public static async Task<string> AddNewTeam(HttpClient httpClient, string token, string teamName)
         {
             try
             {
                 string url = $"{httpClient.BaseAddress}Teams/{token},{teamName}";
                 string json = JsonSerializer.Serialize(teamName);
-                sendLogEvent.SendLog(url);
+                //sendLogEvent.SendLog(url);
                 var request = new StringContent(json, Encoding.UTF8, "application/json");
                 var response = await httpClient.PostAsync(url, null);
                 if (response.IsSuccessStatusCode)
@@ -68,8 +65,8 @@ namespace ServiceToolWPF.Services
                 return ex.Message;
             }
         }
-
-
+        #endregion
+        #region DeleteTeam
         public static async Task<string> DeleteTeam(HttpClient httpClient, string token, int id)
         {
             try
@@ -87,7 +84,8 @@ namespace ServiceToolWPF.Services
                 return ex.Message;
             }
         }
-
+        #endregion
+        #region UpdateTeam
         public static async Task<string> UpdateTeam(HttpClient httpClient, string token, Team team)
         {
             try
@@ -108,14 +106,15 @@ namespace ServiceToolWPF.Services
                 return ex.Message;
             }               
         }
-
+        #endregion
+        #region AddUserToTeam
         public static async Task<string> AddUserToTeam(HttpClient httpClient, string token, string userName, string teamName)
         {
             try
             {
                 string url = httpClient.BaseAddress + $"Teams/AddUserToTeam/{token}?userName={userName}&teamName={teamName}";
                 var response = await httpClient.PutAsync(url,null);
-                sendLogEvent.SendLog(url);
+                //sendLogEvent.SendLog(url);
                 string r = response.Content.ReadAsStringAsync().Result.ToString();
                 sendLogEvent.SendLog(r);
                 return r;
@@ -126,14 +125,15 @@ namespace ServiceToolWPF.Services
                 return ex.Message;  
             }      
         }
-
+        #endregion
+        #region TeamRegistration
         public static async Task<string> TeamRegistration(HttpClient httpClient, string token, string teamName)
         {
             try
             {            
                 string url= httpClient.BaseAddress + $"Teams/TeamRegistration/{token},{WebUtility.UrlEncode(teamName)}";
                 var response = await httpClient.PostAsync(url,null);
-                sendLogEvent.SendLog(url);
+                //sendLogEvent.SendLog(url);
                 string r = response.Content.ReadAsStringAsync().Result.ToString();
                 sendLogEvent.SendLog(r);
                 refreshEvent.Refresh("GetAllTeams");
@@ -145,10 +145,6 @@ namespace ServiceToolWPF.Services
                 return ex.Message;
             }
         }
-
-
-
-
-
+        #endregion
     }
 }

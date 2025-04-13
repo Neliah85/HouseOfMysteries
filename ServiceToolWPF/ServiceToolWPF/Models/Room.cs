@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace ServiceToolWPF.Models;
+﻿namespace ServiceToolWPF.Models;
 public partial class Room
 {
     public int RoomId { get; set; }

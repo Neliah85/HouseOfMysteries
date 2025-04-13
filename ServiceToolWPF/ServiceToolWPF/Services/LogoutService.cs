@@ -1,17 +1,16 @@
 ﻿using ServiceToolWPF.Classes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace ServiceToolWPF.Services
 {
     internal class LogoutService
     {
+        #region Event
         public static SendLogEvent sendLogEvent = new SendLogEvent();
+        #endregion
+        #region Logout
         public static string Logout(HttpClient httpClient, string userName)
         {
             string url = $"{httpClient.BaseAddress}Logout/{userName}";
@@ -38,5 +37,6 @@ namespace ServiceToolWPF.Services
                 return ex.Message;
             }
         }
+        #endregion
     }
 }

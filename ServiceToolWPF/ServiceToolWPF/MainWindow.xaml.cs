@@ -13,13 +13,11 @@ using Microsoft.Win32;
 using System.IO;
 using ServiceToolWPF.DTOs;
 
-
 namespace ServiceToolWPF
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-
     public partial class MainWindow : Window
     {
         #region Declarations
@@ -29,8 +27,8 @@ namespace ServiceToolWPF
         string userHash = "";
         string lastAction = "";
         public static bool loggedIn = false;
-        public static LoggedInUserDTO? loggedInUser;
-        public static HttpClient? sharedClient = new()
+        public static LoggedInUserDTO loggedInUser;
+        public static HttpClient sharedClient = new()
         {
             BaseAddress = new Uri("http://localhost:5131/"),
         };
@@ -40,9 +38,11 @@ namespace ServiceToolWPF
         public static string[] rooms = new string[9] { "Menekülés az iskolából", "A pedellus bosszúja", "A tanári titkai", "A takarítónő visszanéz", "Szabadulás Kódja", "Időcsapda", "KódX Szoba", "Kalandok Kamrája", "Titkok Labirintusa" };
         //Challenge
         public static string[] ranking = new string[11] { "All", "Top 1", "Top 2", "Top 3", "Top 4", "Top 5", "Top 6", "Top 7", "Top 8", "Top 9", "Top 10" };
-
-
-
+        public static bool bookingDataIsUpdated = false;
+        public static bool userDataIsUpdated = false;
+        public static bool teamsDataIsUpdated = false;
+        public static bool rolesDataIsUpdated = false;
+        public static bool roomsDataIsUpdated = false;
         public bool IsNumber(string number)
         {
             string mask = "0123456789";
@@ -71,19 +71,17 @@ namespace ServiceToolWPF
             TeamService.sendLogEvent.LogSent += SendLogEvent_LogSent;
             TeamService.refreshEvent.Refreshed += RefreshEvent_Refreshed;
             RoleService.sendLogEvent.LogSent += SendLogEvent_LogSent;
-            RoleService.refreshEvent.Refreshed -= RefreshEvent_Refreshed;
+            RoleService.refreshEvent.Refreshed += RefreshEvent_Refreshed;
             RoomService.sendLogEvent.LogSent += SendLogEvent_LogSent;
             RoomService.refreshEvent.Refreshed += RefreshEvent_Refreshed;
 
             ResetLoggedInUser();
-
             unTextCheck();
             passTextCheck();
             RegNameTextCheck();
             RegUsernameTextCheck();
             RegPhoneTextCheck();
             RegEmailTextCheck();
-
             //Booking
             cmbBookingTime.ItemsSource = bookingTime;
             cmbBookingTime.SelectedIndex = 0;
@@ -235,7 +233,7 @@ namespace ServiceToolWPF
                                 txbPassword.Background = Brushes.LightGreen;
                                 btnLogin.Content = "Logout";
                                 WriteLog("Login successful!");
-                                WriteLog(l);
+                                //WriteLog(l);
                             }
                         }
                     }
@@ -289,7 +287,8 @@ namespace ServiceToolWPF
         }
         private void btnClearLog_Click(object sender, RoutedEventArgs e)
         {
-            lbxLog.Items.Clear();
+            var result = MessageBox.Show("Are you sure you want to delete the log?", "Confirm deletion", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.Yes) { lbxLog.Items.Clear(); }
         }
         private void btnSaveLog_Click(object sender, RoutedEventArgs e)
         {
@@ -319,6 +318,13 @@ namespace ServiceToolWPF
         }
         #endregion
         #region Refresh 
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.Source == tabControl)
+            {
+                lastAction = "";
+            }
+        }
         private void RefreshEvent_Refreshed(object sender, string e)
         {
             if (lastAction == "" && e != "") { lastAction = e; }
@@ -331,7 +337,6 @@ namespace ServiceToolWPF
             if (lastAction == "GetAllRoles") { GetAllRoles(); }
             if (lastAction == "GetAllRooms") { GetAllRooms(); }
         }
-
         #endregion
         #region Registration input mask settings
         private void txbRegUserName_GotFocus(object sender, RoutedEventArgs e)
@@ -706,6 +711,12 @@ namespace ServiceToolWPF
         {
             e.CancelCommand();
         }
+        private void BookingClearInputs()
+        {
+            txbComment.Text = "";
+            txbBookingId.Text = "";
+            txbResultTime.Text = "";
+        }
         #endregion
         #region Booking input test
         private bool BookingIdTest()
@@ -741,6 +752,7 @@ namespace ServiceToolWPF
             lastAction = "CheckBooking";
             WriteLog($"[Check booking >> Date: {dtpBookingDate.DisplayDate.ToShortDateString()}]");
             dgrBookingData.ItemsSource = await BookingService.CheckBooking(sharedClient, loggedInUser.Token, DateTime.Parse(dtpBookingDate.SelectedDate.Value.ToShortDateString()), cmbRooms.SelectedIndex + 1);
+            BookingClearInputs();
         }
         //New booking
         private async void btnNewBooking_Click(object sender, RoutedEventArgs e)
@@ -757,7 +769,7 @@ namespace ServiceToolWPF
             newBooking.RoomId = cmbRooms.SelectedIndex + 1;
             newBooking.Comment = txbComment.Text;
             await BookingService.NewBooking(sharedClient, loggedInUser.Token, newBooking);
-
+            BookingClearInputs();
         }
         //Clear booking
         private void btnClearBooking_Click(object sender, RoutedEventArgs e)
@@ -771,6 +783,7 @@ namespace ServiceToolWPF
             clearBooking.BookingDate = GetBookingDateTime();
             clearBooking.RoomId = cmbRooms.SelectedIndex + 1;
             await BookingService.ClearBooking(sharedClient, loggedInUser.Token, clearBooking);
+            BookingClearInputs();
         }
         //Get all booking
         private void btnGetAllBooking_Click(object sender, RoutedEventArgs e)
@@ -782,15 +795,21 @@ namespace ServiceToolWPF
             lastAction = "GetAllBooking";
             WriteLog("[Get all booking]");
             dgrBookingData.ItemsSource = await BookingService.GetAllBooking(sharedClient, loggedInUser.Token);
+            BookingClearInputs();
+            bookingDataIsUpdated = true;
         }
         //Delete booking
         private async void btnDeleteBooking_Click(object sender, RoutedEventArgs e)
         {
             if (BookingIdTest())
             {
-                int id = int.Parse(txbBookingId.Text);
-                WriteLog($"[Delete booking >> Id={id}]");
-                await BookingService.DeleteBooking(sharedClient, loggedInUser.Token, id);
+                if (MessageBox.Show("Are you sure you want to delete the selected item?", "Confirm deletion", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                {
+                    int id = int.Parse(txbBookingId.Text);
+                    WriteLog($"[Delete booking >> Id={id}]");
+                    await BookingService.DeleteBooking(sharedClient, loggedInUser.Token, id);
+                    BookingClearInputs();
+                }
             }
         }
         //Get challenge result
@@ -808,7 +827,6 @@ namespace ServiceToolWPF
         {
             SaveResult();
         }
-
         public async void SaveResult()
         {
             if (BookingResultTimeTest())
@@ -821,7 +839,6 @@ namespace ServiceToolWPF
                 await BookingService.SaveResult(sharedClient, loggedInUser.Token, saveResult);
             }
         }
-
         public DateTime GetBookingDateTime()
         {
             TimeSpan time = TimeSpan.Zero;
@@ -831,10 +848,6 @@ namespace ServiceToolWPF
             }
             return DateTime.Parse($"{dtpBookingDate.SelectedDate.Value.ToShortDateString()} " + time);
         }
-
-
-
-
         public int GetIndexOfBookingTime(TimeSpan bookingTime)
         {
             int index = cmbBookingTime.Items.IndexOf(bookingTime.ToString());
@@ -852,6 +865,14 @@ namespace ServiceToolWPF
                 txbBookingId.Text = row.BookingId.ToString();
                 txbComment.Text = row.Comment;
 
+            }
+        }
+        private void dgrBookingData_LayoutUpdated(object sender, EventArgs e)
+        {
+            if (dgrBookingData.Items.Count > 0 && bookingDataIsUpdated == true)
+            {
+                dgrBookingData.ScrollIntoView(dgrBookingData.Items[dgrBookingData.Items.Count - 1]);
+                bookingDataIsUpdated = false;
             }
         }
         #endregion
@@ -1065,7 +1086,19 @@ namespace ServiceToolWPF
         {
             e.CancelCommand();
         }
-
+        private void UsersClearInputs()
+        {
+            txbUsersUserName.Text = "";
+            txbUsersRealName.Text = "";
+            txbUsersEmail.Text = "";
+            txbUsersPhone.Text = "";
+            txbUsersTeamId.Text = "";
+            txbUsersRoleId.Text = "";
+            txbUsersRoleName.Text = "";
+            txbUsersTeamId.Text = "";
+            txbUsersTeamName.Text = "";
+            txbUserId.Text = "";
+        }
         #endregion
         #region Users input test
         private bool UsersInputTest()
@@ -1114,6 +1147,18 @@ namespace ServiceToolWPF
             }
             return result;
         }
+        private bool UsersNameTest()
+        {
+            bool result = true;
+            if (txbUsersUserName.Text == "")
+            {
+                txbUsersUserName.Background = Brushes.LightPink;
+                result = false;
+            }
+            return result;
+        }
+
+
         #endregion
         #region Users
         //Get all users
@@ -1126,6 +1171,8 @@ namespace ServiceToolWPF
             WriteLog("[Get all users]");
             lastAction = "GetAllUsers";
             dgrUserData.ItemsSource = await UserService.GetAllUsers(sharedClient, loggedInUser.Token);
+            userDataIsUpdated = true;
+            UsersClearInputs();
         }
 
         //Get user by username
@@ -1136,14 +1183,19 @@ namespace ServiceToolWPF
 
         private async void GetUserByUserName()
         {
-            if (txbUsersUserName.Text != "")
+            if (UsersNameTest())
             {
                 WriteLog($"[Get user by username >> UserName={txbUsersUserName.Text}]");
                 lastAction = "GetUserByUserName";
                 List<User?> l = new List<User?>();
                 dgrUserData.ItemsSource = l;
                 var response = await UserService.GetUserByUserName(sharedClient, loggedInUser.Token, txbUsersUserName.Text);
-                if (response != null) { l.Add(response); }
+                if (response != null)
+                {
+                    l.Add(response);
+                    dgrUserData.Items.Refresh();
+                }
+                UsersClearInputs();
             }
         }
         //Delete user
@@ -1151,9 +1203,13 @@ namespace ServiceToolWPF
         {
             if (UsersIdTest())
             {
-                int id = int.Parse(txbUserId.Text);
-                WriteLog($"[Delete users >> Id={id}]");
-                UserService.DeleteUser(sharedClient, loggedInUser.Token, id);
+                if (MessageBox.Show("Are you sure you want to delete the selected item?", "Confirm deletion", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                {
+                    int id = int.Parse(txbUserId.Text);
+                    WriteLog($"[Delete users >> Id={id}]");
+                    _ = UserService.DeleteUser(sharedClient, loggedInUser.Token, id);
+                    UsersClearInputs();
+                }
             }
         }
         //Update user
@@ -1179,10 +1235,10 @@ namespace ServiceToolWPF
                     user.TeamId = int.Parse(txbUsersTeamId.Text);
                 }
                 WriteLog($"[Update user >> Id={user.UserId}]");
-                UserService.UpdateUser(sharedClient, loggedInUser.Token, user);
+                _ = UserService.UpdateUser(sharedClient, loggedInUser.Token, user);
+                UsersClearInputs();
             }
         }
-
         private void dgrUserData_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             int index = dgrUserData.SelectedIndex;
@@ -1202,7 +1258,14 @@ namespace ServiceToolWPF
                 userSalt = row.Salt;
             }
         }
-
+        private void dgrUserData_LayoutUpdated(object sender, EventArgs e)
+        {
+            if (dgrUserData.Items.Count > 0 && userDataIsUpdated == true)
+            {
+                dgrUserData.ScrollIntoView(dgrUserData.Items[dgrUserData.Items.Count - 1]);
+                userDataIsUpdated = false;
+            }
+        }
         #endregion
         #region Teams input mask settings
         private void txbTeamsTeamName_GotFocus(object sender, RoutedEventArgs e)
@@ -1259,6 +1322,12 @@ namespace ServiceToolWPF
                 txbTeamsUserName.Background = Brushes.White;
             }
         }
+        private void TeamsClearInputs()
+        {
+            txbTeamsTeamName.Text = "";
+            txbTeamId.Text = "";
+            txbTeamsUserName.Text = "";
+        }
         #endregion
         #region Teams input test
         private bool TeamsIdTest()
@@ -1304,6 +1373,8 @@ namespace ServiceToolWPF
             WriteLog("[Get all teams]");
             lastAction = "GetAllTeams";
             dgrTeamsData.ItemsSource = await TeamService.GetAllTeams(sharedClient, loggedInUser.Token);
+            teamsDataIsUpdated = true;
+            TeamsClearInputs();
         }
         private async void btnTeamsAddNewTeam_Click(object sender, RoutedEventArgs e)
         {
@@ -1311,6 +1382,7 @@ namespace ServiceToolWPF
             {
                 WriteLog($"[Add new team >> Team name: {txbTeamsTeamName.Text}]");
                 await TeamService.AddNewTeam(sharedClient, loggedInUser.Token, txbTeamsTeamName.Text);
+                TeamsClearInputs();
             }
         }
 
@@ -1320,32 +1392,39 @@ namespace ServiceToolWPF
             {
                 WriteLog($"[Team registration >> Team name: {txbTeamsTeamName.Text}]");
                 await TeamService.TeamRegistration(sharedClient, loggedInUser.Token, txbTeamsTeamName.Text);
+                TeamsClearInputs();
             }
         }
 
-            private async void btnTeamsUpdateTeam_Click(object sender, RoutedEventArgs e)
+        private async void btnTeamsUpdateTeam_Click(object sender, RoutedEventArgs e)
         {
-            if (TeamsTeamNameTest()&&TeamsIdTest())
+            if (TeamsTeamNameTest() && TeamsIdTest())
             {
                 WriteLog($"[Update team >> Team name: {txbTeamsTeamName.Text}]");
-                Team team=new Team(){TeamId = int.Parse(txbTeamId.Text),TeamName= txbTeamsTeamName.Text};
+                Team team = new Team() { TeamId = int.Parse(txbTeamId.Text), TeamName = txbTeamsTeamName.Text };
                 await TeamService.UpdateTeam(sharedClient, loggedInUser.Token, team);
+                TeamsClearInputs();
             }
         }
         private async void btnTeamsDeleteTeam_Click(object sender, RoutedEventArgs e)
         {
-            if (TeamsIdTest()) 
+            if (TeamsIdTest())
             {
-                WriteLog($"[Delete team >> Team id: {txbTeamId.Text} Team name: {txbTeamsTeamName.Text}]");
-                await TeamService.DeleteTeam(sharedClient, loggedInUser.Token, int.Parse(txbTeamId.Text));
+                if (MessageBox.Show("Are you sure you want to delete the selected item?", "Confirm deletion", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                {
+                    WriteLog($"[Delete team >> Team id: {txbTeamId.Text} Team name: {txbTeamsTeamName.Text}]");
+                    await TeamService.DeleteTeam(sharedClient, loggedInUser.Token, int.Parse(txbTeamId.Text));
+                    TeamsClearInputs();
+                }
             }
         }
         private async void btnTeamsAddUserToTeam_Click(object sender, RoutedEventArgs e)
         {
             if (TeamsUserNameTest())
             {
-                WriteLog($"[Add user to team >> User name: {txbTeamsTeamName.Text} Team name: {txbTeamsTeamName.Text}]");
-                await TeamService.AddUserToTeam(sharedClient, loggedInUser.Token,txbTeamsUserName.Text,txbTeamsTeamName.Text);
+                WriteLog($"[Add user to team >> User name: {txbTeamsUserName.Text} Team name: {txbTeamsTeamName.Text}]");
+                await TeamService.AddUserToTeam(sharedClient, loggedInUser.Token, txbTeamsUserName.Text, txbTeamsTeamName.Text);
+                TeamsClearInputs();
             }
         }
         private void dgrTeamsData_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -1359,13 +1438,20 @@ namespace ServiceToolWPF
                 txbTeamId.Text = team.TeamId.ToString();
             }
         }
+        private void dgrTeamsData_LayoutUpdated(object sender, EventArgs e)
+        {
+            if (dgrTeamsData.Items.Count > 0 && teamsDataIsUpdated == true)
+            {
+                dgrTeamsData.ScrollIntoView(dgrTeamsData.Items[dgrTeamsData.Items.Count - 1]);
+                teamsDataIsUpdated = false;
+            }
+        }
         #endregion
         #region Roles input mask settings
         private void txbRolesRoleName_GotFocus(object sender, RoutedEventArgs e)
         {
             RolesRoleNameTextCheck();
         }
-
         private void txbRolesRoleName_TextChanged(object sender, TextChangedEventArgs e)
         {
             RolesRoleNameTextCheck();
@@ -1395,6 +1481,11 @@ namespace ServiceToolWPF
             {
                 txbRoleId.Background = Brushes.White;
             }
+        }
+        private void RolesClearInputs()
+        {
+            txbRolesRoleName.Text = "";
+            txbRoleId.Text = "";
         }
         #endregion
         #region Roles input test
@@ -1427,41 +1518,45 @@ namespace ServiceToolWPF
         {
             GetAllRoles();
         }
-
         private async void GetAllRoles()
         {
             WriteLog("[Get all roles]");
             lastAction = "GetAllRoles";
             dgrRolesData.ItemsSource = await RoleService.GetAllRoles(sharedClient, loggedInUser.Token);
+            rolesDataIsUpdated = true;
+            RolesClearInputs();
         }
         private async void btnRolesAddNewRole_Click(object sender, RoutedEventArgs e)
         {
-            if (RolesRoleNameTest()) 
+            if (RolesRoleNameTest())
             {
                 WriteLog($"[Add new role >> Role name: {txbRolesRoleName.Text}]");
                 await RoleService.AddNewRole(sharedClient, loggedInUser.Token, txbRolesRoleName.Text);
+                RolesClearInputs();
             }
         }
-
         private async void btnRolesUpdateRole_Click(object sender, RoutedEventArgs e)
         {
-            if (RolesRoleNameTest() && RolesRoleIdTest()) 
+            if (RolesRoleNameTest() && RolesRoleIdTest())
             {
                 WriteLog($"[Update role >> Role name: {txbRolesRoleName.Text}]");
                 Role role = new Role() { RoleId = int.Parse(txbRoleId.Text), RoleName = txbRolesRoleName.Text };
-                await RoleService.UpdateRole(sharedClient, loggedInUser.Token,role);
+                await RoleService.UpdateRole(sharedClient, loggedInUser.Token, role);
+                RolesClearInputs();
             }
         }
-
         private async void btnRolesDeleteRole_Click(object sender, RoutedEventArgs e)
         {
-            if (RolesRoleIdTest()) 
+            if (RolesRoleIdTest())
             {
-                WriteLog($"[Delete role >> Role id: {txbRoleId.Text} Role name: {txbRolesRoleName.Text}]");
-                await RoleService.DeleteRole(sharedClient, loggedInUser.Token, int.Parse(txbRoleId.Text));
+                if (MessageBox.Show("Are you sure you want to delete the selected item?", "Confirm deletion", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                {
+                    WriteLog($"[Delete role >> Role id: {txbRoleId.Text} Role name: {txbRolesRoleName.Text}]");
+                    await RoleService.DeleteRole(sharedClient, loggedInUser.Token, int.Parse(txbRoleId.Text));
+                    RolesClearInputs();
+                }
             }
         }
-
         private void dgrRolesData_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             int index = dgrRolesData.SelectedIndex;
@@ -1473,7 +1568,14 @@ namespace ServiceToolWPF
                 txbRoleId.Text = role.RoleId.ToString();
             }
         }
-
+        private void dgrRolesData_LayoutUpdated(object sender, EventArgs e)
+        {
+            if (dgrRolesData.Items.Count > 0 && rolesDataIsUpdated == true)
+            {
+                dgrRolesData.ScrollIntoView(dgrRolesData.Items[dgrRolesData.Items.Count - 1]);
+                rolesDataIsUpdated = false;
+            }
+        }
         #endregion
         #region Rooms input mask settings
         private void txbRoomsRoomName_GotFocus(object sender, RoutedEventArgs e)
@@ -1511,6 +1613,11 @@ namespace ServiceToolWPF
                 txbRoomId.Background = Brushes.White;
             }
         }
+        private void RoomsClearInputs()
+        {
+            txbRoomsRoomName.Text = "";
+            txbRoomId.Text = "";
+        }
         #endregion
         #region Rooms input test
         private bool RoomsRoomNameTest()
@@ -1540,23 +1647,23 @@ namespace ServiceToolWPF
         {
             GetAllRooms();
         }
-
         private async void GetAllRooms()
         {
             WriteLog("[Get all rooms]");
-            lastAction = "GetAllRooms";   
+            lastAction = "GetAllRooms";
             dgrRoomsData.ItemsSource = await RoomService.GetAllRooms(sharedClient, loggedInUser.Token);
+            roomsDataIsUpdated = true;
+            RoomsClearInputs();
         }
-
         private async void btnRoomsAddNewRoom_Click(object sender, RoutedEventArgs e)
         {
             if (RoomsRoomNameTest())
             {
                 WriteLog($"[Add new room >> Room name: {txbRoomsRoomName.Text}]");
                 await RoomService.AddNewRoom(sharedClient, loggedInUser.Token, txbRoomsRoomName.Text);
+                RoomsClearInputs();
             }
         }
-
         private async void btnRoomsUpdateRoom_Click(object sender, RoutedEventArgs e)
         {
             if (RoomsRoomNameTest() && RoomsRoomIdTest())
@@ -1564,18 +1671,21 @@ namespace ServiceToolWPF
                 WriteLog($"[Update room >> Room name: {txbRoomsRoomName.Text}]");
                 Room room = new Room() { RoomId = int.Parse(txbRoomId.Text), RoomName = txbRoomsRoomName.Text };
                 await RoomService.UpdateRoom(sharedClient, loggedInUser.Token, room);
+                RoomsClearInputs();
             }
         }
-
         private async void btnRoomsDeleteRoom_Click(object sender, RoutedEventArgs e)
         {
             if (RoomsRoomIdTest())
             {
-                WriteLog($"[Delete room >> Room id: {txbRoomId.Text} Room name: {txbRoomsRoomName.Text}]");
-                await RoomService.DeleteRoom(sharedClient, loggedInUser.Token, int.Parse(txbRoomId.Text));
+                if (MessageBox.Show("Are you sure you want to delete the selected item?", "Confirm deletion", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                {
+                    WriteLog($"[Delete room >> Room id: {txbRoomId.Text} Room name: {txbRoomsRoomName.Text}]");
+                    await RoomService.DeleteRoom(sharedClient, loggedInUser.Token, int.Parse(txbRoomId.Text));
+                    RoomsClearInputs();
+                }
             }
         }
-
         private void dgrRoomsData_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             int index = dgrRoomsData.SelectedIndex;
@@ -1587,14 +1697,14 @@ namespace ServiceToolWPF
                 txbRoomId.Text = room.RoomId.ToString();
             }
         }
-
-        #endregion
-
-        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void dgrRoomsData_LayoutUpdated(object sender, EventArgs e)
         {
-            // lastAction = "";
+            if (dgrRoomsData.Items.Count > 0 && roomsDataIsUpdated == true)
+            {
+                dgrRoomsData.ScrollIntoView(dgrRoomsData.Items[dgrRoomsData.Items.Count - 1]);
+                roomsDataIsUpdated = false;
+            }
         }
-
-
+        #endregion
     }
 }

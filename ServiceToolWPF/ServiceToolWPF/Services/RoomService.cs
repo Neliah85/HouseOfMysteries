@@ -2,26 +2,25 @@
 using ServiceToolWPF.Models;
 using System.Net.Http;
 using System.Net.Http.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Text.Json;
 
 namespace ServiceToolWPF.Services
 {
     public class RoomService
     {
+        #region Events
         public static SendLogEvent sendLogEvent = new SendLogEvent();
         public static RefreshEvent refreshEvent = new RefreshEvent();
+        #endregion
+        #region GetAllRooms
         public static async Task<List<Room>> GetAllRooms(HttpClient httpClient, string token)
         {
             try
             {
                 List<Room> rooms = new List<Room>();
                 string url = $"{httpClient.BaseAddress}Rooms/{token}";
-                sendLogEvent.SendLog(url);
+                //sendLogEvent.SendLog(url);
                 var response = await httpClient.GetAsync(url);
                 if (response.IsSuccessStatusCode)
                 {
@@ -41,14 +40,15 @@ namespace ServiceToolWPF.Services
                 return null;
             }
         }
-
+        #endregion
+        #region AddNewRoom
         public static async Task<string> AddNewRoom(HttpClient httpClient, string token, string roomName)
         {
             try
             {
                 string url = $"{httpClient.BaseAddress}Rooms/{token},{roomName}";
                 string json = JsonSerializer.Serialize(roomName);
-                sendLogEvent.SendLog(url);
+                //sendLogEvent.SendLog(url);
                 var request = new StringContent(json, Encoding.UTF8, "application/json");
                 var response = await httpClient.PostAsync(url, null);
                 if (response.IsSuccessStatusCode)
@@ -64,7 +64,8 @@ namespace ServiceToolWPF.Services
                 return ex.Message;
             }
         }
-
+        #endregion
+        #region UpdateRoom
         public static async Task<string> UpdateRoom(HttpClient httpClient, string token, Room room)
         {
             try
@@ -73,7 +74,6 @@ namespace ServiceToolWPF.Services
                 string json = JsonSerializer.Serialize(room, JsonSerializerOptions.Default);
                 var request = new StringContent(json, Encoding.UTF8, "application/json");
                 var response = await httpClient.PutAsync(url, request);
-
                 string r = response.Content.ReadAsStringAsync().Result.ToString();
                 sendLogEvent.SendLog(r);
                 refreshEvent.Refresh("GetAllRooms");
@@ -85,13 +85,14 @@ namespace ServiceToolWPF.Services
                 return ex.Message;
             }
         }
-
+        #endregion
+        #region DeleteRoom
         public static async Task<string> DeleteRoom(HttpClient httpClient, string token, int id)
         {
             try
             {
                 string url = $"{httpClient.BaseAddress}Rooms/{token}?id={id}";
-                var response = await httpClient.DeleteAsync(url);
+               var response = await httpClient.DeleteAsync(url);
                 if (response.IsSuccessStatusCode)
                 {
                     refreshEvent.Refresh("GetAllRooms");
@@ -106,8 +107,6 @@ namespace ServiceToolWPF.Services
                 return ex.Message;
             }
         }
-
-
-
+        #endregion
     }
 }
